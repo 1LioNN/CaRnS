@@ -6,3 +6,4 @@
 | Lion Su          | sulion   | 1007271523 | lion.su@mail.utoronto.ca          | 647-219-6252 | LioN#7777        |  
 | Emin Guliyev     | guliyeve | 1007263042 | emin.guliyev@mail.utoronto.ca     | 647-545-3646 | PandaGoesMoo#2851|
 | Zexi Zhang       | zhan7327 | 1005701064 | zexi.zhang@mail.utoronto.ca       | 647-833-1652 | rise_of_riptide#6506|
+**Discord Chat/Server Invite :** https://discord.gg/aTmqbuePqJ
