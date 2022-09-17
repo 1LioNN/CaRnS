@@ -1,17 +1,22 @@
 # User Stories
 
+**Kano Model Classification**
+- B &rarr; Basic Expectations
+- S &rarr; Satisfiers
+- D &rarr; Delighters
+
 ## **Buyer/Renter**
-As **Buyer/Renter**, I want to view vehicle listings so that I can compare the options available
+As **Buyer/Renter**, I want to view vehicle listings so that I can compare the options available (B)
 
 *Criteria of Success*
 - View all available listings currently available in the database
 ---
-As a **Buyer/Renter**, I want to be able to “like” certain listings so that I can view them later
+As a **Buyer/Renter**, I want to be able to “like” certain listings so that I can view them later (S)
 
 *Criteria of Success*
 - See "liked" listings in the "Liked" page
 ---
-As a **Buyer/Renter**, I want to be able to contact a vendor so that I can learn more about the product
+As a **Buyer/Renter**, I want to be able to contact a vendor so that I can learn more about the product (B/S)
 
 *Criteria of Success*
 - Send and receive messages from a vendor
@@ -20,7 +25,7 @@ As a **Buyer/Renter**, I want to be able to contact a vendor so that I can learn
 ---
 ## **Buyer**
 
-As a **Buyer**, I want to be able to complete an order for a vehicle
+As a **Buyer**, I want to be able to complete an order for a vehicle (B)
 
 *Criteria of Success*
 - User can open listing and complete the order for a vehicle
@@ -29,7 +34,7 @@ As a **Buyer**, I want to be able to complete an order for a vehicle
 ---
 ## **Renter**
 
-As a **Renter**, I want to be able to view date availabilities for the vehicle so that I can determine if the vehicle will suit my needs
+As a **Renter**, I want to be able to view date availabilities for the vehicle so that I can determine if the vehicle will suit my needs (S)
 
 *Criteria of Success*
 - Renter can open listing see availability of the vehicle on a calendar
@@ -37,7 +42,7 @@ As a **Renter**, I want to be able to view date availabilities for the vehicle s
 
 
 ---
-As a **Renter**, I want to be able to leave a review after my booking of a car is complete
+As a **Renter**, I want to be able to leave a review after my booking of a car is complete (D)
 
 *Criteria of Success*
 - Renter can leave review that remians attached to the listing
@@ -47,7 +52,7 @@ As a **Renter**, I want to be able to leave a review after my booking of a car i
 ---
 ## **Vendor**
 
-As a **Vendor**, I want to be able to create a “Vendor Account” so that I can rent out or sell vehicles.
+As a **Vendor**, I want to be able to create a “Vendor Account” so that I can rent out or sell vehicles. (B)
 
 *Criteria of Success*
 - Data entered in "Sign-up" form is stored in the DB
@@ -55,7 +60,7 @@ As a **Vendor**, I want to be able to create a “Vendor Account” so that I ca
 
 
 ---
-As a **Vendor**, I want to be able to list vehicles for sale so that potential buyers/renters can view the vehicle details
+As a **Vendor**, I want to be able to list vehicles for sale so that potential buyers/renters can view the vehicle details (B)
 
 *Criteria of Success*
 - Uploaded data from vendor side is viewable from the user side
@@ -63,14 +68,14 @@ As a **Vendor**, I want to be able to list vehicles for sale so that potential b
 
 ---
 
-As a **Vendor**, I want to be able to list vehicles for rent for specific dates or periods of times so that I can set aside time for personal use of the vehicle  
+As a **Vendor**, I want to be able to list vehicles for rent for specific dates or periods of times so that I can set aside time for personal use of the vehicle (S)
 
 *Criteria of Success*
 - User can only see availability determined by vendor
 
 
 ---
-As a **Vendor**, I want to be able to see statistics related to the sales I have made in the past so that I can assess the profitability of my activity
+As a **Vendor**, I want to be able to see statistics related to the sales I have made in the past so that I can assess the profitability of my activity (D)
 
 *Criteria of Success*
 - Summary statisitics are automatically uploaded and seen on a "Vendor Statistics" page
