@@ -5,18 +5,19 @@
 - S &rarr; Satisfiers
 - D &rarr; Delighters
 
-## **General User**
-
-As **User**, I want to be able to login to my account in order to see my profile (B)
-
-*Criteria of Success*
-- Pull up user profile from DB and display
-
----
----
-
 
 ## **Buyer/Renter**
+
+As **Buyer/Renter**, I want to be able to create a buyer/renter account in order to see buy or rent vehicles (B)
+
+*Criteria of Success*
+- New vendor user created
+  
+---
+As **Buyer/Renter**, I want to be able to login to my account in order to see my profile (B)
+
+*Criteria of Success*
+- Pull up vendor user profile from DB and display
 
 As **Buyer/Renter**, I want to be able to see my past purchases/bookings (S)
 
@@ -84,6 +85,19 @@ As a **Renter**, I want to be able to leave a review after my booking of a car i
 ---
 ---
 ## **Vendor**
+
+As **Vendor**, I want to be able to create a vendor account in order to see sell or rent out cars (B)
+
+*Criteria of Success*
+- New vendor user created
+  
+---
+As **Vendor**, I want to be able to login to my account in order to see my profile (B)
+
+*Criteria of Success*
+- Pull up vendor user profile from DB and display
+
+---
 
 As a **Vendor**, I want to be able to create a “Vendor Account” so that I can rent out or sell vehicles. (B)
 
