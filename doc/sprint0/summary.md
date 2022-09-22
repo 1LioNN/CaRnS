@@ -1,5 +1,5 @@
 # Summary - CaRnS 
-*[Car Rent 'n' Sell]*
+*Car Rent 'n' Sell*
 
 ## **Project Objective**  
 
@@ -7,19 +7,19 @@ CaRnS is a web peer-to-peer vehicle sharing application and marketplace. Our obj
 
 
 ## **Key Users**  
-- Buyer &rarr; A user who uses the application to buy one or more vehicles.
+- Buyer &rarr; A user who uses the platform to buy one or more vehicles.
 
-- Seller &rarr; A user who creates listings and sells their vehicle(s). 
+- Renter &rarr; A user who rents out a vehicle from a vendor on the platform.
 
-- Renter &rarr; A user who rents out a vehicle from another user on the platform.
-
-- Sharer &rarr; A user who creates listings to allow others to rent out their vehicle.
+- Vendor &rarr; A user who creates listings and either sells vehicles to buyers or allows renters to rent out their vehicles. 
 
 
 ## **Usage Scenarios/Personas**
-Mike Zack, a 29 year old investor, needs a means of visiting startups before chosing to invest into them after his car stopping functioning properly. While he find public transportation inconvenient, he realizes that taxis and car rentals are expensive. He wants a platform to buy a second-hand car at a decent price in good condition and communicate with car owners before making his purchase decision.
+Mike Zack, a 29 year-old investor, needs a means of visiting startups before chosing to invest into them after his car stopping functioning properly. While he find public transportation inconvenient, he realizes that taxis and car rentals are expensive. He wants a platform to buy a second-hand car at a decent price in good condition and communicate with car owners before making his purchase decision.
 
-Tinna Ashly, a 27 year old software developer, works from home and owns two carsd. She is considering selling one of her two cars and renting out the other as they are rarely used. She needs a platform to communicate with buyers and renters to ensure her vehicles are in the right hands.    
+Tiina Ashly, a 27 year-old software developer, works from home and owns two cars. She is considering selling one of her two cars and renting out the other as they are rarely used. She needs a platform to communicate with buyers and renters to ensure her vehicles are in the right hands.
+
+Fern Gabdon, a 37 year-old construction worker, likes to travel a lot with his family although their family is not wealthy. He's looking for a large SUV, however is not pleased with current renting platforms as they don't give him the agency to choose the make, model and colour of the vehicle he rents. He is looking for more control in choosing a suitable car for the travel at a good price.  
 
 
 ## **Key Principles**
