@@ -12,9 +12,11 @@ Communicating as a group and looking for general consensus.
 3. **How did you define priority and/or points of user stories? How many rounds of voting (on
 average) did you need to come to a consensus for the point estimate?**
 
-Point estimation not yet completed in sprint 0
+Story point estimation was done using the fibbonaci scale. Once the voting was complete, team members discussed the outcome and come to a consensus. This was accomplished in two rounds of voting.
 
-4. **How frequently did you meet?**
+Priority was voted on by team members on a scale of 1-5, with 1 being the highest priority. After the first round of voting, team members discussed the outcome and came to a consensus. 
+
+1. **How frequently did you meet?**
 
 Every 3 days and communicated daily on discord.
 
