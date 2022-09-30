@@ -12,13 +12,17 @@
     password: {
         type: String,
         required: true
+    },
+    userType: {
+        type: String,
+        required: true
     }
  }, {timestamp: true})
 
 // static signup method
-authenticationSchema.statics.signup = async function(email, password) {
+authenticationSchema.statics.signup = async function(email, password, userType) {
     // validation
-    if (!email || !password) {
+    if (!email || !password || !userType) {
         throw Error('All fields must be filled')
     }
 
@@ -30,6 +34,10 @@ authenticationSchema.statics.signup = async function(email, password) {
         throw Error('Password is not strong enough')
     }
 
+    if (userType != "vendor" && userType != "buyer"){
+        throw Error('Invalid user type')
+    }
+
 
     // checking if user exists
     const exists = await this.findOne({ email })
@@ -38,7 +46,7 @@ authenticationSchema.statics.signup = async function(email, password) {
     }
 
     // create user
-    const user = await this.create({ email, password})
+    const user = await this.create({ email, password, userType})
     return user
 }
 
