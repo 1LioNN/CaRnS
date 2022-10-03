@@ -37,7 +37,7 @@ listingSchema.statics.list = async function (vendorID, listingName, listingType,
         throw Error('Invalid listing type')
     }
 
-    // create user
+    // create listing
     const listing = await this.create({ vendorID, listingName, listingType, vehicleType, listingSalePrice })
     return listing
 }
