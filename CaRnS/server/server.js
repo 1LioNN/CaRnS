@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const authenticationRoutes = require('./routes/authenticationRoutes')
+const listingRoutes = require('./routes/listingRoutes')
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -11,6 +12,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use('/api/user', authenticationRoutes)
+app.use('/api/listing', listingRoutes)
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri)
