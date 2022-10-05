@@ -17,7 +17,7 @@
         type: String,
         required: true
     }
- }, {timestamp: true})
+ }, {timestamps: true})
 
 // static signup method
 authenticationSchema.statics.signup = async function(email, password, userType) {
