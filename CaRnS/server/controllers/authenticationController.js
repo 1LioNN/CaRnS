@@ -8,6 +8,7 @@ const loginUser = async(req, res) => {
 
     try {
         const user = await User.login(email, password)
+        req.session.user = user;
         res.status(200).json({ email, user })
     } catch (error) {
         res.status(400).json({ error: error.message })
