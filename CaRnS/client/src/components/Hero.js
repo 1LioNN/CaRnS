@@ -22,7 +22,7 @@ function Hero(){
             variant="contained" 
             disableElevation 
             href="/signup"> 
-            Sign Up
+            Get Started
             </Button>
             </div>
         </hero>

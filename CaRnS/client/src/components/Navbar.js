@@ -6,19 +6,25 @@ import Button from '@mui/material/Button';
 function Navbar() {
     return ( 
         <nav className = "nav">
-            <div className = "navbarContainer">
+            <div className = "navbar-container">
             <Link to='/' className='navbarLogo'>
                 <img style={{width: 80, height: 60}} src={logo} alt = "carns logo" ></img>
             </Link>
             <ul>
                  <li classname ="active">
-                    <a href='/' className="site-title">About</a>
+                    <Link to='/About' className='site-title'>
+                        About
+                    </Link>
                 </li>
                 <li classname ="active">
-                    <a href='/' className="site-title">Rent</a>
+                    <Link to='/rent' className='site-title'>
+                        Rent
+                    </Link>
                 </li>
                 <li classname ="active">
-                    <a href='/' className="site-title">Buy</a>
+                    <Link to='/buy' className='site-title'>
+                        Buy
+                    </Link>
                 </li>
 
             </ul>

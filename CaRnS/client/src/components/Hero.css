@@ -1,3 +1,6 @@
+:root {
+  --orange: #e87123;
+}
 @font-face {
     font-family: redhat;
     font-weight: bold;
@@ -48,6 +51,6 @@ h1 {
 }
 
 mark.orange{
-    color: #e87123;
+    color: var(--orange);
     background: none;
 }
