@@ -10,7 +10,7 @@ export function AuthProvider( {children} ) {
     let [user, setUser] = useState(null);
 
     const signup = async ( { email, password, userType }, callback ) => {
-      const response = await fetch('localhost:5000/api/signup', {
+      const response = await fetch('localhost:5000/api/user/signup', {
         method: 'POST', 
         mode: 'cors',
         headers: {
@@ -28,7 +28,7 @@ export function AuthProvider( {children} ) {
     }
 
     let login = async ( { email, password } , callback) => {
-      const response = await fetch('localhost:5000/api/login', {
+      const response = await fetch('localhost:5000/api/user/login', {
         method: 'POST', 
         mode: 'cors',
         credentials: 'include',
