@@ -14,8 +14,18 @@ const listingSchema = new Schema({
         type: String,
         required: true
     },
-    listingType: {
-        type: String,
+    listingDetails:{
+        type: listingDetails,
+        required: true
+    }
+
+}, { timestamps: true })
+
+const listingDetails = new Schema ({
+    listingDescription: String,
+
+    isBuy: {
+        type: Boolean,
         required: true
     },
     vehicleType: {
@@ -23,9 +33,11 @@ const listingSchema = new Schema({
         required: true
     },
     listingSalePrice: {
-        type: Number
+        type: Number,
+        required: true
     }
-}, { timestamps: true })
+})
+
 
 listingSchema.statics.list = async function (vendorID, listingName, listingType, vehicleType, listingSalePrice) {
     // validation
