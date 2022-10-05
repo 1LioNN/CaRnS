@@ -41,6 +41,9 @@ The feature/bug branches will have the following naming convention:
 - `author-feature-feature_name`
 - `author-bug-bug_name`
 
+Commits to these branches follow:
+- `jira_ticket *Commit Message*`
+
 ### Do you use Github issues or another ticketing website?
 We use Jira.
 
