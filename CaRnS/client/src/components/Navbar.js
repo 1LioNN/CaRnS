@@ -11,11 +11,6 @@ function Navbar() {
                 <img style={{width: 80, height: 60}} src={logo} alt = "carns logo" ></img>
             </Link>
             <ul>
-                 <li classname ="active">
-                    <Link to='/About' className='site-title'>
-                        About
-                    </Link>
-                </li>
                 <li classname ="active">
                     <Link to='/rent' className='site-title'>
                         Rent
