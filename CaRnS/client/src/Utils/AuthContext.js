@@ -1,0 +1,62 @@
+import { createContext ,useContext, useState } from 'react';
+
+const AuthContext = createContext();
+
+export function useAuth() {
+    return useContext(AuthContext);
+}
+
+export function AuthProvider( {children} ) {
+    let [user, setUser] = useState(null);
+
+    const signup = async ( { email, password, userType }, callback ) => {
+      const response = await fetch('localhost:5000/api/signup', {
+        method: 'POST', 
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          userType: userType
+        })
+      });
+      const status = response.status;
+      const resData = await response.json();
+      callback(status, resData);
+    }
+
+    let login = async ( { email, password } , callback) => {
+      const response = await fetch('localhost:5000/api/login', {
+        method: 'POST', 
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        })
+      });
+      const status = response.status;
+      const resData = await response.json();
+
+      if (status === 200) {
+        setUser(resData.user);
+      }
+      else {
+        setUser(null);
+      }
+      callback(status, resData);
+    }
+  
+    let value = { user, login, signup }
+
+    return(
+        <AuthContext.Provider value={value}> 
+            {children} 
+        </AuthContext.Provider>
+    )
+}
