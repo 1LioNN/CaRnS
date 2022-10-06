@@ -5,6 +5,23 @@ const User = require('../models/authenticationModel')
 
 const Schema = mongoose.Schema
 
+const listingDetails = new Schema ({
+    listingDescription: String,
+
+    isBuy: {
+        type: Boolean,
+        required: true
+    },
+    vehicleType: {
+        type: String,
+        required: true
+    },
+    listingSalePrice: {
+        type: Number,
+        required: true
+    }
+})
+
 const listingSchema = new Schema({
     vendorID: {
         type: String,
@@ -14,34 +31,25 @@ const listingSchema = new Schema({
         type: String,
         required: true
     },
-    listingType: {
-        type: String,
+    listingDetails: {
+        type: listingDetails,
         required: true
-    },
-    vehicleType: {
-        type: String,
-        required: true
-    },
-    listingSalePrice: {
-        type: Number
     }
+
 }, { timestamps: true })
 
-listingSchema.statics.list = async function (vendorID, listingName, listingType, vehicleType, listingSalePrice) {
-    // validation
-    if (!vendorID || !listingName || !listingType || !vehicleType || !listingSalePrice) {
-        throw Error('All fields must be filled')
-    }
 
-    if (listingType != "buy" && listingType != "rent") {
-        throw Error('Invalid listing type')
+listingSchema.statics.list = async function (vendorID, listingName, listingDetails) {
+
+    // validation
+    if (!vendorID || !listingName || !listingDetails.isBuy || !listingDetails.vehicleType || !listingDetails.listingSalePrice) {
+      throw Error('All fields must be filled')
     }
 
     // create listing
-    const listing = await this.create({ vendorID, listingName, listingType, vehicleType, listingSalePrice })
+    const listing = await this.create({ vendorID, listingName, listingDetails })
     return listing
 }
-
 
 
 module.exports = mongoose.model('Listing', listingSchema)
