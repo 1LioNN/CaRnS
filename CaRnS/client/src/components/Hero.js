@@ -21,7 +21,7 @@ function Hero(){
             }}
             variant="contained" 
             disableElevation 
-            href="/signup"> 
+            href="/signin"> 
             Get Started
             </Button>
             </div>

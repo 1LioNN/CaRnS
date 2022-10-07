@@ -6,6 +6,8 @@ import LandingPage from './components/pages/LandingPage';
 import BuyListing from './components/pages/BuyListing';
 import RentListing from './components/pages/RentListing';
 import SignUp from './components/pages/SignUp';
+import SignIn from './components/pages/SignIn';
+
 
 function App() {
   return (
@@ -16,7 +18,10 @@ function App() {
         <Route path='/buy' element={<BuyListing/>}/>
         <Route path='/rent' element={<RentListing/>}/>
         <Route path='/signup' element ={<SignUp/>}/>
+        <Route path='/signin' element ={<SignIn/>}/>
+
       </Routes>
+     
     </div>
   );
 }
