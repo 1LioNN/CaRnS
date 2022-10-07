@@ -11,12 +11,12 @@ function Navbar() {
                 <img style={{width: 80, height: 60}} src={logo} alt = "carns logo" ></img>
             </Link>
             <ul>
-                <li classname ="active">
+                <li className ="active">
                     <Link to='/rent' className='site-title'>
                         Rent
                     </Link>
                 </li>
-                <li classname ="active">
+                <li className ="active">
                     <Link to='/buy' className='site-title'>
                         Buy
                     </Link>
