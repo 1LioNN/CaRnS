@@ -4,28 +4,22 @@ Priority Scale: 1-5
 Story Point Scale: Fibonacci
 
 
-## **Buyer/Renter**
+## Completed Stories
 
-As **Buyer/Renter**, I want to be able to create a buyer/renter account in order to buy or rent vehicles
+**CAR-1**: As Buyer/Renter, I want to be able to create a buyer/renter account in order to buy or rent vehicles
 
-*Criteria of Success*
-- New buyer/renter user created
+**CAR-2**: As Buyer/Renter, I want to be able to login to my account in order to see my profile
 
-Difficulty: 5 Story Points
+**CAR-5**: As Buyer/Renter, I want to view all vehicle listings so that I can compare the options available
 
-Priority: 1
+**CAR-15**: As a Vendor, I want to be able to create a vendor account in order to see sell or rent out cars
 
-  
----
-As **Buyer/Renter**, I want to be able to login to my account in order to see my profile
+**CAR-16**: As Vendor, I want to be able to login to my account in order to see my profile
 
-*Criteria of Success*
-- Pull up buyer/renter user information from DB and display home page
+## Remaining User Stories
 
 
-Difficulty: 8 Story Points
-
-Priority: 1
+### **Buyer/Renter**
 
 ---
 
@@ -60,16 +54,6 @@ As **Buyer/Renter**, I want to be able to see my past purchases/bookings
 Difficulty: 8 Story Points
 
 Priority: 3
-
----
-As **Buyer/Renter**, I want to view all vehicle listings so that I can compare the options available
-
-*Criteria of Success*
-- View all available listings currently available in the DB
-
-Difficulty: 5 Story Points
-
-Priority: 1
 
 ---
 As **Buyer/Renter**, I want to filter vehicle listings so that I find listings that match my preferences
@@ -137,7 +121,8 @@ Priority: 2
 
 ---
 ---
-## **Renter**
+### **Renter**
+---
 
 As a **Renter**, I want to be able to book a vehicle for a certain period of time.
 
@@ -173,27 +158,7 @@ Priority: 5
 
 ---
 ---
-## **Vendor**
-
-As a **Vendor**, I want to be able to create a vendor account in order to see sell or rent out cars
-
-*Criteria of Success*
-- New vendor user created
-
-Difficulty: 5 Story Points
-
-Priority: 1
-  
----
-As **Vendor**, I want to be able to login to my account in order to see my profile
-
-*Criteria of Success*
-- Pull up vendor user profile from DB and display home page
-
-Difficulty: 8 Story Points
-
-Priority: 1
-
+### **Vendor**
 ---
 
 As a **Vendor** I want to be able to view my profile details
@@ -336,3 +301,6 @@ Difficulty: 55 Story Points
 
 Priority: 5
 
+--- 
+
+As a **User** I want to see a landing page when I enter the site
