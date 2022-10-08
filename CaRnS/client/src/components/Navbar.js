@@ -21,6 +21,11 @@ function Navbar() {
                         Buy
                     </Link>
                 </li>
+        <li className ="active">
+        <Link to='/profile' className='site-title'>
+        Profile
+        </Link>
+        </li>
 
             </ul>
             <Button className ="btn"
@@ -38,8 +43,24 @@ function Navbar() {
             href="/signup"> 
             Sign Up
             </Button>
+        <Button className ="btn"
+        style={{
+            borderRadius: 40,
+            backgroundColor: "#e87123",
+            padding: "8px 30px",
+            fontSize: "18px",
+            color: "#fff",
+            marginLeft: "50px",
+            marginRight:"50px"
+        }}
+        variant="contained" 
+        disableElevation 
+        href="/signin"> 
+        Log In
+        </Button>
             </div>
         </nav>
     );
 }
 export default Navbar
+    

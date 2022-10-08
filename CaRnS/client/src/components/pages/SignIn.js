@@ -5,6 +5,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import {useAuth} from '../../Utils/AuthContext.js'
+import { useNavigate } from 'react-router-dom';
 
 const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto" }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -18,16 +20,34 @@ const validationSchema = Yup.object().shape({
     username: Yup.string().email('please enter valid email').required("Required"),
     password: Yup.string().required("Required")
 })
+/*
 const onSubmit = (values, props) => {
+    
     console.log(values)
     setTimeout(() => {
         props.resetForm()
         props.setSubmitting(false)
     }, 2000)
-
+    
 }
+*/
 
 function SignIn({ handleChange }){
+    const auth = useAuth();
+    const navigate = useNavigate();
+    const onSubmit = async (data) => {
+        console.log(data);
+        
+        auth.login( { email: data.username, password: data.password }, (status, data) => {
+            if (status === 200){
+                
+                navigate('/profile');
+            }
+            else {
+            }
+        });
+    };
+
     return(  <Grid>
         <Paper style={paperStyle}>
             <Grid align='center'>
