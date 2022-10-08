@@ -16,6 +16,7 @@ The primary goal of the release is to have a functioning marketplace app where b
 
 ### Sprint 1: 
 The goal of sprint 1 is to have some of the core functionalities and features of our web app working. These features include: 
+* User Landing Page (CAR-40)
 * Buyer/Renter Sign Up/Login (CAR-1, CAR-2)
 * Vendor Sign Up /Login (CAR-15, CAR-16)
 * Buyer/Vendor Profiles + Editing Profiles (CAR-3, CAR-17, CAR-18)
