@@ -38,14 +38,14 @@ Adhearing to Gitflow:
 - `develop`
 
 The feature/bug branches will have the following naming convention:
-- `author-feature-feature_name-jira_ticket_number`
-- `author-bug-bug_name-jira_ticket_number`
+- `author-feature-feature_name-trello_ticket_number`
+- `author-bug-bug_name-trello_ticket_number`
 
 Commits to these branches follow:
-- `jira_ticket *Commit Message*`
+- `trello_ticket *Commit Message*`
 
 ### Do you use Github issues or another ticketing website?
-We use Jira.
+We use Trello.
 
 ### Do you use pull requests?
 Yes, to merge the feature and bug branches with the develop branch and the develop branch with master.
