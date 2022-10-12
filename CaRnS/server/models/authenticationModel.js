@@ -1,9 +1,18 @@
- const mongoose = require('mongoose')
- const validator = require('validator')
+const mongoose = require('mongoose')
+const validator = require('validator')
 
- const Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
- const authenticationSchema = new Schema({
+const profileSchema = new Schema({
+    name: {
+        type: String
+    },
+    description: {
+        type: String
+    }
+}, {timestamps: true})
+
+const authenticationSchema = new Schema({
     email:{
         type: String,
         required: true,
@@ -16,6 +25,9 @@
     userType: {
         type: String,
         required: true
+    },
+    profile: {
+        type: profileSchema
     }
  }, {timestamps: true})
 

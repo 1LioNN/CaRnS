@@ -1,6 +1,6 @@
 
 const User = require('../models/authenticationModel')
-
+const mongoose = require('mongoose')
 
 // login user
 const loginUser = async(req, res) => {
@@ -17,7 +17,6 @@ const loginUser = async(req, res) => {
 
 
 // signup user
-
 const signupUser = async (req, res) => {
     const {email, password, userType} = req.body
 
@@ -29,4 +28,61 @@ const signupUser = async (req, res) => {
     }
 }
 
-module.exports = {signupUser, loginUser}
+// get user profile
+const getProfile = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such user'})
+    }
+
+    const user = await User.findById(id)
+    if (!user) {
+        return res.status(404).json({error: 'No such user'})
+    }
+
+    res.status(200).json(user.profile)
+}
+
+// edit user profile
+const editProfile = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such user'})
+    }
+
+    const user = await User.findOneAndUpdate(
+        {_id: id}, 
+        {
+            profile : {
+                name: req.body.name,
+                description: req.body.description,
+            }
+        }, 
+        {
+            upsert: true
+        }
+    )
+
+    return res.status(200).json(user)
+
+}
+
+// delete user account
+const deleteUser = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'No such user'})
+    }
+
+    const user = await User.findOneAndDelete({_id: id})
+    if (!user) {
+        return res.status(404).json({error: 'No such user'})
+    }
+
+    res.status(200).json(user) //might want to return something else
+}
+
+module.exports = {signupUser, loginUser, getProfile, editProfile, deleteUser}
