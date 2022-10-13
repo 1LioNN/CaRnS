@@ -2,21 +2,38 @@ const Listing = require('../models/listingModel')
 const mongoose = require('mongoose')
 
 // post listing
-const postListing = async (req, res) => {
-    const { vendorID, listingName, listingDetails } = req.body
+const postBuyListing = async (req, res) => {
+    const { vendorID, listingName, isBuy ,buyListingDetails } = req.body
 
     try {
-        const user = await Listing.list(vendorID, listingName, listingDetails)
-        res.status(200).json({ vendorID, listingName, listingDetails })
+        const user = await Listing.listBuy(vendorID, listingName, isBuy, buyListingDetails)
+        res.status(200).json({ vendorID, listingName, isBuy, buyListingDetails })
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+const postRentListing = async (req, res) => {
+    const { vendorID, listingName, isBuy, rentListingDetails } = req.body
+
+    try {
+        const user = await Listing.listRent(vendorID, listingName, isBuy, rentListingDetails)
+        res.status(200).json({ vendorID, listingName, isBuy, rentListingDetails })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 }
 
 
-// view listings
+// view buy listings
 const viewBuyListings = async (req, res) => {
-    const listings = await Listing.find({}).sort({createdAt: -1})
+    const listings = await Listing.find({isBuy: true}).sort({createdAt: -1})
+    res.status(200).json(listings)
+}
+
+// view rent listings
+const viewRentListings = async (req, res) => {
+    const listings = await Listing.find({ isBuy: false }).sort({ createdAt: -1 })
     res.status(200).json(listings)
 }
 
@@ -36,4 +53,4 @@ const deleteListing = async (req, res) => {
 }
 
 
-module.exports = { postListing, viewBuyListings, deleteListing }
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, deleteListing }
