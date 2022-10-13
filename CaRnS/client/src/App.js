@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/pages/LandingPage';
 import BuyListing from './components/pages/BuyListing';
 import RentListing from './components/pages/RentListing';
-import SignUp from './components/pages/SignUp';
-import SignIn from './components/pages/SignIn';
-import Profile from './components/pages/Profile.js';
+import SignUpPage from './components/pages/SignUpPage';
+import SignInPage from './components/pages/SignInPage';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -18,10 +18,9 @@ function App() {
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/buy' element={<BuyListing/>}/>
         <Route path='/rent' element={<RentListing/>}/>
-        <Route path='/signup' element ={<SignUp/>}/>
-        <Route path='/signin' element ={<SignIn/>}/>
+        <Route path='/signup' element ={<SignUpPage/>}/>
+        <Route path='/signin' element ={<SignInPage/>}/>
         <Route path='/profile' element ={<Profile/>}/>
-
       </Routes>
      
     </div>
