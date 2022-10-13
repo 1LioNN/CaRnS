@@ -47,10 +47,6 @@
 
   }
   
-  .nav li.active {
-    color: var(--orange);
-  }
-  
   .nav li:hover {
     color: var(--orange);
   }
