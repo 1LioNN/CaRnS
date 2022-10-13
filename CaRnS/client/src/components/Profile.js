@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAuth} from '../../Utils/AuthContext.js'
+import {useAuth} from '../Utils/AuthContext.js'
 
 function Profile(){
     
