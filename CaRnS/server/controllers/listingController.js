@@ -16,11 +16,11 @@ const postListing = async (req, res) => {
 
 // view listings
 
-const viewListings = async (req, res) => {
+const viewBuyListings = async (req, res) => {
     const listings = await Listing.find({}).sort({createdAt: -1})
     res.status(200).json(listings)
 }
 
 
 
-module.exports = { postListing, viewListings }
+module.exports = { postListing, viewBuyListings }
