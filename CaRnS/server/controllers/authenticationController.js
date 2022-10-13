@@ -33,7 +33,7 @@ const getProfile = async (req, res) => {
     const { id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such user'})
+        return res.status(404).json({error: 'Not a valid user ID'})
     }
 
     const user = await User.findById(id)
@@ -49,7 +49,7 @@ const editProfile = async (req, res) => {
     const { id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such user'})
+        return res.status(404).json({error: 'Not a valid user ID'})
     }
 
     const user = await User.findOneAndUpdate(
@@ -74,7 +74,7 @@ const deleteUser = async (req, res) => {
     const { id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such user'})
+        return res.status(404).json({error: 'Not a valid user ID'})
     }
 
     const user = await User.findOneAndDelete({_id: id})
