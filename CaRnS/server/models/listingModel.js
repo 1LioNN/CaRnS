@@ -34,6 +34,10 @@ const rentListingDetails = new Schema ({
     availabilityEnd:{
         type: Date,
         required: true
+    },
+    location:{
+        type: String,
+        required:true
     }
     
 })
@@ -89,7 +93,7 @@ listingSchema.statics.listRent = async function (vendorID, listingName, isBuy, r
     }
 
 
-    if (!rentListingDetails.vehicleType || !rentListingDetails.rentPrice || !rentListingDetails.availabilityStart || !rentListingDetails.availabilityEnd) {
+    if (!rentListingDetails.vehicleType || !rentListingDetails.rentPrice || !rentListingDetails.availabilityStart || !rentListingDetails.availabilityEnd || !rentListingDetails.location) {
         throw Error('Rent - All fields must be filled')
     }
 
