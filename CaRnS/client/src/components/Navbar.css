@@ -27,11 +27,33 @@ body {
 .navbarLogo {
   display: flex;
 }
-.profile {
-  margin-left: auto;
-  padding-right: 50px;
-  padding-top: 7px;
+.profile-icon{
+   margin-left: auto;
+   margin-right: 40px;
+   margin-top: 7px;
+   cursor: pointer;
 }
+.profile-popup{
+  background-color: white;
+  border: 3px solid #e4e4e4;
+  border-radius: 15px;
+  width: 150px;
+  height: 155px;
+  padding: 20px;
+  padding-top: 5px;
+  font-family: 'redhat';
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.popup-item{
+  text-decoration: none;
+  color: black;
+}
+.popup-item:hover{
+  color: var(--orange);
+}
+
 .site-title {
   font-size: 24px;
 }

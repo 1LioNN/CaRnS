@@ -7,7 +7,6 @@ function Profile(){
     return(
         <div>
             {auth.user ?
-            
             <>
             <h1 style={{color: 'black'}}> Profile </h1>
             <h1 style={{color: 'black'}}> E-mail: {auth.user.email} </h1>
