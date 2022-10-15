@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 
 function BuyDetail(){
 	const [buyListing, setBuyListing] = useState(null);
@@ -35,16 +36,20 @@ function BuyDetail(){
 		{	buyListing?
 			
 			<>
-			<h1 style={{color: 'black'}}> NAME: </h1>
 			
 			<h1 style={{color: 'black'}}> {buyListing.listingName} </h1>
-			<h1 style={{color: 'black'}}> Detail: </h1>
-			<h1 style={{color: 'black'}}> Description: </h1>
-			<h1 style={{color: 'black'}}> {buyListing.buyListingDetails.listingDescription} </h1>
-			<h1 style={{color: 'black'}}> Vehicle Type: </h1>
-			<h1 style={{color: 'black'}}> {buyListing.buyListingDetails.vehicleType} </h1>
-			<h1 style={{color: 'black'}}> Price: </h1>
-			<h1 style={{color: 'black'}}> {buyListing.buyListingDetails.salePrice} </h1>
+			<Paper elevation={4}>
+			<h2 style={{color: 'black'}}> Description: </h2>
+			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.listingDescription} </h3>
+			</Paper>
+			<Paper elevation={4}>
+			<h2 style={{color: 'black'}}> Vehicle Type: </h2>
+			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.vehicleType} </h3>
+			</Paper>
+			<Paper elevation={4}>
+			<h2 style={{color: 'black'}}> Price: </h2>
+			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.salePrice} </h3>
+			</Paper>
 			</>: <><h1 style={{color: 'black'}}> LOADING </h1></>
 		}
 		</buydetail>
