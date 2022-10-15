@@ -7,6 +7,7 @@ import BuyListing from './components/pages/BuyListing';
 import RentListing from './components/pages/RentListing';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
+import BuyDetail from './components/pages/BuyDetail';
 import Profile from './components/Profile';
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/signup' element ={<SignUpPage/>}/>
         <Route path='/signin' element ={<SignInPage/>}/>
         <Route path='/profile' element ={<Profile/>}/>
+        <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
       </Routes>
      
     </div>

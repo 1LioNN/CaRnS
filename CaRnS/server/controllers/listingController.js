@@ -108,5 +108,25 @@ const deleteListing = async (req, res) => {
     res.status(200).json(listing)
 }
 
+const getdetailbuy = async (req, res) => {
+    const { id } = req.params
+    
+    if (!mongoose.Types.ObjectId.isValid(id )) {
+        return res.status(404).json({ error: 'Not a valid listing ID' })
+    }
+    
+    const listing = await Listing.findById(id)
+    if (!listing) {
+        return res.status(404).json({ error: 'No such listing' })
+    }
+    if (!listing.buyListingDetails) {
+        return res.status(404).json({ error: 'Missing details' })
+    }
+    
+    
+    
+    res.status(200).json(listing)
+}
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing }
+
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy }
