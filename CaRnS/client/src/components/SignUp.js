@@ -72,7 +72,11 @@ function SignUp(){
         auth.signup({
             email: data.email.trim(),
             password: data.password,
-            userType: data.account_type
+            userType: data.account_type,
+            profile:{
+                name: data.name,
+                phone_number: data.phoneNumber
+            }
         }, (res, data)=> {
             if (res === 200) {
                 navigate('/signin');

@@ -10,7 +10,9 @@ function Profile(){
             
             <>
             <h1 style={{color: 'black'}}> Profile </h1>
+            <h1 style={{color: 'black'}}> Name: {auth.user.profile.name} </h1>
             <h1 style={{color: 'black'}}> E-mail: {auth.user.email} </h1>
+            <h1 style={{ color: 'black' }}> Phone Number: {auth.user.profile.phone_number} </h1>
             <h1 style={{color: 'black'}}> Account Type: {auth.user.userType}</h1>
             <h1 style={{color: 'black'}}> Account Creation Date: {auth.user.createdAt} </h1>
                 </>: <><h1 style={{color: 'black'}}> Please Log In </h1></>}
