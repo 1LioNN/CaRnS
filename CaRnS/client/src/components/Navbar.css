@@ -1,12 +1,6 @@
 :root {
   --orange: #e87123;
 }
-
-@font-face {
-  font-family: redhat;
-  font-weight: bolder;
-  src: url("../assets/fonts/redhattext.ttf");
-}
 * {
   box-sizing: border-box;
 }
