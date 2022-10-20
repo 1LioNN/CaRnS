@@ -1,5 +1,4 @@
 import React from 'react';
-import '../App.css';
 import './Hero.css';
 import  logo  from "../assets/icons/carns-logo.png"
 import Button from '@mui/material/Button';

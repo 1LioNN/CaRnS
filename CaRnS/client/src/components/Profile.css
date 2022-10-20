@@ -11,7 +11,7 @@
     width: 1200px;
     margin: auto;
     top: 12%;
-    left: 20%;
+    left: 25%;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -31,9 +31,35 @@
     opacity: 50%;
 }
 
-.profile-options{
-    font-family: 'redhat';
-    display: flex;
-    list-style: none;
-    gap: 5rem;
+.profile-name{
+  color: black;
+  font-size: 40px;
+  padding-top: 25px;
+  padding-right: 450px;
+  margin-left: 24.5%;
+  font-family: 'montserrat';
+}
+
+.profile-info{
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 25px;
+  margin-left: 300px;
+}
+.profile-field{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.field-name{
+  font-family: 'montserrat_light';
+}
+.field-value{
+  font-family: 'redhat';
+  font-size: 24px;
+}
+
+.edit-profile-btn{
+  margin-top: 50px;
 }
