@@ -11,7 +11,7 @@ router.post('/signup', signupUser)
 
 router.get('/profile/:id', getProfile)
 
-router.patch('/profile/:id', editProfile)
+router.put('/profile/:id', editProfile)
 
 router.delete('/:id', deleteUser)
 

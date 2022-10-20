@@ -9,12 +9,11 @@ const loginUser = async(req, res) => {
     try {
         const user = await User.login(email, password)
         req.session.user = user;
-        res.status(200).json({ email, user })
+        res.status(200).json(user)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 }
-
 
 // signup user
 const signupUser = async (req, res) => {
@@ -22,7 +21,7 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.signup(email, password, userType, profile)
-        res.status(200).json({email, userType, user})
+        res.status(200).json(user)
     }catch(error) {
         res.status(400).json({error: error.message})
     }
@@ -52,21 +51,29 @@ const editProfile = async (req, res) => {
         return res.status(404).json({error: 'Not a valid user ID'})
     }
 
-    const user = await User.findOneAndUpdate(
-        {_id: id}, 
-        {
-            profile : {
-                name: req.body.name,
-                description: req.body.phone_number,
+    try {
+        const user = await User.findOneAndUpdate(
+            {_id: id}, 
+            {
+                email: req.body.email,
+                profile: {
+                    name: req.body.name,
+                    phone_number: req.body.phone_number
+                }
+            }, 
+            {
+                upsert: true,
+                new: true
             }
-        }, 
-        {
-            upsert: true
+        )
+        if(!user) {
+            return res.status(404).json({error: 'No such user'})
         }
-    )
-
-    return res.status(200).json(user)
-
+    
+        return res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
 }
 
 // delete user account
