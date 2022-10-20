@@ -22,7 +22,7 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 
 
-const MuiIconButton = () => {
+const ListingForm = () => {
 
     const [values, setValues] = React.useState({
         amount: ''
@@ -135,4 +135,4 @@ const MuiIconButton = () => {
     )
 }
 
-export default MuiIconButton
+export default ListingForm
