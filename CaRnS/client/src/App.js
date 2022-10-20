@@ -9,6 +9,7 @@ import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import BuyDetail from './components/pages/BuyDetail';
 import ProfilePage from './components/pages/ProfilePage';
+import VendorListingsPage from './components/pages/VendorListingsPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -40,6 +41,7 @@ function App() {
         <Route path='/signup' element ={<SignUpPage/>}/>
         <Route path='/signin' element ={<SignInPage/>}/>
         <Route path='/profile' element ={<ProfilePage/>}/>
+        <Route path='/listings' element ={<VendorListingsPage/>}/>
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
       </Routes>
      

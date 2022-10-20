@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import logo from "../assets/icons/carns-logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useAuth } from "../Utils/AuthContext.js";
 import avatar from "../assets/icons/avatar.png";
@@ -8,7 +8,17 @@ import PopUp from 'reactjs-popup';
 
 function Navbar() {
   const auth = useAuth();
+  let navigate = useNavigate();
+    const logOut = async () => {
+        auth.logout((res, data)=> {
+            if (res === 200) {
+                navigate('/');
+            }
+            else {
 
+            }
+        });
+    };
   return (
     <nav className="nav">
       <div className="navbar-container">
@@ -48,7 +58,7 @@ function Navbar() {
               <Link to="/profile" className="popup-item">
                 <p> Account </p>
               </Link>
-              <Link to="/" className="popup-item">
+              <Link to="/" className="popup-item" onClick={logOut}>
                 <p> Log Out </p>
               </Link>
               </div>
