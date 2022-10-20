@@ -18,10 +18,10 @@ const loginUser = async(req, res) => {
 
 // signup user
 const signupUser = async (req, res) => {
-    const {email, password, userType} = req.body
+    const {email, password, userType, profile} = req.body
 
     try {
-        const user = await User.signup(email, password, userType)
+        const user = await User.signup(email, password, userType, profile)
         res.status(200).json({email, userType, user})
     }catch(error) {
         res.status(400).json({error: error.message})
@@ -57,7 +57,7 @@ const editProfile = async (req, res) => {
         {
             profile : {
                 name: req.body.name,
-                description: req.body.description,
+                description: req.body.phone_number,
             }
         }, 
         {

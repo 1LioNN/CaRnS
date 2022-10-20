@@ -9,7 +9,7 @@ export function useAuth() {
 export function AuthProvider( {children} ) {
     let [user, setUser] = useState(null);
 
-    const signup = async ( { email, password, userType }, callback ) => {
+    const signup = async ( { email, password, userType, profile }, callback ) => {
       const response = await fetch('http://localhost:8000/api/user/signup', {
         method: 'POST', 
         mode: 'cors',
@@ -19,7 +19,8 @@ export function AuthProvider( {children} ) {
         body: JSON.stringify({
           email: email,
           password: password,
-          userType: userType
+          userType: userType,
+          profile: profile
         })
       });
       const status = response.status;

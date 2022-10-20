@@ -7,10 +7,10 @@ const profileSchema = new Schema({
     name: {
         type: String
     },
-    description: {
+    phone_number: {
         type: String
     }
-}, {timestamps: true})
+})
 
 const authenticationSchema = new Schema({
     email:{
@@ -27,14 +27,15 @@ const authenticationSchema = new Schema({
         required: true
     },
     profile: {
-        type: profileSchema
+        type: profileSchema,
+        required: true
     }
  }, {timestamps: true})
 
 // static signup method
-authenticationSchema.statics.signup = async function(email, password, userType) {
+authenticationSchema.statics.signup = async function(email, password, userType, profile) {
     // validation
-    if (!email || !password || !userType) {
+    if (!email || !password || !userType || !profile) {
         throw Error('All fields must be filled')
     }
 
@@ -58,7 +59,7 @@ authenticationSchema.statics.signup = async function(email, password, userType) 
     }
 
     // create user
-    const user = await this.create({ email, password, userType})
+    const user = await this.create({ email, password, userType, profile})
     return user
 }
 
