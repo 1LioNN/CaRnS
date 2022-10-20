@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { useAuth } from "../Utils/AuthContext.js";
 import avatar from "../assets/icons/avatar.png";
+import PopUp from 'reactjs-popup';
 
 function Navbar() {
   const auth = useAuth();
@@ -36,13 +37,22 @@ function Navbar() {
     </li>
           </ul>
           {auth.user ? (
-              <Link to="/profile" className="profile">
-                <img
+            <PopUp trigger={ 
+                <img className="profile-icon"
                   style={{ width: 50, height: 50 }}
                   src={avatar}
                   alt="default avatar"
                 ></img>
+              } position="bottom right"> 
+              <div className="profile-popup"> 
+              <Link to="/profile" className="popup-item">
+                <p> Account </p>
               </Link>
+              <Link to="/" className="popup-item">
+                <p> Log Out </p>
+              </Link>
+              </div>
+            </PopUp>
           ) : (
             <></>
           )}
