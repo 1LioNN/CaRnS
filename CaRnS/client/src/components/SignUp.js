@@ -68,7 +68,6 @@ function SignUp(){
     let auth = useAuth();
     let navigate = useNavigate();
     const onSubmit = async (data) => {
-        console.log(data)
         auth.signup({
             email: data.email.trim(),
             password: data.password,

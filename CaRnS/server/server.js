@@ -10,7 +10,10 @@ const listingRoutes = require('./routes/listingRoutes')
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials:true
+}));
 app.use(express.json());
 app.use(session({
     secret: "cscc01FinalProjectCARNS",
@@ -20,6 +23,7 @@ app.use(session({
         path: '/',
         httpOnly: false,
         secure: false,
+        SameSite: 'None',
         maxAge: 1000 * 60 * 60  // 1 hour
     }
 }));

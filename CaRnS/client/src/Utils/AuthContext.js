@@ -13,6 +13,7 @@ export function AuthProvider( {children} ) {
       const response = await fetch('http://localhost:8000/api/user/signup', {
         method: 'POST', 
         mode: 'cors',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -32,6 +33,7 @@ export function AuthProvider( {children} ) {
       const response = await fetch(`http://localhost:8000/api/user/login`, {
         method: 'POST', 
         mode: 'cors',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -52,7 +54,52 @@ export function AuthProvider( {children} ) {
       callback(status, resData);
     }
   
-    let value = { user, login, signup }
+  let logout = async callback => {
+    const response = await fetch('http://localhost:8000/api/user/logout', {
+      method: 'POST', 
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const status = response.status;
+    const resData = await response.json();
+    
+    if (status === 200) {
+      setUser(null);
+    }
+    callback(status, resData);
+  }
+  
+  let isauthenticated = async callback => {
+    
+    if (user === null) { 
+      
+      const response = await fetch('http://localhost:8000/api/user/authenticated', {
+        method: 'GET', 
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const status = response.status;
+      const resData = await response.json();
+      if (status === 200) {
+        setUser(resData.user);
+      }
+      else {
+        setUser(null);
+      }
+      callback(status, resData);
+      
+    }
+    
+  };
+  
+    let value = { user, login, signup, logout, isauthenticated }
 
     return(
         <AuthContext.Provider value={value}> 
