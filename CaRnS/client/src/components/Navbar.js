@@ -31,7 +31,7 @@ function Navbar() {
             </Link>
           </li>
     <li>
-    <Link to="/buydetail/634883108fa3b2803f0e6370" className="site-title">
+    <Link to="/buydetail/635061dfb05190a849df18c8" className="site-title">
     BuyDetail
     </Link>
     </li>

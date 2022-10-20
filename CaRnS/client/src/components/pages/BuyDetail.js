@@ -2,9 +2,11 @@ import React from 'react';
 import { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
+import ContactInfo from "./ContactInfo";
 
 function BuyDetail(){
 	const [buyListing, setBuyListing] = useState(null);
+	const [contactInfo, setContactInfo] = useState(null);
 	let params = useParams();
 	
 	useEffect(() => {
@@ -19,10 +21,8 @@ function BuyDetail(){
 			});
 			
 			const data = await response.json()
-			console.log(response)
 			
 			if (response.ok){
-				console.log(data)
 				setBuyListing(data)
 			}
 			
@@ -50,6 +50,7 @@ function BuyDetail(){
 			<h2 style={{color: 'black'}}> Price: </h2>
 			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.salePrice} </h3>
 			</Paper>
+			<ContactInfo uid = {buyListing.vendorID} />
 			</>: <><h1 style={{color: 'black'}}> LOADING </h1></>
 		}
 		</buydetail>
