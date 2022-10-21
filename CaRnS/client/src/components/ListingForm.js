@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -27,6 +26,13 @@ const ListingForm = () => {
     const [values, setValues] = React.useState({
         amount: ''
       });
+
+    const [showhide, setShowhide] = useState("Sell");
+
+    const handleshow = e=>{
+      const getshow= e.target.value;
+      setShowhide(getshow);
+    }
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -98,19 +104,25 @@ const ListingForm = () => {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
             >
-                <FormControlLabel value="Sell" control={<Radio />} label="Sell" />
-                 <FormControlLabel value="Rent" control={<Radio />} label="Rent" />
+                <FormControlLabel value="Sell" control={<Radio />} label="Sell" checked={showhide==='Sell'} onClick={handleshow} />
+                 <FormControlLabel value="Rent" control={<Radio />} label="Rent" onClick={handleshow}/>
             </RadioGroup>    
         </FormControl>
 
-        
-       
-        <BasicDateRangePicker />
-
-        <Typography fontSize={17}>
-            Listing Price (total amount/per day) 
+        {showhide==='Sell' &&(
+          <Typography fontSize={17}>
+            Listing Price
         </Typography>
+         )
+        }
 
+        {showhide==='Rent' &&(
+          <Typography fontSize={17}>
+            <BasicDateRangePicker />
+            Listing Price (per day)
+            </Typography>
+         )
+        }
 
         <FormControl fullWidth sx={{ m: 0 }} variant="filled">
           <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
