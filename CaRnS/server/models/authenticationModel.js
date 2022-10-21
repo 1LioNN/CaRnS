@@ -7,8 +7,8 @@ const profileSchema = new Schema({
     name: {
         type: String
     },
-    phone_number: {
-        type: String
+    phoneNumber: {
+        type: Number
     }
 })
 
@@ -35,7 +35,7 @@ const authenticationSchema = new Schema({
 // static signup method
 authenticationSchema.statics.signup = async function(email, password, userType, profile) {
     // validation
-    if (!email || !password || !userType || !profile) {
+    if (!email || !password || !userType || !profile || !profile.name || !profile.phone_number) {
         throw Error('All fields must be filled')
     }
 
@@ -50,7 +50,6 @@ authenticationSchema.statics.signup = async function(email, password, userType, 
     if (userType != "vendor" && userType != "buyer"){
         throw Error('Invalid user type')
     }
-
 
     // checking if user exists
     const exists = await this.findOne({ email })
