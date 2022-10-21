@@ -5,6 +5,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import {useAuth} from '../Utils/AuthContext.js'
+import { useNotification } from '../Utils/NotificationContext';
 import { useNavigate } from 'react-router-dom';
 import  logo  from "../assets/icons/carns-logo.png";
 import './SignIn.css';
@@ -33,6 +34,7 @@ const onSubmit = (values, props) => {
 */
 
 function SignIn({ handleChange }){
+    const { _, setNotification } = useNotification();
     const auth = useAuth();
     const navigate = useNavigate();
     const onSubmit = async (data) => {
@@ -43,6 +45,11 @@ function SignIn({ handleChange }){
                 navigate('/profile');
             }
             else {
+                setNotification({
+                    message:data.error,
+                    severity: "error",
+                    open: true
+                });
             }
         });
     };

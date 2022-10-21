@@ -10,6 +10,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { FormHelperText } from '@mui/material'
 import * as Yup from 'yup'
 import {useAuth} from '../Utils/AuthContext.js'
+import { useNotification } from '../Utils/NotificationContext';
 import { useNavigate } from 'react-router-dom';
 import  logo  from "../assets/icons/carns-logo.png";
 import './SignUp.css';
@@ -65,6 +66,7 @@ const OnSubmit = (values, props) => {
 */
 
 function SignUp(){
+    const { _, setNotification } = useNotification();
     let auth = useAuth();
     let navigate = useNavigate();
     const onSubmit = async (data) => {
@@ -81,7 +83,11 @@ function SignUp(){
                 navigate('/signin');
             }
             else {
-                
+                setNotification({
+                    message:data.error,
+                    severity: "error",
+                    open: true
+                });
             }
         });
     };
