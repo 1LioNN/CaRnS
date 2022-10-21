@@ -7,6 +7,11 @@ import { useAuth } from "../Utils/AuthContext.js";
 
 function ProfileSideBar() {
   const auth = useAuth();
+  if ( ! auth.user ){
+    return(
+      <h1>loading...</h1>
+    );
+  }
   if (auth.user.userType == "vendor") {
     return (
       <sidebar className="sidebar">
