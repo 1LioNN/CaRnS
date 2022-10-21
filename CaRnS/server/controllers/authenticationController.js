@@ -56,7 +56,7 @@ const editProfile = async (req, res) => {
         const user = await User.findById(id)
         if(newEmail){user.email = newEmail}
         if(newName){user.profile.name = newName}
-        if(newPhoneNumber){user.profile.phoneNumber = newPhoneNumber}
+        if(newPhoneNumber){user.profile.phone_number = newPhoneNumber}
 
         user.save()
     
