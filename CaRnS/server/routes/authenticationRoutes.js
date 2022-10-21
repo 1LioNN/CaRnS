@@ -15,8 +15,10 @@ router.get('/profile/:id', getProfile)
 
 router.get('/authenticated', authenticated)
 
-router.put('/profile/edit/:id', editProfile)
+router.put('/profile/:id', editProfile)
 
 router.delete('/:id', deleteUser)
+
+
 
 module.exports = router;

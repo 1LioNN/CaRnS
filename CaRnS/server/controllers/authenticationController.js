@@ -9,12 +9,11 @@ const loginUser = async(req, res) => {
     try {
         const user = await User.login(email, password)
         req.session.user = user;
-        res.status(200).json({ email, user })
+        res.status(200).json(user)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 }
-
 
 // signup user
 const signupUser = async (req, res) => {
@@ -22,7 +21,7 @@ const signupUser = async (req, res) => {
 
     try {
         const user = await User.signup(email, password, userType, profile)
-        res.status(200).json({email, userType, user})
+        res.status(200).json(user)
     }catch(error) {
         res.status(400).json({error: error.message})
     }
@@ -47,26 +46,24 @@ const getProfile = async (req, res) => {
 // edit user profile
 const editProfile = async (req, res) => {
     const { id } = req.params
+    const { newEmail, newName, newPhoneNumber } = req.body
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Not a valid user ID'})
     }
 
-    const user = await User.findOneAndUpdate(
-        {_id: id}, 
-        {
-            profile : {
-                name: req.body.name,
-                description: req.body.phone_number,
-            }
-        }, 
-        {
-            upsert: true
-        }
-    )
+    try {
+        const user = await User.findById(id)
+        if(newEmail){user.email = newEmail}
+        if(newName){user.profile.name = newName}
+        if(newPhoneNumber){user.profile.phone_number = newPhoneNumber}
 
-    return res.status(200).json(user)
-
+        user.save()
+    
+        return res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
 }
 
 // delete user account

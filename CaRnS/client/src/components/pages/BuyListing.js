@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import { useEffect, useState} from 'react'
 
@@ -32,7 +33,9 @@ function BuyListings(){
             <div className='listings'>
                 {buyListing && buyListing.map((buyListing) => (
                     <p key={buyListing._id}>
-                        {buyListing.listingName}
+                        <Link to={'/buydetail/'+buyListing._id}>
+                            {buyListing.listingName}
+                        </Link>
                     </p>
                 ))}
             </div>

@@ -14,11 +14,15 @@ const buyListingDetails = new Schema ({
     salePrice: {
         type: Number,
         required: true
+    },
+    location:{
+        type: String,
+        required: true
     }
 })
 
 const rentListingDetails = new Schema ({
-    listingDescription: String,
+    listingDescription: String,  
     vehicleType: {
         type: String,
         required: true
@@ -26,6 +30,10 @@ const rentListingDetails = new Schema ({
     rentPrice:{
         type: Number,
         required: true
+    },
+    location:{
+        type: String,
+        required:true
     },
     availabilityStart:{
         type: Date,
@@ -35,11 +43,8 @@ const rentListingDetails = new Schema ({
         type: Date,
         required: true
     },
-    location:{
-        type: String,
-        required:true
-    }
-    
+    allUnavailableDates: [{type: Date}],
+    booking: [{ customerID: String, dates: [{type: Date}]}]
 })
 
 const listingSchema = new Schema({
@@ -68,28 +73,29 @@ const listingSchema = new Schema({
 listingSchema.statics.listBuy = async function (vendorID, listingName, isBuy, buyListingDetails) {
 
     // validation
-    if (!vendorID || !listingName || !isBuy, !buyListingDetails) {
-      throw Error('All fields must be filled')
+    if (!vendorID || !listingName || !isBuy || !buyListingDetails) {
+      throw Error('Buy - All fields must be filled')
     }
 
 
-    if (!buyListingDetails.vehicleType || !buyListingDetails.salePrice) {
-        throw Error('All fields must be filled')
+    if (!buyListingDetails.vehicleType || !buyListingDetails.salePrice || !buyListingDetails.location) {
+        throw Error('Buy - All fields must be filled')
     }
 
+    if(!isBuy) {
+        throw Error('isBuy must be true for a buy listing')
+    }
 
     // create listing
-
     const listing = await this.create({ vendorID, listingName, isBuy, buyListingDetails })
     return listing
    
 }
 
 listingSchema.statics.listRent = async function (vendorID, listingName, isBuy, rentListingDetails) {
-
     // validation
-    if (!vendorID || !listingName || !isBuy, !rentListingDetails) {
-        throw Error('Gen - All fields must be filled')
+    if (!vendorID || !listingName || isBuy == undefined || !rentListingDetails) {
+        throw Error('Rent - All fields must be filled')
     }
 
 
@@ -97,9 +103,13 @@ listingSchema.statics.listRent = async function (vendorID, listingName, isBuy, r
         throw Error('Rent - All fields must be filled')
     }
 
+    if(isBuy) {
+        throw Error('isBuy must be false for a rent listing')
+    }
+
+    rentListingDetails = {...rentListingDetails, "booking": [], "allUnavailableDates": []} //This line is merely for asethic purposes in the db
 
     // create listing
-
     const listing = await this.create({ vendorID, listingName, isBuy, rentListingDetails })
     return listing
 

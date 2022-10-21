@@ -14,6 +14,8 @@ import EditProfilePage from './components/pages/EditProfilePage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import ListingForm from './components/ListingForm';
+
 
 function App() {
   let auth = useAuth();
@@ -45,6 +47,7 @@ function App() {
         <Route path='/editprofile' element ={<EditProfilePage/>}/>
         <Route path='/listings' element ={<VendorListingsPage/>}/>
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
+        <Route path='/createlisting' element={<ListingForm />} />
       </Routes>
      
     </div>

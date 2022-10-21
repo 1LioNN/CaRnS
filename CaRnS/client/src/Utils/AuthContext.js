@@ -48,7 +48,8 @@ export function AuthProvider( {children} ) {
       const resData = await response.json();
 
       if (status === 200) {
-        setUser(resData.user);
+        setUser(resData);
+        
       }
       else {
         setUser(null);
