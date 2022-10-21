@@ -1,55 +1,60 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
 import "./ProfileSideBar.css";
-import SideBarBtn from "./SideBarBtn";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Utils/AuthContext.js";
 
 function ProfileSideBar() {
   const auth = useAuth();
-  if (auth.user.userType == "vendor") {
+  if (!auth.user){
+    return (
+      <></>
+    )
+  }
+  if (auth.user.userType === "vendor") {
     return (
       <sidebar className="sidebar">
         <div className="sidebar-container">
           <ul>
             <li>
               <Link to="/profile">
-                <SideBarBtn text={"Account"} />
+                Account
               </Link>
             </li>
             <li>
               <Link to="/listings">
-                <SideBarBtn text={"Listings"} />
+                Listings
               </Link>
             </li>
             <li>
-              <Link to="/">
-                <SideBarBtn text={"History"} />
+              <Link to="/history">
+                History
               </Link>
             </li>
           </ul>
         </div>
       </sidebar>
     );
-  }
+  }else{
   return (
     <sidebar className="sidebar">
       <div className="sidebar-container">
         <ul>
           <li>
             <Link to="/profile">
-              <SideBarBtn text={"Account"} />
+              Account
             </Link>
           </li>
           <li>
-            <Link to="/">
-              <SideBarBtn text={"History"} />
+            <Link to="/history">
+              History
             </Link>
           </li>
         </ul>
       </div>
     </sidebar>
   );
+}
 }
 
 export default ProfileSideBar;

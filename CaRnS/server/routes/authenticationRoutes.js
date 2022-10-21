@@ -15,7 +15,7 @@ router.get('/profile/:id', getProfile)
 
 router.get('/authenticated', authenticated)
 
-router.patch('/profile/:id', editProfile)
+router.put('/profile/edit/:id', editProfile)
 
 router.delete('/:id', deleteUser)
 

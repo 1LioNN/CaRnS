@@ -10,9 +10,12 @@ function Capitalize(str) {
 }
 
 function Profile() {
-  const auth = useAuth();
+  const auth = useAuth();  
   return (
     <profile className="profile">
+    {	auth.user ?
+      
+      <>
       <div className="profile-container">
         <text className="page-title">Profile</text>
         <img
@@ -54,13 +57,15 @@ function Profile() {
               }}
               variant="contained"
               disableElevation
-              href="/"
+              href="/editprofile"
             >
               Edit Profile
             </Button>
           </div>
         </div>
       </div>
+      </>: <><h1 style={{color: 'black'}}> LOADING </h1></>
+    }
     </profile>
   );
 }
