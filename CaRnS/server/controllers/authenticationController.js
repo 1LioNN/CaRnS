@@ -82,4 +82,19 @@ const deleteUser = async (req, res) => {
     res.status(200).json(user) //might want to return something else
 }
 
-module.exports = {signupUser, loginUser, getProfile, editProfile, deleteUser}
+const logOut = async (req, res) => {
+    req.session.destroy();
+    res.clearCookie('connect.sid');
+    return res.status(200).json({ msg: 'user logged out' }).end();
+}
+
+const authenticated = async (req, res) => {
+    if (!req.session.user) return res.status(401).json({ msg: 'not authenticated' }).end();
+    else {
+        user =req.session.user;
+        res.status(200).json({user}).end();
+    }
+}
+
+
+module.exports = {signupUser, loginUser, getProfile, editProfile, deleteUser, logOut, authenticated}

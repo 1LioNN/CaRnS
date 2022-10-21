@@ -36,7 +36,6 @@ function SignIn({ handleChange }){
     const auth = useAuth();
     const navigate = useNavigate();
     const onSubmit = async (data) => {
-        console.log(data);
         
         auth.login( { email: data.username, password: data.password }, (status, data) => {
             if (status === 200){

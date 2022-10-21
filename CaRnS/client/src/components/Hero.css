@@ -1,17 +1,6 @@
 :root {
   --orange: #e87123;
 }
-@font-face {
-    font-family: redhat;
-    font-weight: bold;
-    src: url("../assets/fonts/redhattext.ttf");
-  }
-@font-face {
-    font-family: montserrat;
-    font-weight: bold;
-    src: url("../assets/fonts/montserrat.ttf");
-}
-
 .heroContainer {
     position: relative;
     height: 859px;
