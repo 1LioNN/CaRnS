@@ -40,11 +40,6 @@ function Navbar() {
               Buy
             </Link>
           </li>
-    <li>
-    <Link to="/buydetail/635061dfb05190a849df18c8" className="site-title">
-    BuyDetail
-    </Link>
-    </li>
           </ul>
           {auth.user ? (
             <PopUp trigger={ 

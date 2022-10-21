@@ -51,6 +51,10 @@ function BuyDetail(){
 			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.salePrice} </h3>
 			</Paper>
 			<ContactInfo uid = {buyListing.vendorID} />
+			<Paper elevation={4}>
+			<h2 style={{color: 'black'}}> Location: </h2>
+			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.location} </h3>
+			</Paper>
 			</>: <><h1 style={{color: 'black'}}> LOADING </h1></>
 		}
 		</buydetail>
