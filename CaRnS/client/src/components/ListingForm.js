@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
+import { useNotification } from '../Utils/NotificationContext';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -36,7 +37,9 @@ const initialValues = {
 }
 
 
-
+const ListingForm = () => {
+  
+  const { _, setNotification } = useNotification();
 const onSubmit = async (data) => {
     console.log(data)
     let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
@@ -65,12 +68,25 @@ const onSubmit = async (data) => {
     console.log(status)
     const resData = await response.json();
     console.log(resData)
+  if (status === 200) {
+    setNotification({
+      message:"Listing successfully posted",
+      severity: "success",
+      open: true
+    });
+  }
+  else {
+    setNotification({
+      message:resData.error,
+      severity: "error",
+      open: true
+    });
+  }
 
 
 
   };
 
-const ListingForm = () => {
 
     const [values, setValues] = React.useState({
         amount: ''
