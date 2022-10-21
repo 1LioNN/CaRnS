@@ -57,7 +57,7 @@ function Profile() {
               }}
               variant="contained"
               disableElevation
-              href="/"
+              href="/editprofile"
             >
               Edit Profile
             </Button>

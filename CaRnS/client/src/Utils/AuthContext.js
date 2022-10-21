@@ -29,6 +29,8 @@ export function AuthProvider( {children} ) {
       callback(status, resData);
     }
 
+
+
     let login = async ( { email, password } , callback) => {
       const response = await fetch(`http://localhost:8000/api/user/login`, {
         method: 'POST', 
@@ -72,7 +74,30 @@ export function AuthProvider( {children} ) {
     }
     callback(status, resData);
   }
-  
+
+   const editprofile = async ( { newEmail, newName, newPhoneNumber, uid}, callback ) => {
+      const response = await fetch('http://localhost:8000/api/user/profile/' + uid, {
+        method: 'PUT', 
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          newEmail: newEmail,
+          newName: newName,
+          newPhoneNumber: newPhoneNumber,
+        })
+      });
+      const status = response.status;
+      const resData = await response.json();
+      if (status === 200) {
+        setUser(resData);
+
+      }
+      callback(status, resData);
+  }
+
   let isauthenticated = async callback => {
     
     if (user === null) { 
@@ -100,7 +125,7 @@ export function AuthProvider( {children} ) {
     
   };
   
-    let value = { user, login, signup, logout, isauthenticated }
+    let value = { user, login, signup, logout, editprofile, isauthenticated }
 
     return(
         <AuthContext.Provider value={value}> 
