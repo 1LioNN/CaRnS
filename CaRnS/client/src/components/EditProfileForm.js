@@ -22,14 +22,14 @@ function EditProfileForm() {
   const initialValues = {
     name: auth.user.profile.name,
     email: auth.user.email,
-    phoneNumber: auth.user.profile.phone_number,
+    phone: auth.user.profile.phone_number,
     date: moment(auth.user.createdAt).format("MMM DD, YYYY"),
     type: Capitalize(auth.user.userType),
   };
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(3, "Name hould be 3 characters long").required("Required"),
     email: Yup.string().email("Enter a valid email").required("Required"),
-    phoneNumber: Yup.number()
+    phone: Yup.number()
       .typeError("Enter a valid Phone Number")
       .required("Required"),
   });
@@ -39,7 +39,7 @@ function EditProfileForm() {
       {
         newEmail: data.email.trim(),
         newName: data.name,
-        newPhoneNumer: data.phone,
+        newPhoneNumber: data.phone,
         uid: auth.user._id,
       },
       (status, data) => {
@@ -82,7 +82,7 @@ function EditProfileForm() {
                 />
                 <Field
                   as={TextField}
-                  name="phoneNumber"
+                  name="phone"
                   label="Phone Number"
                   placeholder="Enter your phone number"
                 />

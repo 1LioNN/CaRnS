@@ -59,6 +59,7 @@ const editProfile = async (req, res) => {
         if(newPhoneNumber){user.profile.phone_number = newPhoneNumber}
 
         user.save()
+        req.session.user = user
     
         return res.status(200).json(user)
     } catch (error) {

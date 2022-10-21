@@ -76,7 +76,7 @@ export function AuthProvider( {children} ) {
   }
 
    const editprofile = async ( { newEmail, newName, newPhoneNumber, uid}, callback ) => {
-      const response = await fetch('http://localhost:8000/api/user/profile/edit/' + uid, {
+      const response = await fetch('http://localhost:8000/api/user/profile/' + uid, {
         method: 'PUT', 
         mode: 'cors',
         credentials: 'include',
