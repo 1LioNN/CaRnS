@@ -13,8 +13,8 @@ router.get('/view-buy', viewBuyListings)
 router.get('/view-rent', viewRentListings)
 router.get('/view-detail-buy/:id', getdetailbuy)
 
-router.put('/update-buy', updateBuyListing) //change (id)
-router.put('/update-rent', updateRentListing) //change (id)
+router.put('/update-buy/:id', updateBuyListing)
+router.put('/update-rent/:id', updateRentListing)
 
 router.put('/add-dates/:id', addRentListingDates)
 router.put('/remove-dates/:id', removeRentListingDates)

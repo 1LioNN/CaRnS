@@ -44,7 +44,7 @@ const rentListingDetails = new Schema ({
         required: true
     },
     allUnavailableDates: [{type: Date}],
-    booking: [{ customerID: String, unavailableDates: [{type: Date}]}]
+    booking: [{ customerID: String, dates: [{type: Date}]}]
 })
 
 const listingSchema = new Schema({

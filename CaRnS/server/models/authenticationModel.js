@@ -7,7 +7,7 @@ const profileSchema = new Schema({
     name: {
         type: String
     },
-    phone_number: {
+    phoneNumber: {
         type: Number
     }
 })

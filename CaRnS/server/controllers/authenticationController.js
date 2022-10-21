@@ -46,29 +46,19 @@ const getProfile = async (req, res) => {
 // edit user profile
 const editProfile = async (req, res) => {
     const { id } = req.params
+    const { newEmail, newName, newPhoneNumber } = req.body
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'Not a valid user ID'})
     }
 
     try {
-        const user = await User.findOneAndUpdate(
-            {_id: id}, 
-            {
-                email: req.body.email,
-                profile: {
-                    name: req.body.name,
-                    phone_number: req.body.phone_number
-                }
-            }, 
-            {
-                upsert: true,
-                new: true
-            }
-        )
-        if(!user) {
-            return res.status(404).json({error: 'No such user'})
-        }
+        const user = await User.findById(id)
+        if(newEmail){user.email = newEmail}
+        if(newName){user.profile.name = newName}
+        if(newPhoneNumber){user.profile.phoneNumber = newPhoneNumber}
+
+        user.save()
     
         return res.status(200).json(user)
     } catch (error) {
