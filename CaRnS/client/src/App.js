@@ -13,6 +13,8 @@ import VendorListingsPage from './components/pages/VendorListingsPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import ListingForm from './components/ListingForm';
+
 
 function App() {
   let auth = useAuth();
@@ -43,6 +45,7 @@ function App() {
         <Route path='/profile' element ={<ProfilePage/>}/>
         <Route path='/listings' element ={<VendorListingsPage/>}/>
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
+        <Route path='/createlisting' element={<ListingForm />} />
       </Routes>
      
     </div>
