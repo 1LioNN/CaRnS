@@ -3,13 +3,23 @@ const express = require('express')
 const router = express.Router()
 
 //controller functions
-const { postListing, viewListings } = require('../controllers/listingController')
+const { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates } = require('../controllers/listingController')
 
-router.post('/post', postListing)
-
-
-router.get('/view', viewListings)
+router.post('/post-buy', postBuyListing)
+router.post('/post-rent', postRentListing)
 
 
+router.get('/view-buy', viewBuyListings)
+router.get('/view-rent', viewRentListings)
+router.get('/view-detail-buy/:id', getdetailbuy)
+
+router.put('/update-buy/:id', updateBuyListing)
+router.put('/update-rent/:id', updateRentListing)
+
+router.put('/add-dates/:id', addRentListingDates)
+router.put('/remove-dates/:id', removeRentListingDates)
+
+
+router.delete('/:id', deleteListing)
 
 module.exports = router;

@@ -1,9 +1,18 @@
- const mongoose = require('mongoose')
- const validator = require('validator')
+const mongoose = require('mongoose')
+const validator = require('validator')
 
- const Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
- const authenticationSchema = new Schema({
+const profileSchema = new Schema({
+    name: {
+        type: String
+    },
+    phone_number: {
+        type: String
+    }
+})
+
+const authenticationSchema = new Schema({
     email:{
         type: String,
         required: true,
@@ -16,13 +25,17 @@
     userType: {
         type: String,
         required: true
+    },
+    profile: {
+        type: profileSchema,
+        required: true
     }
  }, {timestamps: true})
 
 // static signup method
-authenticationSchema.statics.signup = async function(email, password, userType) {
+authenticationSchema.statics.signup = async function(email, password, userType, profile) {
     // validation
-    if (!email || !password || !userType) {
+    if (!email || !password || !userType || !profile || !profile.name || !profile.phone_number) {
         throw Error('All fields must be filled')
     }
 
@@ -38,7 +51,6 @@ authenticationSchema.statics.signup = async function(email, password, userType) 
         throw Error('Invalid user type')
     }
 
-
     // checking if user exists
     const exists = await this.findOne({ email })
     if (exists){
@@ -46,7 +58,7 @@ authenticationSchema.statics.signup = async function(email, password, userType) 
     }
 
     // create user
-    const user = await this.create({ email, password, userType})
+    const user = await this.create({ email, password, userType, profile})
     return user
 }
 

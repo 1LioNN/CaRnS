@@ -1,6 +1,5 @@
 import React from 'react';
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material'
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import { Grid, Paper, Typography, TextField, Button } from '@mui/material'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,12 +9,14 @@ import Checkbox from '@mui/material/Checkbox';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { FormHelperText } from '@mui/material'
 import * as Yup from 'yup'
-import {useAuth} from '../../Utils/AuthContext.js'
+import {useAuth} from '../Utils/AuthContext.js'
+import { useNotification } from '../Utils/NotificationContext';
 import { useNavigate } from 'react-router-dom';
+import  logo  from "../assets/icons/carns-logo.png";
+import './SignUp.css';
 
 const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
     const headerStyle = { margin: 0 }
-    const avatarStyle = { backgroundColor: '#1bbd7e' }
     const marginTop = { marginTop: 5 }
     const initialValues = {
         name: '',
@@ -65,31 +66,37 @@ const OnSubmit = (values, props) => {
 */
 
 function SignUp(){
+    const { _, setNotification } = useNotification();
     let auth = useAuth();
     let navigate = useNavigate();
     const onSubmit = async (data) => {
-        console.log(data)
         auth.signup({
             email: data.email.trim(),
             password: data.password,
-            userType: data.account_type
+            userType: data.account_type,
+            profile:{
+                name: data.name,
+                phone_number: data.phoneNumber
+            }
         }, (res, data)=> {
             if (res === 200) {
                 navigate('/signin');
             }
             else {
-                
+                setNotification({
+                    message:data.error,
+                    severity: "error",
+                    open: true
+                });
             }
         });
     };
     
         return(
-        <Grid>
+        <Grid className='signupForm-container'>
         <Paper style={paperStyle}>
             <Grid align='center'>
-                <Avatar style={avatarStyle}>
-                    <AddCircleOutlineOutlinedIcon />
-                </Avatar>
+                <img style={{width: 80, height: 60}} src={logo} alt = "carns logo" ></img>
                 <h2 style={headerStyle}>Sign Up</h2>
                 <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
             </Grid>
