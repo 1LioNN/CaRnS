@@ -36,21 +36,21 @@ transactionSchema.statics.log = async function (customerID, listingID, transacti
     
     //validate customer ID
     if (! mongoose.isValidObjectId(customerID)){
-        return res.status(404).json({ error: 'Not a valid customer ID' })
+        throw Error('Not a valid customer ID')
     }
     const customer = await User.findById(customerID)
     if (!customer) {
-        return res.status(404).json({ error: 'Not a valid customer ID' })
+        throw Error('Not a valid customer ID')
     }
 
 
     // validate listing ID
     if (!mongoose.isValidObjectId(listingID)) {
-        return res.status(404).json({ error: 'Not a valid listing ID' })
+        throw Error('Not a valid listing ID')
     }
     const listing = await Listing.findById(listingID)
     if (!listing) {
-        return res.status(404).json({ error: 'Not a valid listing ID' })
+        throw Error('Not a valid listing ID')
     } 
 
     vendorID = listing.vendorID
