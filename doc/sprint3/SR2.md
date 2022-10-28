@@ -3,6 +3,8 @@ David
 Emin
 Lion
 Youssef
+Zexi
+Andrew
 
 #### Completed Stories
 
@@ -29,18 +31,23 @@ Youssef
 
 
 ### What are practices that you should continue during next sprint
-- 
+- Good use of gitflow to prevent errors when we merged.
+- Assigning tasks on Trello was done better than Sprint 1. Each member knew what was assigned to them and was able to work on the task independently.
 
 ### What are some new practices that you might want to use during next sprint 
-- 
+- Manage exceptations and prioritize Trello tasks (with midterms and A1), so we're all on the same page. Put our energy on the same tasks so they get completed.
+- Frontend reuse former packages/dependencies to avoid missing components during merge (like in Sprint 2).
+- Splitting stories into frontend and backend on Trello and moving them when finished instead of at the end of the sprint.
 
 ### What are (if any) harmful practices you should stop using during next sprint 
-- 
+- Not all frontend packages were consistent across components, which caused some issues during merge.
+- Most of our work was commited within the last few days before the deadline causing some stress when attempting to bugfix.
 
-### What was your best/worst experience during sprint 1 
+### What was your best/worst experience during sprint 2 
 **Best**
-- 
+- After the bugs were fixed, the product in dev felt high quality.
+- Learning new things.
+
 **Worst**
-- Thursday nights
-- Friday night wasnt fun either
 - Overload on second week. Too much.
+- Merging the form didn't work initially.
