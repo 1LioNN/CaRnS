@@ -60,7 +60,8 @@ const onSubmit = async (data) => {
           listingDescription: description,
           vehicleType: data.vehicle_type,
           salePrice: data.amount,
-          location: data.location
+          location: data.location,
+          isActive: true
         }
       })
     });

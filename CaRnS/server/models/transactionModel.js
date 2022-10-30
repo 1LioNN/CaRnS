@@ -52,6 +52,10 @@ transactionSchema.statics.log = async function (customerID, listingID, transacti
     if (!listing) {
         throw Error('Not a valid listing ID')
     } 
+    if (listing.isBuy == true){
+        listing.buyListingDetails.isActive = false
+        listing.save()
+    }
 
     vendorID = listing.vendorID
 
