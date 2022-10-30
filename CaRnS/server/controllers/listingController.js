@@ -28,19 +28,19 @@ const postRentListing = async (req, res) => {
 
 // view buy listings
 const viewBuyListings = async (req, res) => {
-    const listings = await Listing.find({isBuy: true}).sort({createdAt: -1})
+    const listings = await Listing.find({isBuy: true, 'buyListingDetails.isActive': true}).sort({createdAt: -1})
     res.status(200).json(listings)
 }
 
 const viewActiveBuyListings = async (req, res) => {
     const { id } = req.params
-    const listings = await Listing.find({isBuy: true, vendorID: id}).sort({createdAt: -1})
+    const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': true}).sort({createdAt: -1})
     res.status(200).json(listings)
 }
 
 const viewPastBuyListings = async (req, res) => {
     const { id } = req.params
-    const listings = await Listing.find({isBuy: true, vendorID: id}).sort({createdAt: -1})
+    const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': false}).sort({createdAt: -1})
     res.status(200).json(listings)
 }
 
