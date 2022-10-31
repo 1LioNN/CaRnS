@@ -50,6 +50,13 @@ const viewRentListings = async (req, res) => {
     res.status(200).json(listings)
 }
 
+const viewActiveRentListings = async (req, res) => {
+    const { id } = req.params
+    const listings = await Listing.find({ isBuy: false, vendorID: id }).sort({ createdAt: -1 })
+    res.status(200).json(listings)
+}
+
+
 const updateBuyListing = async (req, res) => {
     const { id } = req.params
     const { newListingDescription, newSalePrice, newLocation } = req.body
@@ -230,4 +237,4 @@ const removeRentListingDates = async (req, res) => {
 
 } 
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings }
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }

@@ -37,9 +37,7 @@ function ActiveSellList(){
     return(
         <activeselllist>
         <div className="profile-container">
-        <Link to={'/history'}>Active Sell</Link>
-        <Link to={'/pastsellhistory'}>Past Sell</Link>
-        <Link to={'/vendorrenthistory'}>Rent History</Link>
+        <Link to={'/vendorrenthistory'}>Rent</Link>
         <text className="page-title">Active Sell Listings</text>
             <div className='listings'>
             <Stack spacing={2}>

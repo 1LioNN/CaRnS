@@ -1,12 +1,14 @@
 import React from 'react';
 import ProfileSideBar from '../ProfileSideBar';
 import VendorRentHistoryListings from '../VendorRentHistoryListings';
+import VendorListing from '../VendorListing';
 
 function VendorRentHistoryPage(){
     return(
         <vendorhistorypage>
-            <VendorRentHistoryListings/>
             <ProfileSideBar />
+            <VendorListing />
+            <VendorRentHistoryListings/>
         </vendorhistorypage>        
     );
 }
