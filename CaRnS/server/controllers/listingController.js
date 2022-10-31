@@ -256,16 +256,25 @@ const removeRentListingDates = async (req, res) => {
     //Sorting the dates
     let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime())
 
+
+
     try {
         //Create and update booking object
         //Find if the customerID exists already in the booking object
         if(listing.rentListingDetails.booking.find(booking => booking.customerID === customerID) != null) {
             // Update allUnavaliableDates and booking dates
-            listing.rentListingDetails.allUnavailableDates = removeDates(listing.rentListingDetails.allUnavailableDates, rentDates)
-
             booking = listing.rentListingDetails.booking.find(booking => booking.customerID === customerID)
-            bookingIndex = listing.rentListingDetails.booking.findIndex(booking => booking.customerID === customerID) //Used for resulting array check
+            
+            for(let i = 0; i < rentDates.length; i++) {
+                if(!isInArray(booking.dates, rentDates[i])) {
+                    return res.status(400).json({error: 'Cannot remove non-booked dates' })
+                }
+            }
+
+            listing.rentListingDetails.allUnavailableDates = removeDates(listing.rentListingDetails.allUnavailableDates, rentDates)
             booking.dates = removeDates(booking.dates, rentDates)
+            bookingIndex = listing.rentListingDetails.booking.findIndex(booking => booking.customerID === customerID) //Used for resulting array check
+            
 
             // Check if booking dates for the user is empty and if it is then delete the user's booking object (clutter removal)
             if(booking.dates.length == 0) {
