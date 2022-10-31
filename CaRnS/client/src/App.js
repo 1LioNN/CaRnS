@@ -12,7 +12,6 @@ import ProfilePage from './components/pages/ProfilePage';
 import VendorListingsPage from './components/pages/VendorListingsPage';
 import VendorHistoryPage from './components/pages/VendorHistoryPage';
 import EditProfilePage from './components/pages/EditProfilePage';
-import PastSellHistoryPage from './components/pages/PastSellHistoryPage';
 import VendorRentHistoryPage from './components/pages/VendorRentHistoryPage';
 import BuyerHistoryPage from './components/pages/BuyerHistoryPage';
 import { useAuth } from "./Utils/AuthContext";
@@ -53,7 +52,6 @@ function App() {
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
         <Route path='/createlisting' element={<ListingForm />} />
         <Route path='/history' element={<VendorHistoryPage />} />
-        <Route path='/pastsellhistory' element={<PastSellHistoryPage />} />
         <Route path='/vendorrenthistory' element={<VendorRentHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
       </Routes>

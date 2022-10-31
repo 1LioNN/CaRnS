@@ -1,12 +1,12 @@
 import React from 'react';
-import ActiveSellList from '../ActiveSellList';
+import PastSellList from '../PastSellList';
 import ProfileSideBar from '../ProfileSideBar';
 
 function VendorHistoryPage(){
     return(
         <vendorhistorypage>
             <ProfileSideBar />
-            <ActiveSellList/>
+            <PastSellList/>
         </vendorhistorypage>        
     );
 }

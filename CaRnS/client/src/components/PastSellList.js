@@ -37,9 +37,6 @@ function PastSellList(){
     return(
         <pastselllist>
         <div className="profile-container">
-        <Link to={'/history'}>Active Sell</Link>
-        <Link to={'/pastsellhistory'}>Past Sell</Link>
-        <Link to={'/vendorrenthistory'}>Rent History</Link>
         <text className="page-title">Past Sell Listings</text>
             <div className='listings'>
             <Stack spacing={2}>

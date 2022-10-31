@@ -10,7 +10,7 @@ function VendorRentHistoryListings(){
     const auth = useAuth();  
     useEffect(() => {
         const fetchBuyListings = async () => {
-            const response = await fetch('http://localhost:8000/api/listing/view-rent', {
+            const response = await fetch('http://localhost:8000/api/listing/viewActiveRentListings/'+auth.user._id, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
@@ -36,10 +36,8 @@ function VendorRentHistoryListings(){
     return(
         <>
         <div className="profile-container">
-        <Link to={'/history'}>Active Sell</Link>
-        <Link to={'/pastsellhistory'}>Past Sell</Link>
-        <Link to={'/vendorrenthistory'}>Rent History</Link>
-        <text className="page-title">Rent History</text>
+        <Link to={'/listings'}>Sell</Link>
+        <text className="page-title">Rent Listings</text>
             <div className='listings'>
             <Stack spacing={2}>
                 {rentListing && rentListing.map((rentListing) => (
