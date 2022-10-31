@@ -161,7 +161,12 @@ function isInArray(array, value) {
 
 const addRentListingDates = async (req, res) => {
     const { id } = req.params
-    const { customerID } = req.body
+
+    if(req.session.user == null) {
+        return res.status(400).json({ error: 'User not logged in' })
+    }
+    const customerID = req.session.user._id
+
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Not a valid listing ID' })
@@ -187,7 +192,7 @@ const addRentListingDates = async (req, res) => {
         //Check if date is taken
         for(let i = 0; i < rentDates.length; i++) {
             if(isInArray(listing.rentListingDetails.allUnavailableDates, rentDates[i])) {
-                return res.status(400).json({error: 'Date is already taken'})
+                return res.status(400).json({error: 'Date is already taken' })
             }
         }
 
@@ -220,8 +225,63 @@ const addRentListingDates = async (req, res) => {
     }
 } 
 
-const removeRentListingDates = async (req, res) => {
+function removeDates(dates, datesToRemove) {
+    return dates.filter(function(date) {
+        if(!isInArray(datesToRemove, date)) {
+            return date
+        }
+    })
+}
 
+const removeRentListingDates = async (req, res) => {
+    const { id } = req.params
+
+    if(req.session.user == null) {
+        return res.status(400).json({ error: 'User not logged in' })
+    }
+    const customerID = req.session.user._id
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Not a valid listing ID' })
+    }
+    
+    const listing = await Listing.findById(id)
+    if (!listing) {
+        return res.status(404).json({ error: 'No such listing' })
+    }
+    if (listing.isBuy == true) {
+        return res.status(400).json({ error: 'Not a rent listing' })
+    }
+
+    //Sorting the dates
+    let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime())
+
+    try {
+        //Create and update booking object
+        //Find if the customerID exists already in the booking object
+        if(listing.rentListingDetails.booking.find(booking => booking.customerID === customerID) != null) {
+            // Update allUnavaliableDates and booking dates
+            listing.rentListingDetails.allUnavailableDates = removeDates(listing.rentListingDetails.allUnavailableDates, rentDates)
+
+            booking = listing.rentListingDetails.booking.find(booking => booking.customerID === customerID)
+            bookingIndex = listing.rentListingDetails.booking.findIndex(booking => booking.customerID === customerID) //Used for resulting array check
+            booking.dates = removeDates(booking.dates, rentDates)
+
+            // Check if booking dates for the user is empty and if it is then delete the user's booking object (clutter removal)
+            if(booking.dates.length == 0) {
+               listing.rentListingDetails.booking.splice(bookingIndex, 1) 
+            }
+        } else {
+            return res.status(400).json({ error: 'Customer has no dates to remove' })
+        }
+        
+
+        listing.save()
+
+        return res.status(200).json(listing.rentListingDetails)
+    } catch(error) {
+        return res.status(404).json({error: 'Error updating dates'})
+    }
 } 
 
 module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates }
