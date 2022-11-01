@@ -18,29 +18,29 @@ import FilledInput from '@mui/material/FilledInput';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 
 
-import BasicDateRangePicker from './date-range-picker';
 import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
-  image: '',
-  listing_name: '',
-  vehicle_type: '',
-  car_make:'',
-  car_model: '',
-  car_year: '',
-  amount:'',
-  location:''
+  address: '',
+  card_number: '',
+  card_holder:'',
+  expiry_date: '',
+  cvc: ''
 
 }
 
 
 const BookDetailsRent = () => {
+
+
   
-  const { _, setNotification } = useNotification();
+  // const { _, setNotification } = useNotification();
 const onSubmit = async (data) => {
-  //   console.log(data)
+    // console.log(data)
   //   let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
-  //   console.log(description)
+  //   console.log(description) 
 
 
   //   const response = await fetch('http://localhost:8000/api/listing/post-buy', {
@@ -99,6 +99,18 @@ const onSubmit = async (data) => {
     //     setValues({ ...values, [prop]: event.target.value });
     //   };
 
+  const [value, setValue] = React.useState('cash');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const [values, setValues] = React.useState({
+    address: ''
+  });
+
+  let history = useNavigate();
+
 
 
     return(
@@ -120,7 +132,7 @@ const onSubmit = async (data) => {
         <Form>
             <Container maxWidth="md" >
           
-              <IconButton size="large">
+              <IconButton size="large" onClick={() => history.goBack()}>
                   <ArrowBackIcon/>
               </IconButton>
 
@@ -128,13 +140,10 @@ const onSubmit = async (data) => {
                   Booking Details 
               </Typography>
 
-              <Typography fontSize={17} color='grey'>
+              {/* <Typography fontSize={17} color='grey'>
                   Date
-              </Typography>
+              </Typography> */}
 
-              <Typography fontSize={17}>
-                  <BasicDateRangePicker />
-              </Typography>
 
               <Typography fontSize={17} color='grey'>
                   Address
@@ -147,20 +156,20 @@ const onSubmit = async (data) => {
                 />
               </FormControl>
 
-              
-              
               <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Payment Method</FormLabel>
-                <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="Card"
-                name="radio-buttons-group"
-                >
-                  <FormControlLabel value="female" control={<Radio />} label="Cash" />
-                  <FormControlLabel value="male" control={<Radio />} label="Card" />
-                </RadioGroup>         
-              </FormControl>
+                 <FormLabel id="demo-controlled-radio-buttons-group">Payment Method</FormLabel>
+                    <RadioGroup
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    value={value}
+                    onChange={handleChange}
+                          >
+              <FormControlLabel value="cash" control={<Radio />} label="Cash" />
+              <FormControlLabel value="card" control={<Radio />} label="Card" />
+                  </RadioGroup>
+             </FormControl>
 
+              
             
               <Box
                 sx={{
@@ -191,6 +200,7 @@ const onSubmit = async (data) => {
                 <text className="field-name"> x </text>
                 <text className="field-value"> {"3"} </text>
                 <text className="field-name"> days </text>
+                {/* "10000" and "3" are only examples*/}
               </Box>
 
               <Box fontSize={17}>
