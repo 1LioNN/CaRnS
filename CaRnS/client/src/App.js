@@ -10,7 +10,10 @@ import SignInPage from './components/pages/SignInPage';
 import BuyDetail from './components/pages/BuyDetail';
 import ProfilePage from './components/pages/ProfilePage';
 import VendorListingsPage from './components/pages/VendorListingsPage';
+import VendorHistoryPage from './components/pages/VendorHistoryPage';
 import EditProfilePage from './components/pages/EditProfilePage';
+import VendorRentHistoryPage from './components/pages/VendorRentHistoryPage';
+import BuyerHistoryPage from './components/pages/BuyerHistoryPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -36,9 +39,9 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-    <Route path='/' element={<LandingPage/>}/>
-    <Route path='/signup' element ={<SignUpPage/>}/>
-    <Route path='/signin' element ={<SignInPage/>}/>
+        <Route path='/' element={<LandingPage/>}/>
+        <Route path='/signup' element ={<SignUpPage/>}/>
+        <Route path='/signin' element ={<SignInPage/>}/>
         <Route path='/buy' element={<BuyListing/>}/>
         <Route path='/rent' element={<RentListing/>}/>
         <Route path='/signup' element ={<SignUpPage/>}/>
@@ -48,6 +51,9 @@ function App() {
         <Route path='/listings' element ={<VendorListingsPage/>}/>
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
         <Route path='/createlisting' element={<ListingForm />} />
+        <Route path='/history' element={<VendorHistoryPage />} />
+        <Route path='/vendorrenthistory' element={<VendorRentHistoryPage />} />
+        <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
       </Routes>
      
     </div>

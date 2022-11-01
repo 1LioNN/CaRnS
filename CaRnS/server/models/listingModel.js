@@ -18,6 +18,10 @@ const buyListingDetails = new Schema ({
     location:{
         type: String,
         required: true
+    },
+    isActive:{
+        type: Boolean,
+        required: true
     }
 })
 
