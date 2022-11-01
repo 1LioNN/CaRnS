@@ -32,9 +32,19 @@ const viewBuyListings = async (req, res) => {
     res.status(200).json(listings)
 }
 
-// view rent listings
+// view non-expired/avaliable rent listings
 const viewRentListings = async (req, res) => {
-    const listings = await Listing.find({ isBuy: false }).sort({ createdAt: -1 })
+    const today = new Date()
+    //$gt -> greater than
+    const listings = await Listing.find({ isBuy: false, "rentListingDetails.availabilityEnd": { $gt: today }} ).sort({ createdAt: -1 })
+    res.status(200).json(listings)
+}
+
+// view expired rent listings
+const viewExpiredRentListings = async (req, res) => {
+    const today = new Date()
+    //$lt -> less than
+    const listings = await Listing.find({ isBuy: false, "rentListingDetails.availabilityEnd": { $lt: today }} ).sort({ createdAt: -1 })
     res.status(200).json(listings)
 }
 
@@ -293,4 +303,4 @@ const removeRentListingDates = async (req, res) => {
     }
 } 
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates }
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, viewExpiredRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates }
