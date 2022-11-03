@@ -19,7 +19,8 @@ import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import ListingForm from './components/ListingForm';
-
+import CreateRentListingPage from './components/pages/CreateRentListingPage';
+import RentListingForm from './components/RentListingForm'
 
 function App() {
   let auth = useAuth();
@@ -54,6 +55,8 @@ function App() {
         <Route path='/listingrent' element={<VendorListingsRent />} />
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
         <Route path='/createlisting' element={<ListingForm />} />
+        <Route path='/createlistingrent' element={<CreateRentListingPage />} />
+        <Route path='/listingrent' element={<RentListingForm />} />
         <Route path='/history' element={<VendorHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
         <Route path='/buycheckout/:listId' element={<BuyCheckoutPage />} />
