@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import "./Profile.css";
 import Stack from '@mui/material/Stack';
 import { useEffect, useState} from 'react'
 import { useAuth } from "../Utils/AuthContext.js";
+import AddIcon from "@mui/icons-material/Add";
+import "./ActiveSellList.css"
 
 function VendorRentHistoryListings(){
     const [rentListing, setRentListings] = useState(null)
@@ -35,11 +36,30 @@ function VendorRentHistoryListings(){
 
     return(
         <>
-        <div className="profile-container">
-        <Link to={'/listings'}>Sell</Link>
-        <text className="page-title">Rent Listings</text>
+        <div className="listing-container">
+        <div className="page-header">
+          <text className="listing-page-title">
+            Active Rent Listings
+          </text>
+
+          <Link to={"/listings"}>
+            <text className="rentToggle">
+            View Active Sell Listings
+            </text> 
+          </Link>
+        </div>
+
+        <Link to={"/createlistingrent"}>
+          <div className="newListing">
+            <AddIcon
+              sx={{ fontSize: 50, marginTop: "20px", marginLeft: "47.5%" }}
+            />
+            New Rent Listing
+          </div>
+        </Link>
+
             <div className='listings'>
-            <Stack spacing={2}>
+            <Stack spacing={3}>
                 {rentListing && rentListing.map((rentListing) => (
                     <>map details here</>
 

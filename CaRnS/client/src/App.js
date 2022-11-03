@@ -12,7 +12,7 @@ import ProfilePage from './components/pages/ProfilePage';
 import VendorListingsPage from './components/pages/VendorListingsPage';
 import VendorHistoryPage from './components/pages/VendorHistoryPage';
 import EditProfilePage from './components/pages/EditProfilePage';
-import VendorRentHistoryPage from './components/pages/VendorRentHistoryPage';
+import VendorListingsRent from './components/pages/VendorListingsPageRent';
 import BuyerHistoryPage from './components/pages/BuyerHistoryPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
@@ -49,10 +49,10 @@ function App() {
         <Route path='/profile' element ={<ProfilePage/>}/>
         <Route path='/editprofile' element ={<EditProfilePage/>}/>
         <Route path='/listings' element ={<VendorListingsPage/>}/>
+        <Route path='/listingrent' element={<VendorListingsRent />} />
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
         <Route path='/createlisting' element={<ListingForm />} />
         <Route path='/history' element={<VendorHistoryPage />} />
-        <Route path='/vendorrenthistory' element={<VendorRentHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
       </Routes>
      
