@@ -41,6 +41,7 @@ const viewActiveBuyListings = async (req, res) => {
 const viewPastBuyListings = async (req, res) => {
     const { id } = req.params
     const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': false}).sort({createdAt: -1})
+    res.status(200).json(listings)
 }
 
 // view non-expired/avaliable rent listings
