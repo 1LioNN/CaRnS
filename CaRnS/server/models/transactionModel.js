@@ -21,24 +21,28 @@ const transactionSchema = new Schema({
     transactionAmount: {
         type: Number,
         required: true
+    },
+    dates: {
+        type: [Date],
+        default: undefined
     }
 }, { timestamps: true })
 
 
-transactionSchema.statics.log = async function (customerID, listingID, transactionAmount) {
+transactionSchema.statics.log = async function (customerID, listingID, transactionAmount, dates) {
 
     // validation
     if (!customerID || !listingID ||!transactionAmount) {
         throw Error('Missing data to complete transaction')
     }
 
-
-    
     //validate customer ID
-    if (! mongoose.isValidObjectId(customerID)){
+    if (!mongoose.isValidObjectId(customerID)){
         throw Error('Not a valid customer ID')
     }
+
     const customer = await User.findById(customerID)
+
     if (!customer) {
         throw Error('Not a valid customer ID')
     }
@@ -52,21 +56,24 @@ transactionSchema.statics.log = async function (customerID, listingID, transacti
     if (!listing) {
         throw Error('Not a valid listing ID')
     } 
-    if (listing.isBuy == true){
-        listing.buyListingDetails.isActive = false
-        listing.save()
-    }
 
     vendorID = listing.vendorID
 
+    if (listing.isBuy == true){
+        listing.buyListingDetails.isActive = false
+        listing.save()
+        const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount })
+        return transaction
+    } else {
+        
+        if(dates.length == 0) {
+            throw Error('No dates for the rent listing')
+        }
 
-
-
-
-    // create transaction
-    const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount })
-    return transaction
-
+        transactionAmount = transactionAmount * dates.length
+        const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
+        return transaction
+    }
 }
 
 module.exports = mongoose.model('Transaction', transactionSchema)
