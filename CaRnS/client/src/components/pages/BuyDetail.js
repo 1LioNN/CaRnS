@@ -3,6 +3,7 @@ import { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import ContactInfo from "./ContactInfo";
+import { Link } from "react-router-dom";
 
 function BuyDetail(){
 	const [buyListing, setBuyListing] = useState(null);
@@ -55,6 +56,10 @@ function BuyDetail(){
 			<h2 style={{color: 'black'}}> Location: </h2>
 			<h3 style={{color: 'black'}}> {buyListing.buyListingDetails.location} </h3>
 			</Paper>
+			
+			<Link to={'/buycheckout/'+buyListing._id}>
+			         Buy It Now!
+			     </Link>
 			</>: <><h1 style={{color: 'black'}}> LOADING </h1></>
 		}
 		</buydetail>
