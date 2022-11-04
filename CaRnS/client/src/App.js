@@ -3,8 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/pages/LandingPage';
-import BuyListing from './components/pages/BuyListing';
-import RentListing from './components/pages/RentListing';
+import BuyListingPage from './components/pages/BuyListingPage';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import BuyDetail from './components/pages/BuyDetail';
@@ -18,6 +17,7 @@ import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import ListingForm from './components/ListingForm';
+import RentListingPage from './components/pages/RentListingPage';
 
 
 function App() {
@@ -42,8 +42,8 @@ function App() {
         <Route path='/' element={<LandingPage/>}/>
         <Route path='/signup' element ={<SignUpPage/>}/>
         <Route path='/signin' element ={<SignInPage/>}/>
-        <Route path='/buy' element={<BuyListing/>}/>
-        <Route path='/rent' element={<RentListing/>}/>
+        <Route path='/buy' element={<BuyListingPage/>}/>
+        <Route path='/rent' element={<RentListingPage/>}/>
         <Route path='/signup' element ={<SignUpPage/>}/>
         <Route path='/signin' element ={<SignInPage/>}/>
         <Route path='/profile' element ={<ProfilePage/>}/>
