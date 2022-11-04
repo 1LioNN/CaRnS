@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 
 const User = require('../models/authenticationModel')
 
@@ -98,7 +99,8 @@ listingSchema.statics.listBuy = async function (vendorID, listingName, isBuy, bu
 
 listingSchema.statics.listRent = async function (vendorID, listingName, isBuy, rentListingDetails) {
     // validation
-    if (!vendorID || !listingName || isBuy == undefined || !rentListingDetails) {
+
+    if (!vendorID || !listingName || isBuy==undefined || !rentListingDetails) {
         throw Error('Rent - All fields must be filled')
     }
 
@@ -111,11 +113,32 @@ listingSchema.statics.listRent = async function (vendorID, listingName, isBuy, r
         throw Error('isBuy must be false for a rent listing')
     }
 
+    if (!moment(rentListingDetails.availabilityStart, "YYYY-MM-DD", true).isValid()) {
+        throw Error('Invalid start date')
+
+    }
+    if (!moment(rentListingDetails.availabilityEnd, "YYYY-MM-DD", true).isValid()) {
+        throw Error('Invalid end date')
+
+    }
+
+    if (Date.parse(rentListingDetails.availabilityStart) > Date.parse(rentListingDetails.availabilityEnd)) {
+        throw Error('End date must be after the start date')
+    }
+
+    
+
     rentListingDetails = {...rentListingDetails, "booking": [], "allUnavailableDates": []} //This line is merely for asethic purposes in the db
 
     // create listing
-    const listing = await this.create({ vendorID, listingName, isBuy, rentListingDetails })
-    return listing
+
+    try {
+        const listing = await this.create({ vendorID, listingName, isBuy, rentListingDetails })
+        return listing
+
+    } catch (error) {
+        throw Error('Failed to add to database')
+    }
 
 }
 

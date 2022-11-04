@@ -20,7 +20,6 @@ import FilledInput from '@mui/material/FilledInput';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 
 
-import BasicDateRangePicker from './date-range-picker';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 
@@ -60,14 +59,13 @@ const RentListingForm = () => {
             body: JSON.stringify({
                 listingName: data.listing_name,
                 isBuy: false,
-                buyListingDetails: {
+                rentListingDetails: {
                     listingDescription: description,
                     vehicleType: data.vehicle_type,
                     rentPrice: data.daily_fee,
                     location: data.location,
                     availabilityStart: data.start_date,
                     availabilityEnd: data.end_date,
-                    isActive: true
                 }
             })
         });
@@ -96,7 +94,7 @@ const RentListingForm = () => {
 
 
     const [values, setValues] = React.useState({
-        amount: ''
+        daily_fee: ''
     });
 
     const [showhide, setShowhide] = useState("Sell");
@@ -156,9 +154,9 @@ const RentListingForm = () => {
                             noValidate
                             autoComplete="off"
                         >
-                            <Field as={TextField} name="listing_name" label="listing_name" variant="filled" />
-                            <Field as={TextField} name="vehicle_type" label="vehicle_type" variant="filled" />
-                            <Field as={TextField} name="location" label="location" variant="filled" />
+                            <Field as={TextField} name="listing_name" label="Listing Name" variant="filled" />
+                            <Field as={TextField} name="vehicle_type" label="Vehicle Type" variant="filled" />
+                            <Field as={TextField} name="location" label="Location" variant="filled" />
 
                         </Box>
 
@@ -169,42 +167,16 @@ const RentListingForm = () => {
                             noValidate
                             autoComplete="off"
                         >
-                            <Field as={TextField} name="car_make" label="car_make" variant="filled" />
-                            <Field as={TextField} name="car_model" label="car_model" variant="filled" />
-                            <Field as={TextField} name="car_year" label="car_year" variant="filled" />
+                            <Field as={TextField} name="car_make" label="Make" variant="filled" />
+                            <Field as={TextField} name="car_model" label="Model" variant="filled" />
+                            <Field as={TextField} name="car_year" label="Year" variant="filled" />
                         </Box>
 
-                        {/* <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">Listing Type</FormLabel>
-                  <Field as={RadioGroup}
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="listing-type"
-                  >
-                      <FormControlLabel value="sell" control={<Radio />} label="Sell" checked={showhide==='Sell'} onClick={handleshow} />
-                      <FormControlLabel value="rent" control={<Radio />} label="Rent" onClick={handleshow}/>
-                  </Field>
-              </FormControl>
-
-              {showhide==='Sell' &&(
-                <Typography fontSize={17}>
-                  Listing Price
-              </Typography>
-              )
-              }
-
-              {showhide==='Rent' &&(
-                <Typography fontSize={17}>
-                  <BasicDateRangePicker />
-                  Listing Price (per day)
-                  </Typography>
-              )
-              } */}
 
                         <FormControl fullWidth sx={{ m: 0 }} variant="filled">
                             <InputLabel htmlFor="filled-adornment-amount">Price per day</InputLabel>
                             <Field as={FilledInput}
-                                   name="amount"
+                                   name="daily_fee"
                                 // value={values.amount}
                                 // onChange={handleChange('amount')}
                                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -216,9 +188,8 @@ const RentListingForm = () => {
                         </Typography>
 
                         <div>
-                            <BasicDateRangePicker>
-
-                            </BasicDateRangePicker>
+                            <Field as={TextField} name="start_date" label="Start Date" variant="filled" helperText="YYYY-MM-DD"/>
+                            <Field as={TextField} name="end_date" label="End Date" variant="filled" helperText="YYYY-MM-DD"/>
                         </div>
 
 
