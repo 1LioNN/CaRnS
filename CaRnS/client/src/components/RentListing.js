@@ -1,6 +1,13 @@
 import React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { Link } from "react-router-dom";
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState} from 'react'
+import "./Listings.css";
+
+import placeholder from "../assets/image/placeholder-image.png";
 
 
 function RentListings(){
@@ -34,9 +41,25 @@ function RentListings(){
 
             <div className='listings'>
                 {rentListing && rentListing.map((rentListing) => (
-                    <p key={rentListing._id}>
-                        {rentListing.listingName}
-                    </p>
+                    <Link to={'/rentdetail/'+rentListing._id} className='listingCardcontainer'>
+                    <Card sx={{ minWidth: 275 }} elevation={4}>
+                        
+                        <CardContent className='rent-listing-content' sx={{borderRadius: 15}}>
+                            <Typography variant="h5" component="div" sx={{fontFamily: 'montserrat'}}>
+                                {rentListing.listingName}
+                            </Typography> 
+                            <div className="listingimg"> 
+                            <img src = {placeholder} style={{height: 200, width: 200, opacity: 0.5} } 
+                           ></img>
+                            </div>
+                            <Typography variant="h5" component="div" sx= {{fontFamily: 'redhat'}}>
+                                Price: <span style={{color:'#e87123'}}>{'$'+ rentListing.rentListingDetails.rentPrice } </span> per day
+                                
+                            </Typography> 
+                           
+                        </CardContent>
+                    </Card>
+                    </Link>
                 ))}
             </div>
         </rentlisting>        
