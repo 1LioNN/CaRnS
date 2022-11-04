@@ -111,8 +111,10 @@ const RentListingForm = () => {
 
 
     return(
-
-
+        <createrentlisting>
+        <IconButton size="large" className='backArrow' href='/listingrent'>
+        <ArrowBackIcon/>
+        </IconButton>
         <Formik
             container
             spacing={0}
@@ -129,9 +131,6 @@ const RentListingForm = () => {
                 <Form>
                     <Container maxWidth="md" >
 
-                        <IconButton size="large">
-                            <ArrowBackIcon/>
-                        </IconButton>
 
                         <Typography fontSize={22}>
                             Create New Listing
@@ -203,7 +202,7 @@ const RentListingForm = () => {
                 </Form>
             )}
         </Formik>
-
+        </createrentlisting>
     )
 }
 
