@@ -62,7 +62,7 @@ function ActiveSellList() {
           </div>
         </Link>
 
-        <div className="listings">
+        <div className="singlelistings">
           <Stack spacing={3}>
             {buyListing &&
               buyListing.map((buyListing) => (
