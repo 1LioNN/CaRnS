@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 
 // import for card component
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { useEffect, useState} from 'react'
-import "./BuyListing.css";
+import "./Listings.css";
 
 import placeholder from "../assets/image/placeholder-image.png";
-import { autocompleteClasses } from '@mui/material';
 
 function BuyListings(){
     const [buyListing, setBuyListings] = useState(null)
@@ -43,7 +40,7 @@ function BuyListings(){
     return(
         <buylisting>
             <h1 style={{color: 'black'}}> Buy </h1>
-            <div className='buy-listings'>
+            <div className='listings'>
                 {buyListing && buyListing.map((buyListing) => (
 
                     // Naive implementation of listing

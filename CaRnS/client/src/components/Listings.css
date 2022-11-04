@@ -1,4 +1,4 @@
-.buy-listings{
+.listings{
     width: 1000px;
     display: flex;
     flex-wrap: wrap;
@@ -16,7 +16,7 @@
     height: 350px;
 }
 
-.buy-listings a{
+.listings a{
     text-decoration: none;
 }
 
