@@ -6,6 +6,8 @@ import ContactInfo from "./ContactInfo";
 import "./BuyDetail.css";
 import placeholder from "../assets/image/placeholder-image.png";
 import Button from "@mui/material/Button";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from '@mui/material/IconButton';
 
 function BuyDetail() {
   const [buyListing, setBuyListing] = useState(null);
@@ -36,9 +38,13 @@ function BuyDetail() {
 
   return (
     <buydetail>
+		<IconButton size="large" href='/buy' className="backArrow">
+            <ArrowBackIcon/>
+        </IconButton>
       <div className="buydetail">
         {buyListing ? (
           <>
+
             <div className="buydetail-container">
 			  <div className="buyDetail-left">
               <div className="buylistingimg">
