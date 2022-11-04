@@ -40,9 +40,9 @@ function ContactInfo(props){
 				border: "2px solid #aaaaaa", 
 				borderRadius: "10px",
 				fontFamily: 'redhat',
-				padding: '20px',
-				width: '600px',
-				fontSize: '18px',
+				padding: '25px',
+				width: '500px',
+				fontSize: '16px',
 				marginTop: '25px'}}>
 			<h2 style={{color: 'black'}}> Contact Information: </h2>
 			<h3 style={{color: 'black'}}> Name: {contactInfo.name}</h3>
