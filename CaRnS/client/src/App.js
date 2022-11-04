@@ -13,12 +13,15 @@ import VendorHistoryPage from './components/pages/VendorHistoryPage';
 import EditProfilePage from './components/pages/EditProfilePage';
 import VendorListingsRent from './components/pages/VendorListingsPageRent';
 import BuyerHistoryPage from './components/pages/BuyerHistoryPage';
+import BuyCheckoutPage from './components/pages/BuyCheckoutPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import ListingForm from './components/ListingForm';
 import RentListingPage from './components/pages/RentListingPage';
 
+import CreateRentListingPage from './components/pages/CreateRentListingPage';
+import RentListingForm from './components/RentListingForm'
 
 function App() {
   let auth = useAuth();
@@ -27,8 +30,9 @@ function App() {
   
   useEffect( () => {
     auth.isauthenticated( (status, data) => {
-      if (status !== 200) {
-        return <Navigate to="/signin" replace />
+      if (status !== 200 && location.pathname != "/" && location.pathname != "/buy" 
+        && location.pathname != "/rent" && location.pathname != "/signup") {
+        navigate("/signin");
       }
       else {
         navigate(location.pathname);
@@ -52,8 +56,11 @@ function App() {
         <Route path='/listingrent' element={<VendorListingsRent />} />
         <Route path='/buydetail/:listId' element ={<BuyDetail/>}/>
         <Route path='/createlisting' element={<ListingForm />} />
+        <Route path='/createlistingrent' element={<CreateRentListingPage />} />
+        <Route path='/listingrent' element={<RentListingForm />} />
         <Route path='/history' element={<VendorHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
+        <Route path='/buycheckout/:listId' element={<BuyCheckoutPage />} />
       </Routes>
      
     </div>

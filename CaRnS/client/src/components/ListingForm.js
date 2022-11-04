@@ -167,32 +167,6 @@ const onSubmit = async (data) => {
                 <Field as={TextField} name="car_year" label="car_year" variant="filled" />
               </Box>
               
-              {/* <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">Listing Type</FormLabel>
-                  <Field as={RadioGroup}
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="listing-type"
-                  >
-                      <FormControlLabel value="sell" control={<Radio />} label="Sell" checked={showhide==='Sell'} onClick={handleshow} />
-                      <FormControlLabel value="rent" control={<Radio />} label="Rent" onClick={handleshow}/>
-                  </Field>    
-              </FormControl>
-
-              {showhide==='Sell' &&(
-                <Typography fontSize={17}>
-                  Listing Price
-              </Typography>
-              )
-              }
-
-              {showhide==='Rent' &&(
-                <Typography fontSize={17}>
-                  <BasicDateRangePicker />
-                  Listing Price (per day)
-                  </Typography>
-              )
-              } */}
 
               <FormControl fullWidth sx={{ m: 0 }} variant="filled">
                 <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
