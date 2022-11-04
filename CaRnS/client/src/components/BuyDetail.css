@@ -1,0 +1,26 @@
+.buydetail{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 600px;
+}
+
+.buydetail-container{
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 600px;
+}
+
+.buylistingimg{
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #aaaaaa;
+    height: 350px;
+    width: 600px;
+    padding-top: 25px;
+    border-radius: 10px;
+}
+
+.buydetailinfo{
+    width: 100%;
+}
