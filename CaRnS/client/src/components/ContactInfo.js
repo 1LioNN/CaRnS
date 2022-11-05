@@ -35,7 +35,15 @@ function ContactInfo(props){
 		{	contactInfo?
 			
 			<>
-			<Paper elevation={4}>
+			<Paper elevation={0} 
+			sx={{
+				border: "2px solid #aaaaaa", 
+				borderRadius: "10px",
+				fontFamily: 'redhat',
+				padding: '25px',
+				width: '500px',
+				fontSize: '16px',
+				marginTop: '25px'}}>
 			<h2 style={{color: 'black'}}> Contact Information: </h2>
 			<h3 style={{color: 'black'}}> Name: {contactInfo.name}</h3>
 			<h3 style={{color: 'black'}}> Phone Number: {contactInfo.phone_number}</h3>

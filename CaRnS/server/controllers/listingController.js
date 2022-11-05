@@ -28,15 +28,44 @@ const postRentListing = async (req, res) => {
 
 // view buy listings
 const viewBuyListings = async (req, res) => {
-    const listings = await Listing.find({isBuy: true}).sort({createdAt: -1})
+    const listings = await Listing.find({isBuy: true, 'buyListingDetails.isActive': true}).sort({createdAt: -1})
     res.status(200).json(listings)
 }
 
-// view rent listings
-const viewRentListings = async (req, res) => {
-    const listings = await Listing.find({ isBuy: false }).sort({ createdAt: -1 })
+const viewActiveBuyListings = async (req, res) => {
+    const { id } = req.params
+    const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': true}).sort({createdAt: -1})
     res.status(200).json(listings)
 }
+
+const viewPastBuyListings = async (req, res) => {
+    const { id } = req.params
+    const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': false}).sort({createdAt: -1})
+    res.status(200).json(listings)
+}
+
+// view non-expired/avaliable rent listings
+const viewRentListings = async (req, res) => {
+    const today = new Date()
+    //$gt -> greater than
+    const listings = await Listing.find({ isBuy: false, "rentListingDetails.availabilityEnd": { $gt: today }} ).sort({ createdAt: -1 })
+    res.status(200).json(listings)
+}
+
+// view expired rent listings
+const viewExpiredRentListings = async (req, res) => {
+    const today = new Date()
+    //$lt -> less than
+    const listings = await Listing.find({ isBuy: false, "rentListingDetails.availabilityEnd": { $lt: today }} ).sort({ createdAt: -1 })
+    res.status(200).json(listings)
+}
+
+const viewActiveRentListings = async (req, res) => {
+    const { id } = req.params
+    const listings = await Listing.find({ isBuy: false, vendorID: id }).sort({ createdAt: -1 })
+    res.status(200).json(listings)
+}
+
 
 const updateBuyListing = async (req, res) => {
     const { id } = req.params
@@ -105,7 +134,6 @@ const updateRentListing = async (req, res) => {
         }            
     }
     if (newEndDate) { 
-        console.log(newEndDate, listing.rentListingDetails.availabilityStart)
         if(newEndDate > listing.rentListingDetails.availabilityStart) {
             listing.rentListingDetails.availabilityEnd = newEndDate
         } else {
@@ -162,7 +190,12 @@ function isInArray(array, value) {
 
 const addRentListingDates = async (req, res) => {
     const { id } = req.params
-    const { customerID } = req.body
+
+    if(req.session.user == null) {
+        return res.status(400).json({ error: 'User not logged in' })
+    }
+    const customerID = req.session.user._id
+
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Not a valid listing ID' })
@@ -171,6 +204,9 @@ const addRentListingDates = async (req, res) => {
     const listing = await Listing.findById(id)
     if (!listing) {
         return res.status(404).json({ error: 'No such listing' })
+    }
+    if (listing.isBuy == true) {
+        return res.status(400).json({ error: 'Not a rent listing' })
     }
 
     const startDate = listing.rentListingDetails.availabilityStart
@@ -185,7 +221,7 @@ const addRentListingDates = async (req, res) => {
         //Check if date is taken
         for(let i = 0; i < rentDates.length; i++) {
             if(isInArray(listing.rentListingDetails.allUnavailableDates, rentDates[i])) {
-                return res.status(400).json({error: 'Date is already taken'})
+                return res.status(400).json({error: 'Date is already taken' })
             }
         }
 
@@ -194,14 +230,18 @@ const addRentListingDates = async (req, res) => {
             rentDates = rentDates.concat(listing.rentListingDetails.allUnavailableDates)
             rentDates.sort((a,b)=>a.getTime()-b.getTime())
             listing.rentListingDetails.allUnavailableDates = rentDates
-            
+
             //Create and update booking object
-            if(listing.rentListingDetails.booking.dates != null) {
-                listing.rentListingDetails.booking.push({ "customerID": customerID, "dates": bookingDates.concat(listing.rentListingDetails.booking.dates)})
+            //Find if the customerID exists already in the booking object
+            if(listing.rentListingDetails.booking.find(booking => booking.customerID === customerID) != null) {
+                //If it does, update the respective customer's booking object (and sort it)
+                booking = listing.rentListingDetails.booking.find(booking => booking.customerID === customerID)
+                booking.dates = booking.dates.concat(bookingDates).sort((a,b)=>a.getTime()-b.getTime())
             } else {
+                //If it doesn't, then just create a booking object for the customer
                 listing.rentListingDetails.booking.push({ "customerID": customerID, "dates": bookingDates })
             }
-            //Check if customerID is in bookings, $push?
+            
 
             listing.save()
 
@@ -214,8 +254,72 @@ const addRentListingDates = async (req, res) => {
     }
 } 
 
-const removeRentListingDates = async (req, res) => {
+function removeDates(dates, datesToRemove) {
+    return dates.filter(function(date) {
+        if(!isInArray(datesToRemove, date)) {
+            return date
+        }
+    })
+}
 
+const removeRentListingDates = async (req, res) => {
+    const { id } = req.params
+
+    if(req.session.user == null) {
+        return res.status(400).json({ error: 'User not logged in' })
+    }
+    const customerID = req.session.user._id
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Not a valid listing ID' })
+    }
+    
+    const listing = await Listing.findById(id)
+    if (!listing) {
+        return res.status(404).json({ error: 'No such listing' })
+    }
+    if (listing.isBuy == true) {
+        return res.status(400).json({ error: 'Not a rent listing' })
+    }
+
+    //Sorting the dates
+    let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime())
+
+
+
+    try {
+        //Create and update booking object
+        //Find if the customerID exists already in the booking object
+        if(listing.rentListingDetails.booking.find(booking => booking.customerID === customerID) != null) {
+            // Update allUnavaliableDates and booking dates
+            booking = listing.rentListingDetails.booking.find(booking => booking.customerID === customerID)
+            
+            for(let i = 0; i < rentDates.length; i++) {
+                if(!isInArray(booking.dates, rentDates[i])) {
+                    return res.status(400).json({error: 'Cannot remove non-booked dates' })
+                }
+            }
+
+            listing.rentListingDetails.allUnavailableDates = removeDates(listing.rentListingDetails.allUnavailableDates, rentDates)
+            booking.dates = removeDates(booking.dates, rentDates)
+            bookingIndex = listing.rentListingDetails.booking.findIndex(booking => booking.customerID === customerID) //Used for resulting array check
+            
+
+            // Check if booking dates for the user is empty and if it is then delete the user's booking object (clutter removal)
+            if(booking.dates.length == 0) {
+               listing.rentListingDetails.booking.splice(bookingIndex, 1) 
+            }
+        } else {
+            return res.status(400).json({ error: 'Customer has no dates to remove' })
+        }
+        
+
+        listing.save()
+
+        return res.status(200).json(listing.rentListingDetails)
+    } catch(error) {
+        return res.status(404).json({error: 'Error updating dates'})
+    }
 } 
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates }
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }

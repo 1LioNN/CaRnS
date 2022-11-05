@@ -6,6 +6,8 @@ const session = require('express-session');
 
 const authenticationRoutes = require('./routes/authenticationRoutes')
 const listingRoutes = require('./routes/listingRoutes')
+const transactionRoutes = require('./routes/transactionRoutes')
+
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -30,6 +32,8 @@ app.use(session({
 }));
 app.use('/api/user', authenticationRoutes)
 app.use('/api/listing', listingRoutes)
+app.use('/api/transaction', transactionRoutes)
+
 
 
 const uri = process.env.ATLAS_URI;

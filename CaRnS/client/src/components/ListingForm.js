@@ -60,7 +60,8 @@ const onSubmit = async (data) => {
           listingDescription: description,
           vehicleType: data.vehicle_type,
           salePrice: data.amount,
-          location: data.location
+          location: data.location,
+          isActive: true
         }
       })
     });
@@ -106,7 +107,10 @@ const onSubmit = async (data) => {
 
 
     return(
-
+      <listingform>
+        <IconButton size="large" href='/listings' className="backArrow">
+            <ArrowBackIcon/>
+        </IconButton>
 
     <Formik 
         container
@@ -119,14 +123,10 @@ const onSubmit = async (data) => {
         initialValues={initialValues}
       >
         {(props) => (
-          
         
         <Form>
             <Container maxWidth="md" >
-          
-              <IconButton size="large">
-                  <ArrowBackIcon/>
-              </IconButton>
+
 
               <Typography fontSize={22}>
                   Create New Listing 
@@ -167,32 +167,6 @@ const onSubmit = async (data) => {
                 <Field as={TextField} name="car_year" label="car_year" variant="filled" />
               </Box>
               
-              {/* <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">Listing Type</FormLabel>
-                  <Field as={RadioGroup}
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="listing-type"
-                  >
-                      <FormControlLabel value="sell" control={<Radio />} label="Sell" checked={showhide==='Sell'} onClick={handleshow} />
-                      <FormControlLabel value="rent" control={<Radio />} label="Rent" onClick={handleshow}/>
-                  </Field>    
-              </FormControl>
-
-              {showhide==='Sell' &&(
-                <Typography fontSize={17}>
-                  Listing Price
-              </Typography>
-              )
-              }
-
-              {showhide==='Rent' &&(
-                <Typography fontSize={17}>
-                  <BasicDateRangePicker />
-                  Listing Price (per day)
-                  </Typography>
-              )
-              } */}
 
               <FormControl fullWidth sx={{ m: 0 }} variant="filled">
                 <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
@@ -214,6 +188,7 @@ const onSubmit = async (data) => {
           </Form>
         )}
         </Formik>
+        </listingform>
 
     )
 }

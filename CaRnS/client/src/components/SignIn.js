@@ -87,7 +87,7 @@ function SignIn({ handleChange }){
             </Formik>
            
             <Typography > Do you have an account ?
-                 <Link href="#" onClick={() => handleChange("event", 1)} >
+                 <Link href="signup" onClick={() => handleChange("event", 1)} >
                     Sign Up
             </Link>
             </Typography>

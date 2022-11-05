@@ -46,7 +46,7 @@ function ProfileSideBar() {
             </Link>
           </li>
           <li>
-            <Link to="/history">
+            <Link to="/buyerhistory">
               History
             </Link>
           </li>

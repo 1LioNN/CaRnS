@@ -25,3 +25,8 @@
     box-sizing: border-box;
   }
 
+.backArrow{
+  position: absolute;
+  top: 30px;
+  left: 150px;
+}

@@ -20,6 +20,8 @@ Story Point Scale: Fibonacci
 
 **CAR-17**: As a User, I want to be able to view my profile details
 
+**CAR-19**: As a Vendor, I want to be able to list vehicles for sale so that potential buyers can view the vehicle details
+
 **CAR-30**: As a User, I want to be able to see the landing page when I enter the site
 
 **CAR-35**: SR2.md
