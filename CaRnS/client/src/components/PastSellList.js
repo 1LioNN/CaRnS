@@ -11,7 +11,7 @@ function PastSellList(){
     const auth = useAuth();  
     useEffect(() => {
         const fetchBuyListings = async () => {
-            const response = await fetch('http://localhost:8000/api/listing/viewPastBuyListings/'+auth.user._id, {
+            const response = await fetch('http://localhost:8000/api/listing/view-past-buy/'+auth.user._id, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
