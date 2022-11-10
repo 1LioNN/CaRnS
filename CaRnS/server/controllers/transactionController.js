@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 
 const logTransaction = async (req, res) => {
-    const { customerID, listingID, dates } = req.body
+    const { customerID, listingID, transactionAmount, dates } = req.body
    
     const listing = await Listing.findById(listingID)
     
@@ -13,9 +13,9 @@ const logTransaction = async (req, res) => {
 
     try {
         if(listing.isBuy == true) {
-            transaction = await Transaction.log(customerID, listingID)
+            transaction = await Transaction.log(customerID, listingID, transactionAmount)
         } else {
-            transaction = await Transaction.log(customerID, listingID, dates)
+            transaction = await Transaction.log(customerID, listingID, transactionAmount, dates)
         }
         res.status(200).json(transaction)
     } catch (error) {
@@ -24,20 +24,4 @@ const logTransaction = async (req, res) => {
     
 }
 
-const getPastPurchases = async (req, res) => {
-    const { id } = req.params
-    const listing_transactions = await Transaction.find({ customerID: id }, {_id: 0, listingID:1})
-
-    const listing_array = []
-
-    for (var i = 0; i < listing_transactions.length; i++) {
-        listing_array.push(listing_transactions[i].listingID)
-    }
-
-    const listings = await Listing.find({_id: {$in: listing_array} } )
-
-
-    res.status(200).json(listings)
-}
-
-module.exports = { logTransaction, getPastPurchases }
+module.exports = { logTransaction }
