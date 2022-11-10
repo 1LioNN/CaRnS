@@ -5,6 +5,7 @@ import { useEffect, useState} from 'react'
 import { useAuth } from "../Utils/AuthContext.js";
 import AddIcon from "@mui/icons-material/Add";
 import "./ActiveSellList.css"
+import VendorRentSingle from "./VendorRentSingle.js";
 
 function VendorRentHistoryListings(){
     const [rentListing, setRentListings] = useState(null)
@@ -58,10 +59,10 @@ function VendorRentHistoryListings(){
           </div>
         </Link>
 
-            <div className='listings'>
+            <div className='singlelistings'>
             <Stack spacing={3}>
                 {rentListing && rentListing.map((rentListing) => (
-                    <>map details here</>
+                  <VendorRentSingle listing={rentListing} />
 
                 ))}
         </Stack>
