@@ -13,7 +13,7 @@ function ActiveSellList() {
   useEffect(() => {
     const fetchBuyListings = async () => {
       const response = await fetch(
-        "http://localhost:8000/api/listing/view-active-buy/" +
+        "http://localhost:8000/api/listing/viewActiveBuyListings/" +
           auth.user._id,
         {
           method: "GET",

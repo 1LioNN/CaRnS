@@ -13,9 +13,9 @@ router.get('/view-buy', viewBuyListings)
 router.get('/view-rent', viewRentListings)
 router.get('/view-rent-expired', viewExpiredRentListings)
 router.get('/view-detail-buy/:id', getdetailbuy)
-router.get('/view-active-buy/:id', viewActiveBuyListings)
-router.get('/view-past-buy/:id', viewPastBuyListings)
-router.get('/view-active-rent/:id', viewActiveRentListings)
+router.get('/viewActiveBuyListings/:id', viewActiveBuyListings)
+router.get('/viewPastBuyListings/:id', viewPastBuyListings)
+router.get('/viewActiveRentListings/:id', viewActiveRentListings)
 
 
 router.put('/update-buy/:id', updateBuyListing)

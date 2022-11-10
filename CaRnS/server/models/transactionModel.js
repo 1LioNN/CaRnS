@@ -29,10 +29,10 @@ const transactionSchema = new Schema({
 }, { timestamps: true })
 
 
-transactionSchema.statics.log = async function (customerID, listingID, dates) {
+transactionSchema.statics.log = async function (customerID, listingID, transactionAmount, dates) {
 
     // validation
-    if (!customerID || !listingID) {
+    if (!customerID || !listingID ||!transactionAmount) {
         throw Error('Missing data to complete transaction')
     }
 
@@ -61,9 +61,8 @@ transactionSchema.statics.log = async function (customerID, listingID, dates) {
 
     if (listing.isBuy == true){
         listing.buyListingDetails.isActive = false
-        const transactionAmount = listing.buyListingDetails.salePrice
         listing.save()
-        const transaction = await this.create({ customerID, vendorID, listingID,  transactionAmount})
+        const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount })
         return transaction
     } else {
         
@@ -71,7 +70,7 @@ transactionSchema.statics.log = async function (customerID, listingID, dates) {
             throw Error('No dates for the rent listing')
         }
 
-        const transactionAmount = listing.rentListingDetails.rentPrice * dates.length
+        transactionAmount = transactionAmount * dates.length
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
         return transaction
     }
