@@ -38,6 +38,11 @@ function PastSellList(){
         <pastselllist>
         <div className="profile-container">
         <text className="page-title">Past Sell Listings</text>
+        <Link to={"/vendorbookinghistory"}>
+        <text className="rentToggle">
+        View Booking History
+        </text> 
+        </Link>
             <div className='listings'>
             <Stack spacing={2}>
                 {buyListing && buyListing.map((buyListing) => (
