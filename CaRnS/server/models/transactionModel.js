@@ -28,8 +28,20 @@ const transactionSchema = new Schema({
     }
 }, { timestamps: true })
 
+//Convert start and end dates to an array of dates
+function toDateArray(startDate, endDate) {
+    let dateArray = []
+    let date = new Date(startDate)
+    let end = new Date(endDate)
 
-transactionSchema.statics.log = async function (customerID, listingID, dates) {
+    while (date <= end) {
+        dateArray.push(new Date(date))
+        date.setDate(date.getDate() + 1)
+    }
+    return dateArray
+}
+
+transactionSchema.statics.log = async function (customerID, listingID, bookingStartDate, bookingEndDate) {
 
     // validation
     if (!customerID || !listingID) {
@@ -66,8 +78,15 @@ transactionSchema.statics.log = async function (customerID, listingID, dates) {
         const transaction = await this.create({ customerID, vendorID, listingID,  transactionAmount})
         return transaction
     } else {
-        //Turn addRentListingDates into static method in model
-        const transactionAmount = listing.rentListingDetails.rentPrice * dates.length //dates.length > 0 
+        Listing.addRentListingDates(customerID, listingID, bookingStartDate, bookingEndDate)
+        
+        dates = toDateArray(bookingStartDate, bookingEndDate)
+
+        if(dates.length == 0) {
+            throw Error('Invalid booking date for transaction')
+        }
+        
+        const transactionAmount = listing.rentListingDetails.rentPrice * dates.length  
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
         return transaction
     }
