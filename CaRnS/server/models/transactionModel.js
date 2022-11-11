@@ -66,8 +66,8 @@ transactionSchema.statics.log = async function (customerID, listingID, dates) {
         const transaction = await this.create({ customerID, vendorID, listingID,  transactionAmount})
         return transaction
     } else {
-
-        transactionAmount = transactionAmount * dates.length //dates.length > 0 
+        //Turn addRentListingDates into static method in model
+        const transactionAmount = listing.rentListingDetails.rentPrice * dates.length //dates.length > 0 
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
         return transaction
     }

@@ -23,16 +23,16 @@ const logTransaction = async (req, res) => {
     const listing = await Listing.findById(listingID)
     
     let transaction;
-    let dates = toDateArray(bookingStartDate, bookingEndDate)
-
-    if(dates.length == 0) {
-        return res.status(400).json({error: 'Invalid booking date for transaction'})
-    }
 
     try {
         if(listing.isBuy == true) {
             transaction = await Transaction.log(customerID, listingID)
         } else {
+            let dates = toDateArray(bookingStartDate, bookingEndDate)
+
+            if(dates.length == 0) {
+                return res.status(400).json({error: 'Invalid booking date for transaction'})
+            }
             transaction = await Transaction.log(customerID, listingID, dates)
         }
         res.status(200).json(transaction)

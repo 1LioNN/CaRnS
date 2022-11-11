@@ -58,8 +58,7 @@ function BuyCheckout(){
 				},
 				body: JSON.stringify({
 					"customerID": auth.user._id,
-					"listingID": buyListing._id,
-					"transactionAmount": buyListing.buyListingDetails.salePrice
+					"listingID": buyListing._id
 				}),
 			}
 		);
