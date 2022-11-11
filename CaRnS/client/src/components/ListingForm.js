@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
+
 import { useNotification } from '../Utils/NotificationContext';
 
 import Radio from '@mui/material/Radio';
@@ -17,6 +18,8 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FilledInput from '@mui/material/FilledInput';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 
 
@@ -38,7 +41,8 @@ const initialValues = {
 
 
 const ListingForm = () => {
-  
+
+
   const { _, setNotification } = useNotification();
 const onSubmit = async (data) => {
     console.log(data)
@@ -100,9 +104,6 @@ const onSubmit = async (data) => {
       setShowhide(getshow);
     }
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
 
 
 
@@ -127,21 +128,6 @@ const onSubmit = async (data) => {
         <Form>
             <Container maxWidth="md" >
 
-
-              <Typography fontSize={22}>
-                  Create New Listing 
-              </Typography>
-
-              <Typography fontSize={17} color='grey'>
-                  Upload Image
-              </Typography>
-
-              <div>
-                  <Avatar variant="rounded" src={""} sx={{ width: 150, height: 150 }} />
-                  <input type="file" name="image"/>
-                  <button >Submit</button>
-              </div>
-
               <Box
                 sx={{
                   '& > :not(style)': { m: 1, width: '25ch' },
@@ -149,9 +135,9 @@ const onSubmit = async (data) => {
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="listing_name" label="listing_name" variant="filled" />
-                <Field as={TextField} name="vehicle_type" label="vehicle_type" variant="filled" />
-                <Field as={TextField} name="location" label="location" variant="filled" />
+                <Field as={TextField} name="listing_name" label="listing_name" />
+                <Field as={TextField} name="vehicle_type" label="vehicle_type" />
+                <Field as={TextField} name="location" label="location" />
               
               </Box>
 
@@ -162,16 +148,17 @@ const onSubmit = async (data) => {
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="car_make" label="car_make" variant="filled" />
-                <Field as={TextField} name="car_model" label="car_model" variant="filled" />
-                <Field as={TextField} name="car_year" label="car_year" variant="filled" />
+                <Field as={TextField} name="car_make" label="car_make" />
+                <Field as={TextField} name="car_model" label="car_model" />
+                <Field as={TextField} name="car_year" label="car_year"  />
               </Box>
               
 
-              <FormControl fullWidth sx={{ m: 0 }} variant="filled">
-                <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
+              <FormControl fullWidth sx={{ m: 0 }}>
+                <InputLabel htmlFor="adornment-amount"></InputLabel>
                 <Field as={FilledInput}
                   name="amount"
+                  label="Amount"
                   // value={values.amount}
                   // onChange={handleChange('amount')}
                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
