@@ -93,7 +93,7 @@ function BuyDetail() {
 				margin: 'auto',
 				marginTop: '51px',
               }}
-			  href = {'/checkout/' + buyListing._id}
+			  href = {'/buycheckout/' + buyListing._id}
               variant="contained"
               disableElevation> 
 			  Buy </Button>
