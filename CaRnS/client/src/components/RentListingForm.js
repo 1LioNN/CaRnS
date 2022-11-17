@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -22,6 +22,9 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
+import './ListingForm.css'
+import placeholder from "../assets/image/placeholder-image.png";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // This is the page for create a rent listing
 
@@ -29,24 +32,22 @@ const initialValues = {
     image: '',
     listing_name: '',
     vehicle_type: '',
-    car_make:'',
+    car_make: '',
     car_model: '',
     car_year: '',
-    daily_fee:'',
-    location:'',
-    start_date:'',
-    end_date:''
+    daily_fee: '',
+    location: '',
+    start_date: '',
+    end_date: ''
 
 }
 
 
 const RentListingForm = () => {
-
+    const navigate = useNavigate();
     const { _, setNotification } = useNotification();
     const onSubmit = async (data) => {
-        console.log(data)
-        let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
-        console.log(description)
+        console.log(data);
 
 
         const response = await fetch('http://localhost:8000/api/listing/post-rent', {
@@ -60,7 +61,7 @@ const RentListingForm = () => {
                 listingName: data.listing_name,
                 isBuy: false,
                 rentListingDetails: {
-                    listingDescription: description,
+                    listingDescription: data.description,
                     vehicleType: data.vehicle_type,
                     rentPrice: data.daily_fee,
                     location: data.location,
@@ -75,14 +76,15 @@ const RentListingForm = () => {
         console.log(resData)
         if (status === 200) {
             setNotification({
-                message:"Listing successfully posted",
+                message: "Listing successfully posted",
                 severity: "success",
                 open: true
             });
+            navigate('/listingrent')
         }
         else {
             setNotification({
-                message:resData.error,
+                message: resData.error,
                 severity: "error",
                 open: true
             });
@@ -99,8 +101,8 @@ const RentListingForm = () => {
 
     const [showhide, setShowhide] = useState("Sell");
 
-    const handleshow = e=>{
-        const getshow= e.target.value;
+    const handleshow = e => {
+        const getshow = e.target.value;
         setShowhide(getshow);
     }
 
@@ -110,98 +112,120 @@ const RentListingForm = () => {
 
 
 
-    return(
+    return (
         <createrentlisting>
-        <IconButton size="large" className='backArrow' href='/listingrent'>
-        <ArrowBackIcon/>
-        </IconButton>
-        <Formik
-            container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            style={{ minHeight: '100vh' }}
-            onSubmit={onSubmit}
-            initialValues={initialValues}
-        >
-            {(props) => (
+            <IconButton size="large" className='backArrow' href='/listingrent'>
+                <ArrowBackIcon />
+            </IconButton>
+            <div className='listingform-container'>
 
 
-                <Form>
-                    <Container maxWidth="md" >
+
+                <div className='page-header'>
+                    <text className="page-title">
+                        New Rent Listing
+                    </text>
+                </div>
+                <div className="form-image">
+                    <img
+                        className="car-img"
+                        style={{ width: 150, height: 150, opacity: 0.5 }}
+                        src={placeholder}
+                        alt="placeholder"
+                    ></img>
+                </div>
+                <Formik
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    style={{ minHeight: '100vh' }}
+                    onSubmit={onSubmit}
+                    initialValues={initialValues}
+                >
+                    {(props) => (
 
 
-                        <Typography fontSize={22}>
-                            Create New Listing
-                        </Typography>
-
-                        <Typography fontSize={17} color='grey'>
-                            Upload Image
-                        </Typography>
-
-                        <div>
-                            <Avatar variant="rounded" src={""} sx={{ width: 150, height: 150 }} />
-                            <input type="file" name="image"/>
-                            <button >Submit</button>
-                        </div>
-
-                        <Box
-                            sx={{
-                                '& > :not(style)': { m: 1, width: '25ch' },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Field as={TextField} name="listing_name" label="Listing Name" variant="filled" />
-                            <Field as={TextField} name="vehicle_type" label="Vehicle Type" variant="filled" />
-                            <Field as={TextField} name="location" label="Location" variant="filled" />
-
-                        </Box>
-
-                        <Box
-                            sx={{
-                                '& > :not(style)': { m: 1, width: '25ch' },
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <Field as={TextField} name="car_make" label="Make" variant="filled" />
-                            <Field as={TextField} name="car_model" label="Model" variant="filled" />
-                            <Field as={TextField} name="car_year" label="Year" variant="filled" />
-                        </Box>
+                        <Form>
+                            <Container maxWidth="md" >
 
 
-                        <FormControl fullWidth sx={{ m: 0 }} variant="filled">
-                            <InputLabel htmlFor="filled-adornment-amount">Price per day</InputLabel>
-                            <Field as={FilledInput}
-                                   name="daily_fee"
-                                // value={values.amount}
-                                // onChange={handleChange('amount')}
-                                   startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                            />
-                        </FormControl>
 
-                        <Typography fontSize={17} color='grey'>
-                            Select start and end Date
-                        </Typography>
+                                <Box
+                                    className='listing-info-fields'
+                                    sx={{
+                                        '& > :not(style)': { m: 1, width: '25ch' },
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <Field as={TextField} name="listing_name" label="Listing Name" />
+                                    <Field as={TextField} name="vehicle_type" label="Vehicle Type" />
+                                    <Field as={TextField} name="location" label="Location" />
 
-                        <div>
-                            <Field as={TextField} name="start_date" label="Start Date" variant="filled" helperText="YYYY-MM-DD"/>
-                            <Field as={TextField} name="end_date" label="End Date" variant="filled" helperText="YYYY-MM-DD"/>
-                        </div>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        '& > :not(style)': { m: 1, width: 636 },
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <Field as={TextField}
+                                        name="description"
+                                        label="Listing Description"
+                                        multiline
+                                        rows={6}
+                                        inputProps={{ maxLength: 300 }} />
+                                </Box>
 
 
-                        <Button type='submit' variant='contained' onSubmit={onSubmit} sx={{ m: 2 }}
-                                style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40}}>
-                            Create New Listing
-                        </Button>
+
+                                <Typography sx={{ marginLeft: 2 }} fontSize={17} color='grey'>
+                                    Select a start and end date
+                                </Typography>
+                                <Box className='listing-info-fields'
+                                    sx={{
+                                        '& > :not(style)': { m: 1, width: '25ch' },
+                                    }}>
+                                    <Field as={TextField} name="start_date" label="Start Date" helperText="YYYY-MM-DD" />
+                                    <Field as={TextField} name="end_date" label="End Date" helperText="YYYY-MM-DD" />
+                                </Box>
+                                <div className='form-price'>
+                                    <FormControl sx={{ m: 0 }} >
+                                        <Field as={TextField}
+                                            name="daily_fee"
+                                            label="Price Per Day"
+                                            // value={values.amount}
+                                            // onChange={handleChange('amount')}
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                            }}
+                                        />
+                                    </FormControl>
 
 
-                    </Container>
-                </Form>
-            )}
-        </Formik>
+
+
+                                    <Button
+                                        type='submit'
+                                        variant='contained'
+                                        onSubmit={onSubmit} sx={{ m: 2 }}
+                                        style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40, padding: 10 }}>
+                                        Create New Listing
+                                    </Button>
+
+                                </div>
+
+
+
+                            </Container>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
         </createrentlisting>
     )
 }

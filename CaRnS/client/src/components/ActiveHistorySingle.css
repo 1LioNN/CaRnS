@@ -5,6 +5,10 @@
     position: relative;
     display: flex;
 }
+.single-left{
+    display: flex;
+    flex-direction: column;
+}
 .listing-image{
     display: flex;
     justify-content: center;
@@ -21,6 +25,7 @@
 .listing-info{
     width: 550px;
     margin-left: auto;
+    margin-top: 35px;
 }
 
 .vendor-listing-card{

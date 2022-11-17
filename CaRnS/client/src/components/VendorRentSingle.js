@@ -119,16 +119,8 @@ export default function VendorRentSingle(props) {
         sx={{ borderRadius: "15px" }}
         className="listing-card"
       >
-        <div className="listing-image">
-          <img
-            className="car-img"
-            style={{ width: 150, height: 150, opacity: 0.5 }}
-            src={placeholder}
-            alt="placeholder"
-          ></img>
-        </div>
-        <div className="listing-info">
-          <Typography
+      <div className="single-left">
+      <Typography
             component="h1"
             variant="h5"
             align="left"
@@ -139,6 +131,19 @@ export default function VendorRentSingle(props) {
           >
             {listing.listingName}
           </Typography>
+        <div className="listing-image">
+          <img
+            className="car-img"
+            style={{ width: 150, height: 150, opacity: 0.5 }}
+            src={placeholder}
+            alt="placeholder"
+          ></img>
+        </div>
+
+      </div>
+
+        <div className="listing-info">
+
           <div className="delete-button">
             <img
               title="Delete"
