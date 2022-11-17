@@ -5,6 +5,9 @@ import { useEffect, useState} from 'react'
 import { useAuth } from "../Utils/AuthContext.js";
 import AddIcon from "@mui/icons-material/Add";
 import "./ActiveSellList.css"
+import Container from '@mui/material/Container';
+import Paper from "@mui/material/Paper";
+import ContactInfo from "./ContactInfo";
 
 function VendorBookingTrans(){
     const [rentListing, setRentListings] = useState(null)
