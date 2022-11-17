@@ -5,6 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f86a6dcb-2b8f-42bf-8cee-0c23aee76975" name="Changes" comment="refined views of each listings">
+      <change afterPath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CaRnS/client/src/components/pages/RentDetailsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-03,_4_31_p_m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-03__4_31_p_m___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CaRnS/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/client/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +48,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/CaRnS/client/src/components" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +67,7 @@
       <workItem from="1667266538971" duration="7869000" />
       <workItem from="1667419224715" duration="13867000" />
       <workItem from="1667504997573" duration="3299000" />
+      <workItem from="1668714689522" duration="6059000" />
     </task>
     <task id="LOCAL-00001" summary="refined views of each listings">
       <created>1666410905954</created>

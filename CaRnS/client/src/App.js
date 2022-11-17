@@ -7,6 +7,7 @@ import BuyListingPage from './components/pages/BuyListingPage';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import BuyDetail from './components/pages/BuyDetailsPage';
+import RentDetail from './components/pages/RentDetailsPage';
 import ProfilePage from './components/pages/ProfilePage';
 import VendorListingsPage from './components/pages/VendorListingsPage';
 import VendorHistoryPage from './components/pages/VendorHistoryPage';
@@ -62,7 +63,8 @@ function App() {
         <Route path='/history' element={<VendorHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
         <Route path='/buycheckout/:listId' element={<BuyCheckoutPage />} />
-        <Route path='/vendorbookinghistory' element={<VendorBookingHistoryPage />} />
+        <Route path='/vendorbookinghistory' element={<VendorBookingHistoryPage />} />\
+        <Route path='/rentdetail/:listId' element ={<RentDetail/>}/>
       </Routes>
      
     </div>
