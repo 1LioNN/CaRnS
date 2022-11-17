@@ -26,7 +26,7 @@ const logTransaction = async (req, res) => {
 }
 
 const getPastPurchases = async (req, res) => {
-    const { id } = req.params
+    const id = req.session.user._id;
     const listing_transactions = await Transaction.find({ customerID: id }, {_id: 0, listingID:1})
 
     const listing_array = []
