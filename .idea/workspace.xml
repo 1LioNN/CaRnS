@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f86a6dcb-2b8f-42bf-8cee-0c23aee76975" name="Changes" comment="refined views of each listings">
-      <change afterPath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CaRnS/client/src/components/pages/RentDetailsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-03,_4_31_p_m__[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-11-03__4_31_p_m___Changes_.xml" beforeDir="false" />
+    <list default="true" id="f86a6dcb-2b8f-42bf-8cee-0c23aee76975" name="Changes" comment="Created rent details page. Not displaying properly at the time.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CaRnS/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaRnS/server/controllers/listingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/server/controllers/listingController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaRnS/server/routes/listingRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/server/routes/listingRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +63,7 @@
       <workItem from="1667266538971" duration="7869000" />
       <workItem from="1667419224715" duration="13867000" />
       <workItem from="1667504997573" duration="3299000" />
-      <workItem from="1668714689522" duration="6059000" />
+      <workItem from="1668714689522" duration="9209000" />
     </task>
     <task id="LOCAL-00001" summary="refined views of each listings">
       <created>1666410905954</created>
@@ -76,7 +72,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666410905954</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created rent details page. Not displaying properly at the time.">
+      <created>1668722033334</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668722033334</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -95,6 +98,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refined views of each listings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refined views of each listings" />
+    <MESSAGE value="Created rent details page. Not displaying properly at the time." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created rent details page. Not displaying properly at the time." />
   </component>
 </project>
