@@ -52,10 +52,25 @@ function VendorBookingTrans(){
             <div className='singlelistings'>
             <Stack spacing={3}>
                 {rentListing && rentListing.map((rentListing) => (
+                  <Paper  elevation={3}>
+                  <>Listing Name: {rentListing.listingName}</>
+                  
                   <>{rentListing.rentListingDetails.booking.map((singleBooking) => (
-                    <>{JSON.stringify(singleBooking)}</>
                     
-                  ))}</>
+                    <Container>
+                    <Paper elevation={3}>
+                    <ContactInfo uid={singleBooking.customerID} />
+                    <>Dates Booked:</><>{singleBooking.dates.map((date)=>(
+                      <Stack spacing={1}>
+                      <>{new Date(date).toLocaleDateString()}</>
+                      </Stack>
+                    ))}</>
+                    
+                    </Paper>
+                    </Container>
+                  ))}
+                  
+                  </></Paper>
 
                 ))}
         </Stack>
