@@ -136,7 +136,7 @@ function BuyCheckout(){
 			<input required id="input" name="input" placeholder="Expire Date (yyyy/mm)" />
 			<input required id="input" name="input" placeholder="CVV/CVC" />
 			</Stack>
-			<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Checkout</Button>
+			<Button type="submit" onSubmit={checkout} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Checkout</Button>
 			</form>
 			</Container>
 			</>: <><h1 style={{color: 'black'}}> LOADING </h1></>
