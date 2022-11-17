@@ -16,7 +16,7 @@ function BuyCheckout(){
 	const auth = useAuth();
 	const { _, setNotification } = useNotification();
 	let navigate  = useNavigate();
-	const [v, setV] = useState(false);
+	//const [v, setV] = useState(false);
 
 	
 	useEffect(() => {
@@ -42,7 +42,7 @@ function BuyCheckout(){
 		}
 		
 		fetchBuyDetail()
-	},[v])
+	},[])
 	
 	const checkout = async (e) => {
 		if (! auth.user){
@@ -68,7 +68,7 @@ function BuyCheckout(){
 		const resData = await response.json();
 		console.log(resData);
 		if (status === 200) {
-			setV(true);
+			//setV(true);
 			navigate("/profile");
 		} else {
 			setNotification({
