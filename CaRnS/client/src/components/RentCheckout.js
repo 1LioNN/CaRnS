@@ -34,6 +34,10 @@ const initialValues = {
   endDate: ''  
 }
 
+//Get number of dates between 2 date strings (+1 because renting for the same day counts as 1 day)
+function getRentPeriod(startDate, endDate) {
+    return Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) + 1;
+}
 
 const RentCheckout = () => {
     const auth = useAuth()
@@ -109,7 +113,7 @@ const RentCheckout = () => {
     const [value, setValue] = React.useState('cash');
 
     const handleChange = (event) => {
-        //setValue(event.target.value);
+        setValue(event.target.value);
     };
 
     const [values, setValues] = React.useState({
@@ -209,27 +213,19 @@ const RentCheckout = () => {
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="startDate" label="Start Date (YYYY-MM-DD)" variant="filled" />
-                <Field as={TextField} name="endDate" label="End Date (YYYY-MM-DD)" variant="filled"/>
+                <Field as={TextField} name="startDate" label="Start Date (YYYY-MM-DD)" variant="filled" id="start-date" />
+                <Field as={TextField} name="endDate" label="End Date (YYYY-MM-DD)" variant="filled" id="end-date"/>
               </Box>
 
               <Box fontSize={17}  >
                 <text  className="field-name">Price Details: $</text>
-                <text className="field-value" id="rent-price"> {"10000"} </text>
+                <text className="field-value" id="rent-price"> </text>
                 <text className="field-name"> x </text>
                 <text className="field-value" id="rent-days"> {"3"} </text>
                 <text className="field-name"> days </text>
                 {/* "10000" and "3" are only examples*/}
               </Box>
 
-              <FormControl
-                id="rent-days"
-                placeholder="0"
-                value={5}
-                //error={touched.username && errors.username}
-                onChange={handleChange}
-                //onBlur={handleBlur}
-                />
                 
               <Box fontSize={17}>
                 <text className="field-name">Total Cost: $ </text>
