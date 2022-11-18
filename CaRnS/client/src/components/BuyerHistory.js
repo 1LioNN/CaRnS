@@ -54,6 +54,8 @@ function BuyerHistory(){
                   <Paper elevation={3}>
                   <>Listing Name: {listing.listingName}</>
                   <ContactInfo uid={listing.vendorID} />
+                  <>{listing.isBuy ?
+                    <>Type: Buy</>:<>Type: Rent</>}</>
                   </Paper>
                   </Container>
 
