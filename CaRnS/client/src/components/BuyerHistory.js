@@ -49,13 +49,27 @@ function BuyerHistory(){
 
             <div className='singlelistings'>
             <Stack spacing={3}>
-                {listing && listing.map((listing) => (
+                {listing && auth.user && listing.map((listing) => (
                   <Container>
                   <Paper elevation={3}>
                   <>Listing Name: {listing.listingName}</>
                   <ContactInfo uid={listing.vendorID} />
                   <>{listing.isBuy ?
                     <>Type: Buy</>:<>Type: Rent</>}</>
+                  <>{listing.isBuy ?
+                    <></>:<Container>Dates booked: 
+                    {
+                      listing.rentListingDetails.booking.map((booking)=>(
+                        <>
+                        {booking.customerID === auth.user._id ? 
+                          <>{booking.dates.map((date)=>(
+                            <Stack spacing={1}>
+                            <>{date.slice(0,10)}</>
+                            </Stack>
+                          ))}</>:<></>}
+                        </>
+                      ))
+                    }</Container>}</>
                   </Paper>
                   </Container>
 
