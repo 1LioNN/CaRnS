@@ -162,7 +162,7 @@ function toDateArray(startDate, endDate) {
 listingSchema.statics.addRentListingDates = async function (customerID, listingID, bookingStartDate, bookingEndDate) {
     
     if (!mongoose.Types.ObjectId.isValid(listingID)) {
-        return //res.status(404).json({ error: 'Not a valid listing ID' })
+        throw Error('Not a valid listing')
     }
     
     const listing = await this.findById(listingID)
