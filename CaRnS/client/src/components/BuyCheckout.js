@@ -16,7 +16,7 @@ function BuyCheckout(){
 	const auth = useAuth();
 	const { _, setNotification } = useNotification();
 	let navigate  = useNavigate();
-	const [v, setV] = useState(false);
+	//const [v, setV] = useState(false);
 
 	
 	useEffect(() => {
@@ -42,7 +42,7 @@ function BuyCheckout(){
 		}
 		
 		fetchBuyDetail()
-	},[v])
+	},[])
 	
 	const checkout = async (e) => {
 		if (! auth.user){
@@ -68,7 +68,7 @@ function BuyCheckout(){
 		const resData = await response.json();
 		console.log(resData);
 		if (status === 200) {
-			setV(true);
+			//setV(true);
 			navigate("/profile");
 		} else {
 			setNotification({
@@ -136,7 +136,7 @@ function BuyCheckout(){
 			<input required id="input" name="input" placeholder="Expire Date (yyyy/mm)" />
 			<input required id="input" name="input" placeholder="CVV/CVC" />
 			</Stack>
-			<Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Checkout</Button>
+			<Button type="submit" onSubmit={checkout} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}> Checkout</Button>
 			</form>
 			</Container>
 			</>: <><h1 style={{color: 'black'}}> LOADING </h1></>

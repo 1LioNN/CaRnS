@@ -29,8 +29,8 @@ export default function VendorRentSingle(props) {
     newPriceRef.current.value = listing.rentListingDetails.rentPrice;
     newLocationRef.current.value = listing.rentListingDetails.location;
     
-    newStartDateRef.current.value = (new Date(listing.rentListingDetails.availabilityStart)).toLocaleDateString();
-    newEndDateRef.current.value = (new Date(listing.rentListingDetails.availabilityEnd)).toLocaleDateString();
+    newStartDateRef.current.value = listing.rentListingDetails.availabilityStart.slice(0,10);
+    newEndDateRef.current.value = listing.rentListingDetails.availabilityEnd.slice(0,10);
   }, []);
 
   const newpost = async (e) => {

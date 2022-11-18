@@ -5,6 +5,9 @@ import { useEffect, useState} from 'react'
 import { useAuth } from "../Utils/AuthContext.js";
 import AddIcon from "@mui/icons-material/Add";
 import "./ActiveSellList.css"
+import Container from '@mui/material/Container';
+import Paper from "@mui/material/Paper";
+import ContactInfo from "./ContactInfo";
 
 function VendorBookingTrans(){
     const [rentListing, setRentListings] = useState(null)
@@ -52,10 +55,25 @@ function VendorBookingTrans(){
             <div className='singlelistings'>
             <Stack spacing={3}>
                 {rentListing && rentListing.map((rentListing) => (
+                  <Paper  elevation={3}>
+                  <>Listing Name: {rentListing.listingName}</>
+                  
                   <>{rentListing.rentListingDetails.booking.map((singleBooking) => (
-                    <>{JSON.stringify(singleBooking)}</>
                     
-                  ))}</>
+                    <Container>
+                    <Paper elevation={3}>
+                    <ContactInfo uid={singleBooking.customerID} />
+                    <>Dates Booked:</><>{singleBooking.dates.map((date)=>(
+                      <Stack spacing={1}>
+                      <>{date.slice(0,10)}</>
+                      </Stack>
+                    ))}</>
+                    
+                    </Paper>
+                    </Container>
+                  ))}
+                  
+                  </></Paper>
 
                 ))}
         </Stack>

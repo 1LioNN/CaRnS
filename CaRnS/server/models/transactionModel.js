@@ -81,14 +81,15 @@ transactionSchema.statics.log = async function (customerID, listingID, bookingSt
         Listing.addRentListingDates(customerID, listingID, bookingStartDate, bookingEndDate)
         
         dates = toDateArray(bookingStartDate, bookingEndDate)
-
+    
         if(dates.length == 0) {
             throw Error('Invalid booking date for transaction')
         }
-        
+            
         const transactionAmount = listing.rentListingDetails.rentPrice * dates.length  
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
         return transaction
+
     }
 }
 
