@@ -65,7 +65,7 @@ function VendorBookingTrans(){
                     <ContactInfo uid={singleBooking.customerID} />
                     <>Dates Booked:</><>{singleBooking.dates.map((date)=>(
                       <Stack spacing={1}>
-                      <>{new Date(date).toLocaleDateString()}</>
+                      <>{date.slice(0,10)}</>
                       </Stack>
                     ))}</>
                     

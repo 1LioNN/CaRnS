@@ -197,7 +197,7 @@ const getDetailRent = async (req, res) => {
     if (!listing.rentListingDetails) {
         return res.status(404).json({ error: 'Missing details' })
     }
-
+    
     res.status(200).json(listing)
 }
 
@@ -358,4 +358,6 @@ const removeRentListingDates = async (req, res) => {
     }
 } 
 
+
 module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, getDetailRent, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }
+

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -16,100 +16,111 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import FilledInput from '@mui/material/FilledInput';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
-
+import { useAuth } from "../Utils/AuthContext.js";
 
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+//import { Grid, tableBodyClasses } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+
+const today = new Date()
 
 const initialValues = {
   address: '',
   card_number: '',
   card_holder:'',
   expiry_date: '',
-  cvc: ''
-
+  cvc: '',
+  startDate: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+  endDate: ''  
 }
 
+//Get number of dates between 2 date strings (+1 because renting for the same day counts as 1 day)
+function getRentPeriod(startDate, endDate) {
+    return Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) + 1;
+}
 
-const BookDetailsRent = () => {
+const RentCheckout = () => {
+    const auth = useAuth()
+    const params = useParams()
+    let navigate  = useNavigate()
+    const { _, setNotification } = useNotification()
+
+    const [rentListing, setRentListing] = useState(null);
+
+    useEffect(() => {
+        const url = 'http://localhost:8000/api/listing/view-detail-rent/'+ params.listId;
+		const fetchRentDetail = async () => {
+			const response = await fetch(url, {
+				method: 'GET',
+				mode: 'cors',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			
+			const data = await response.json()
+            
+            if (response.ok) {
+                setRentListing(data)
+                document.getElementById('rent-price').innerHTML = data.rentListingDetails.rentPrice;
+            }
+        }
+        fetchRentDetail()
+    }, [])
+    
+
+    // const { _, setNotification } = useNotification();
+    const onSubmit = async (data) => {
+        if (! auth.user){
+			return
+		}
+		const response = await fetch(
+			"http://localhost:8000/api/transaction/log",
+			{
+				method: "POST",
+				mode: "cors",
+				credentials: "include",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					"customerID": auth.user._id,
+					"listingID": rentListing._id,
+                    "bookingStartDate": data.startDate,
+                    "bookingEndDate": data.endDate
+				}),
+			}
+		);
+
+        const status = response.status;
+        console.log(status)
+        const resData = await response.json();
+        console.log(resData)
+
+        if (status === 200) {
+			navigate("/profile");
+            
+		} else {
+			setNotification({
+				message: resData.error,
+				severity: "error",
+				open: true,
+			});
+		}
+    }
 
 
-  
-  // const { _, setNotification } = useNotification();
-const onSubmit = async (data) => {
-    // console.log(data)
-  //   let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
-  //   console.log(description) 
+    const [value, setValue] = React.useState('cash');
 
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    };
 
-  //   const response = await fetch('http://localhost:8000/api/listing/post-buy', {
-  //     method: 'POST',
-  //     mode: 'cors',
-  //     credentials: 'include',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       listingName: data.listing_name,
-  //       isBuy: true,
-  //       buyListingDetails: {
-  //         listingDescription: description,
-  //         vehicleType: data.vehicle_type,
-  //         salePrice: data.amount,
-  //         location: data.location,
-  //         isActive: true
-  //       }
-  //     })
-  //   });
-  //   const status = response.status;
-  //   console.log(status)
-  //   const resData = await response.json();
-  //   console.log(resData)
-  // if (status === 200) {
-  //   setNotification({
-  //     message:"Listing successfully posted",
-  //     severity: "success",
-  //     open: true
-  //   });
-  // }
-  // else {
-  //   setNotification({
-  //     message:resData.error,
-  //     severity: "error",
-  //     open: true
-  //   });
-  // }
+    const [values, setValues] = React.useState({
+        address: ''
+    });
 
-  };
-
-
-    // const [values, setValues] = React.useState({
-    //     amount: ''
-    //   });
-
-    // const [showhide, setShowhide] = useState("Sell");
-
-    // const handleshow = e=>{
-    //   const getshow= e.target.value;
-    //   setShowhide(getshow);
-    // }
-
-    // const handleChange = (prop) => (event) => {
-    //     setValues({ ...values, [prop]: event.target.value });
-    //   };
-
-  const [value, setValue] = React.useState('cash');
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const [values, setValues] = React.useState({
-    address: ''
-  });
-
-  let history = useNavigate();
+    let history = useNavigate();
 
 
 
@@ -140,12 +151,13 @@ const onSubmit = async (data) => {
                   Booking Details 
               </Typography>
 
+
               {/* <Typography fontSize={17} color='grey'>
                   Date
               </Typography> */}
 
 
-              <Typography fontSize={17} color='grey'>
+              {/* <Typography fontSize={17} color='grey'>
                   Address
               </Typography>
 
@@ -167,7 +179,7 @@ const onSubmit = async (data) => {
               <FormControlLabel value="cash" control={<Radio />} label="Cash" />
               <FormControlLabel value="card" control={<Radio />} label="Card" />
                   </RadioGroup>
-             </FormControl>
+             </FormControl> */}
 
               
             
@@ -194,15 +206,27 @@ const onSubmit = async (data) => {
                 <Field as={TextField} name="cvc" label="CVC" variant="filled" />
               </Box>
 
+              <Box
+                sx={{
+                  '& > :not(style)': { m: 1, width: '30ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <Field as={TextField} name="startDate" label="Start Date (YYYY-MM-DD)" variant="filled" id="start-date" />
+                <Field as={TextField} name="endDate" label="End Date (YYYY-MM-DD)" variant="filled" id="end-date"/>
+              </Box>
+
               <Box fontSize={17}  >
                 <text  className="field-name">Price Details: $</text>
-                <text className="field-value"> {"10000"} </text>
+                <text className="field-value" id="rent-price"> </text>
                 <text className="field-name"> x </text>
-                <text className="field-value"> {"3"} </text>
+                <text className="field-value" id="rent-days"> {"3"} </text>
                 <text className="field-name"> days </text>
                 {/* "10000" and "3" are only examples*/}
               </Box>
 
+                
               <Box fontSize={17}>
                 <text className="field-name">Total Cost: $ </text>
                 <text className="field-value"> {"30000"} </text>
@@ -212,14 +236,14 @@ const onSubmit = async (data) => {
               style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40}}>
                   Book
               </Button>
-
-    
+   
             </Container>
-          </Form>
+
+        </Form>
         )}
-        </Formik>
+    </Formik>
 
     )
 }
 
-export default BookDetailsRent;
+export default RentCheckout;

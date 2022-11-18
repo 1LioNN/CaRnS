@@ -15,6 +15,7 @@ import EditProfilePage from './components/pages/EditProfilePage';
 import VendorListingsRent from './components/pages/VendorListingsPageRent';
 import BuyerHistoryPage from './components/pages/BuyerHistoryPage';
 import BuyCheckoutPage from './components/pages/BuyCheckoutPage';
+import RentCheckoutPage from './components/pages/RentCheckoutPage';
 import VendorBookingHistoryPage from './components/pages/VendorBookingHistoryPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
@@ -63,8 +64,9 @@ function App() {
         <Route path='/history' element={<VendorHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
         <Route path='/buycheckout/:listId' element={<BuyCheckoutPage />} />
-        <Route path='/vendorbookinghistory' element={<VendorBookingHistoryPage />} />\
+        <Route path='/rentcheckout/:listId' element={<RentCheckoutPage />} />
         <Route path='/rentdetail/:listId' element ={<RentDetail/>}/>
+        <Route path='/vendorbookinghistory' element={<VendorBookingHistoryPage />} />
       </Routes>
      
     </div>
