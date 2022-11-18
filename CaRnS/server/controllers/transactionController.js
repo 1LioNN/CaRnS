@@ -27,7 +27,7 @@ const logTransaction = async (req, res) => {
 
 const getPastPurchases = async (req, res) => {
     const id = req.session.user._id;
-    const listing_transactions = await Transaction.find({ customerID: id }, {_id: 0, listingID:1})
+    const listing_transactions = await Transaction.find({ customerID: id }, { _id: 0, listingID: 1 }).sort({ createdAt: 1 })
 
     const listing_array = []
 
@@ -37,7 +37,7 @@ const getPastPurchases = async (req, res) => {
         }
     }
 
-    const listings = await Listing.find({_id: {$in: listing_array} } )
+    const listings = await Listing.find({_id: {$in: listing_array} } ).sort({updatedAt:-1})
 
 
     res.status(200).json(listings)
