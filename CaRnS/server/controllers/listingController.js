@@ -183,7 +183,7 @@ const getdetailbuy = async (req, res) => {
     res.status(200).json(listing)
 }
 
-const getdetailrent = async (req, res) => {
+const getDetailRent = async (req, res) => {
     const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -358,4 +358,4 @@ const removeRentListingDates = async (req, res) => {
     }
 } 
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, getdetailrent, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, getDetailRent, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }

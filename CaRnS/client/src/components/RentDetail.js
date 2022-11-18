@@ -36,6 +36,8 @@ function RentDetail() {
         fetchRentDetail();
     }, []);
 
+    //console.log(rentListing);
+
     return (
         <rentdetail>
             <IconButton size="large" href='/rent' className="backArrow">
@@ -78,18 +80,18 @@ function RentDetail() {
                                     </Paper>
 
                                     <Paper elevation={0}>
-                                        <h2 style={{ color: "black" }}> Price per day: <span style={{color: '#e87123'}}>${rentListing.rentListingDetails.rentPrice} </span></h2>
+                                        <h2 style={{ color: "black" }}> Price per day: <span style={{color: '#e87123'}}>{rentListing.rentListingDetails.rentPrice} </span></h2>
                                     </Paper>
 
                                     <Paper elevation={0}>
                                         <h2 style={{color: "black"}}>
-                                            Available from: <span style={{color: '#e87123'}}>${rentListing.rentListingDetails.availabilityStart} </span>
+                                            Available from: <span style={{color: '#e87123'}}>{rentListing.rentListingDetails.availabilityStart.slice(0, 10)} </span>
                                         </h2>
                                     </Paper>
 
                                     <Paper elevation={0}>
                                         <h2 style={{color: "black"}}>
-                                            Available until: <span style={{color: '#e87123'}}>${rentListing.rentListingDetails.availabilityEnd} </span>
+                                            Available until: <span style={{color: '#e87123'}}>{rentListing.rentListingDetails.availabilityEnd.slice(0, 10)} </span>
                                         </h2>
                                     </Paper>
 
@@ -104,9 +106,9 @@ function RentDetail() {
                                         color: "#fff",
                                         width: 250,
                                         margin: 'auto',
-                                        marginTop: '51px',
+                                        marginTop: '30px',
                                     }}
-                                    href = {'/buycheckout/' + rentListing._id}
+                                    href = {'/rentcheckout/' + rentListing._id}
                                     variant="contained"
                                     disableElevation>
                                     Rent </Button>

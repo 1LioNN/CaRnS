@@ -1,18 +1,18 @@
-.buydetail{
+.rentdetail{
     width: 55%;
     margin: 0 auto;
     margin-top: 50px;
     height: 600px;
 }
 
-.buydetail-container{
+.rentdetail-container{
     box-sizing: border-box;
     height: 600px;
     display: flex;
     gap: 60px;
 }
 
-.buylistingimg{
+.rentlistingimg{
     vertical-align: middle;
     text-align: center;
     border: 1px solid #aaaaaa;
@@ -22,17 +22,17 @@
     border-radius: 10px;
 }
 
-.buyDetail-left{
+.rentDetail-left{
     display: flex;
     flex-direction: column;
 
 }
-.buyDetail-right{
-    width: 45%;
+.rentDetail-right{
+    width: 50%;
     height: 600px;
     display: flex;
     flex-direction: column;
 }
-.buyDetail-info{
+.rentDetail-info{
     font-family: 'redhat_light';
 }
