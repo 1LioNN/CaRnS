@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -20,7 +20,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const initialValues = {
   address: '',
@@ -32,15 +32,36 @@ const initialValues = {
 }
 
 
-const BookDetailsRent = () => {
+const RentCheckout = () => {
+    const params = useParams()
+    const [rentListing, setRentListing] = useState(null);
 
+    useEffect(() => {
+        const url = 'http://localhost:8000/api/listing/view-detail-rent/'+ params.listId;
+		const fetchRentDetail = async () => {
+			const response = await fetch(url, {
+				method: 'GET',
+				mode: 'cors',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			
+			const data = await response.json()
+            
+            if (response.ok) {
+                setRentListing(data)
+            }
+        }
+        fetchRentDetail()
+    }, [])
+    
 
-  
-  // const { _, setNotification } = useNotification();
-const onSubmit = async (data) => {
+    // const { _, setNotification } = useNotification();
+    const onSubmit = async (data) => {}
     // console.log(data)
-  //   let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
-  //   console.log(description) 
+     //   let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
+     //   console.log(description) 
 
 
   //   const response = await fetch('http://localhost:8000/api/listing/post-buy', {
@@ -81,7 +102,7 @@ const onSubmit = async (data) => {
   //   });
   // }
 
-  };
+    
 
 
     // const [values, setValues] = React.useState({
@@ -222,4 +243,4 @@ const onSubmit = async (data) => {
     )
 }
 
-export default BookDetailsRent;
+export default RentCheckout;
