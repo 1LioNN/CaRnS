@@ -64,7 +64,7 @@ function BuyerHistory(){
                         {booking.customerID === auth.user._id ? 
                           <>{booking.dates.map((date)=>(
                             <Stack spacing={1}>
-                            <>{new Date(date).toLocaleDateString()}</>
+                            <>{date.slice(0,10)}</>
                             </Stack>
                           ))}</>:<></>}
                         </>
