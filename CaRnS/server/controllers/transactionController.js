@@ -32,7 +32,9 @@ const getPastPurchases = async (req, res) => {
     const listing_array = []
 
     for (var i = 0; i < listing_transactions.length; i++) {
-        listing_array.push(listing_transactions[i].listingID)
+        if (!listing_array.includes(listing_transactions[i].listingID)){
+            listing_array.push(listing_transactions[i].listingID)
+        }
     }
 
     const listings = await Listing.find({_id: {$in: listing_array} } )
