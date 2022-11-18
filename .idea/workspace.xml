@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f86a6dcb-2b8f-42bf-8cee-0c23aee76975" name="Changes" comment="refined views of each listings">
-      <change beforePath="$PROJECT_DIR$/CaRnS/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/client/src/App.js" afterDir="false" />
+    <list default="true" id="f86a6dcb-2b8f-42bf-8cee-0c23aee76975" name="Changes" comment="Routed url for rent detail page and created a rentlisting fetch function in backend, problem still not fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/client/src/components/RentDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaRnS/server/controllers/listingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/server/controllers/listingController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaRnS/server/routes/listingRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/CaRnS/server/routes/listingRoutes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +46,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/CaRnS/client/src/components" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -56,6 +65,7 @@
       <workItem from="1667266538971" duration="7869000" />
       <workItem from="1667419224715" duration="13867000" />
       <workItem from="1667504997573" duration="3299000" />
+      <workItem from="1668714689522" duration="15282000" />
     </task>
     <task id="LOCAL-00001" summary="refined views of each listings">
       <created>1666410905954</created>
@@ -64,7 +74,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666410905954</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created rent details page. Not displaying properly at the time.">
+      <created>1668722033334</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668722033334</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Routed url for rent detail page and created a rentlisting fetch function in backend, problem still not fixed">
+      <created>1668725350761</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668725350761</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -83,6 +107,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refined views of each listings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refined views of each listings" />
+    <MESSAGE value="Created rent details page. Not displaying properly at the time." />
+    <MESSAGE value="Routed url for rent detail page and created a rentlisting fetch function in backend, problem still not fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Routed url for rent detail page and created a rentlisting fetch function in backend, problem still not fixed" />
   </component>
 </project>

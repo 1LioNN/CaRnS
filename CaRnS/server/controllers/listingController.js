@@ -185,11 +185,11 @@ const getdetailbuy = async (req, res) => {
 
 const getDetailRent = async (req, res) => {
     const { id } = req.params
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Not a valid listing ID' })
     }
-    
+
     const listing = await Listing.findById(id)
     if (!listing) {
         return res.status(404).json({ error: 'No such listing' })
@@ -358,4 +358,6 @@ const removeRentListingDates = async (req, res) => {
     }
 } 
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, getDetailRent,addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }
+
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, getDetailRent, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }
+
