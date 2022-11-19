@@ -80,7 +80,7 @@ function RentDetail() {
                                     <Paper elevation={0}>
                                         <h2 style={{ color: "black" }}> Description: </h2>
                                         <h4 style={{ color: "black" }}>
-                                            {rentListing.rentListingDetails.description}
+                                            {rentListing.rentListingDetails.listingDescription}
                                         </h4>
                                     </Paper>
 
