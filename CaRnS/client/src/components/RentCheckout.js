@@ -21,6 +21,7 @@ import { useAuth } from "../Utils/AuthContext.js";
 import Box from '@mui/material/Box';
 //import { Grid, tableBodyClasses } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import moment from 'moment';
 
 const today = new Date()
 
@@ -36,6 +37,11 @@ const initialValues = {
 
 //Get number of dates between 2 date strings (+1 because renting for the same day counts as 1 day)
 function getRentPeriod(startDate, endDate) {
+  console.log (startDate);
+  console.log (endDate);
+  if (!moment(startDate, "YYYY-MM-DD", true).isValid() || !moment(endDate, "YYYY-MM-DD", true).isValid()) {
+    return 1;
+  }
     return Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) + 1;
 }
 
@@ -46,6 +52,9 @@ const RentCheckout = () => {
     const { _, setNotification } = useNotification()
 
     const [rentListing, setRentListing] = useState(null);
+    const [startdate, setStartDate] = useState(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+    const [enddate, setEndDate] = useState('');
+    const [price, setPrice] = useState(0);
 
     useEffect(() => {
         const url = 'http://localhost:8000/api/listing/view-detail-rent/'+ params.listId;
@@ -63,6 +72,7 @@ const RentCheckout = () => {
             if (response.ok) {
                 setRentListing(data)
                 document.getElementById('rent-price').innerHTML = data.rentListingDetails.rentPrice;
+                setPrice(data.rentListingDetails.rentPrice);
             }
         }
         fetchRentDetail()
@@ -125,7 +135,12 @@ const RentCheckout = () => {
 
 
     return(
+      <rentcheckout>
 
+ 
+      <IconButton size="large" href={'/rentdetail/'+ params.listId} className="backArrow">
+      <ArrowBackIcon />
+    </IconButton>
 
     <Formik 
         container
@@ -143,43 +158,9 @@ const RentCheckout = () => {
         <Form>
             <Container maxWidth="md" >
           
-              <IconButton size="large" onClick={() => history.goBack()}>
-                  <ArrowBackIcon/>
-              </IconButton>
-
               <Typography fontSize={22}>
                   Booking Details 
               </Typography>
-
-
-              {/* <Typography fontSize={17} color='grey'>
-                  Date
-              </Typography> */}
-
-
-              {/* <Typography fontSize={17} color='grey'>
-                  Address
-              </Typography>
-
-              <FormControl fullWidth sx={{ m: 0 }} variant="filled">
-                <InputLabel htmlFor="standard-adornment-address"></InputLabel>
-                <Field as={FilledInput}
-                  name="address"
-                />
-              </FormControl>
-
-              <FormControl>
-                 <FormLabel id="demo-controlled-radio-buttons-group">Payment Method</FormLabel>
-                    <RadioGroup
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
-                    value={value}
-                    onChange={handleChange}
-                          >
-              <FormControlLabel value="cash" control={<Radio />} label="Cash" />
-              <FormControlLabel value="card" control={<Radio />} label="Card" />
-                  </RadioGroup>
-             </FormControl> */}
 
               
             
@@ -190,8 +171,8 @@ const RentCheckout = () => {
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="card_number" label="Card Number" variant="filled" />
-                <Field as={TextField} name="card_holder" label="Card Holder" variant="filled" />              
+                <Field as={TextField} name="card_number" label="Card Number" inputProps={{ maxLength: 16 }} />
+                <Field as={TextField} name="card_holder" label="Card Holder"  />              
               </Box>
 
 
@@ -202,8 +183,8 @@ const RentCheckout = () => {
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="expiry_date" label="Expiry Date" variant="filled" />
-                <Field as={TextField} name="cvc" label="CVC" variant="filled" />
+                <Field as={TextField} name="expiry_date" label="Expiry Date"  inputProps={{ maxLength: 5 }}/>
+                <Field as={TextField} name="cvc" label="CVC"  inputProps={{ maxLength: 3 }}/>
               </Box>
 
               <Box
@@ -213,23 +194,27 @@ const RentCheckout = () => {
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="startDate" label="Start Date (YYYY-MM-DD)" variant="filled" id="start-date" />
-                <Field as={TextField} name="endDate" label="End Date (YYYY-MM-DD)" variant="filled" id="end-date"/>
+                <Field as={TextField} name="startDate" label="Start Date (YYYY-MM-DD)"  id="start-date" onBlur={(event) => 
+                  {setStartDate(event.target.value);
+                  }}/>
+                <Field as={TextField} name="endDate" label="End Date (YYYY-MM-DD)"  id="end-date" onBlur={(event) => 
+                 {setEndDate(event.target.value);
+                  }}/>
               </Box>
 
               <Box fontSize={17}  >
                 <text  className="field-name">Price Details: $</text>
                 <text className="field-value" id="rent-price"> </text>
                 <text className="field-name"> x </text>
-                <text className="field-value" id="rent-days"> {"3"} </text>
-                <text className="field-name"> days </text>
+                <text className="field-value" id="rent-days"> {getRentPeriod(startdate, enddate)} </text>
+                <text className="field-name"> day(s) </text>
                 {/* "10000" and "3" are only examples*/}
               </Box>
 
                 
               <Box fontSize={17}>
-                <text className="field-name">Total Cost: $ </text>
-                <text className="field-value"> {"30000"} </text>
+                <text className="field-name">Total Cost: $ {price * getRentPeriod(startdate, enddate)} </text>
+                <text className="field-value"> </text>
               </Box>
               
               <Button type='submit' variant='contained' onSubmit={onSubmit} sx={{ m: 2 }}
@@ -242,7 +227,7 @@ const RentCheckout = () => {
         </Form>
         )}
     </Formik>
-
+    </rentcheckout>
     )
 }
 

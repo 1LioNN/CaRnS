@@ -8,12 +8,17 @@ import placeholder from "../assets/image/placeholder-image.png";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
+import { useAuth } from "../Utils/AuthContext.js";
 
 function RentDetail() {
     const [rentListing, setRentListing] = useState(null);
     const [contactInfo, setContactInfo] = useState(null);
     let params = useParams();
-
+    let auth = useAuth();
+    let buyer = true;
+    if (auth.user){
+      buyer = (auth.user.userType == 'buyer')
+    }
     useEffect(() => {
         const url =
             "http://localhost:8000/api/listing/view-detail-rent/" + params.listId;
@@ -80,7 +85,7 @@ function RentDetail() {
                                     </Paper>
 
                                     <Paper elevation={0}>
-                                        <h2 style={{ color: "black" }}> Price per day: <span style={{color: '#e87123'}}>{rentListing.rentListingDetails.rentPrice} </span></h2>
+                                        <h2 style={{ color: "black" }}> Price per day: <span style={{color: '#e87123'}}>${rentListing.rentListingDetails.rentPrice} </span></h2>
                                     </Paper>
 
                                     <Paper elevation={0}>
@@ -96,7 +101,8 @@ function RentDetail() {
                                     </Paper>
 
                                 </div>
-                                <Button
+                                {buyer ? <>
+                                    <Button
                                     className="btn"
                                     style={{
                                         borderRadius: 40,
@@ -112,6 +118,11 @@ function RentDetail() {
                                     variant="contained"
                                     disableElevation>
                                     Rent </Button>
+                                
+                                
+                                
+                                </> : <></>}
+                                
                             </div>
                         </div>
                     </>

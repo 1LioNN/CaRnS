@@ -7,22 +7,20 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
+
 import { useNotification } from '../Utils/NotificationContext';
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel';
-import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FilledInput from '@mui/material/FilledInput';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import { Formik, Field, Form, ErrorMessage } from 'formik'
+import placeholder from "../assets/image/placeholder-image.png";
 
-
-import BasicDateRangePicker from './date-range-picker';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+import "./ListingForm.css";
 
 const initialValues = {
   image: '',
@@ -38,12 +36,11 @@ const initialValues = {
 
 
 const ListingForm = () => {
-  
+
+  const navigate = useNavigate();
   const { _, setNotification } = useNotification();
 const onSubmit = async (data) => {
     console.log(data)
-    let description = data.car_make.concat('-', data.car_model,'-',data.car_year)
-    console.log(description)
 
 
     const response = await fetch('http://localhost:8000/api/listing/post-buy', {
@@ -57,7 +54,7 @@ const onSubmit = async (data) => {
         listingName: data.listing_name,
         isBuy: true,
         buyListingDetails: {
-          listingDescription: description,
+          listingDescription: data.description,
           vehicleType: data.vehicle_type,
           salePrice: data.amount,
           location: data.location,
@@ -75,6 +72,7 @@ const onSubmit = async (data) => {
       severity: "success",
       open: true
     });
+    navigate('/listings');
   }
   else {
     setNotification({
@@ -100,17 +98,31 @@ const onSubmit = async (data) => {
       setShowhide(getshow);
     }
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-      };
 
 
 
     return(
       <listingform>
-        <IconButton size="large" href='/listings' className="backArrow">
+           <IconButton size="large" href='/listings' className="backArrow">
             <ArrowBackIcon/>
         </IconButton>
+      <div className='listingform-container'>
+
+      
+     
+        <div className='page-header'>
+        <text className="page-title">
+            New Sell Listing
+          </text>
+        </div>
+        <div className="form-image">
+          <img
+            className="car-img"
+            style={{ width: 150, height: 150, opacity: 0.5 }}
+            src={placeholder}
+            alt="placeholder"
+          ></img>
+        </div>
 
     <Formik 
         container
@@ -127,67 +139,61 @@ const onSubmit = async (data) => {
         <Form>
             <Container maxWidth="md" >
 
-
-              <Typography fontSize={22}>
-                  Create New Listing 
-              </Typography>
-
-              <Typography fontSize={17} color='grey'>
-                  Upload Image
-              </Typography>
-
-              <div>
-                  <Avatar variant="rounded" src={""} sx={{ width: 150, height: 150 }} />
-                  <input type="file" name="image"/>
-                  <button >Submit</button>
-              </div>
-
               <Box
+                className="listing-info-fields"
                 sx={{
                   '& > :not(style)': { m: 1, width: '25ch' },
                 }}
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="listing_name" label="listing_name" variant="filled" />
-                <Field as={TextField} name="vehicle_type" label="vehicle_type" variant="filled" />
-                <Field as={TextField} name="location" label="location" variant="filled" />
+                <Field as={TextField} name="listing_name" label="Listing Name" />
+                <Field as={TextField} name="vehicle_type" label="Vehicle Type" />
+                <Field as={TextField} name="location" label="Location" />
               
               </Box>
 
               <Box
                 sx={{
-                  '& > :not(style)': { m: 1, width: '25ch' },
+                  '& > :not(style)': { m: 1, width: 636 },
                 }}
                 noValidate
                 autoComplete="off"
               >
-                <Field as={TextField} name="car_make" label="car_make" variant="filled" />
-                <Field as={TextField} name="car_model" label="car_model" variant="filled" />
-                <Field as={TextField} name="car_year" label="car_year" variant="filled" />
+                <Field as={TextField} 
+                name="description" 
+                label="Listing Description"  
+                multiline
+                rows={6}
+                inputProps={{ maxLength: 300 }} />
               </Box>
               
 
-              <FormControl fullWidth sx={{ m: 0 }} variant="filled">
-                <InputLabel htmlFor="filled-adornment-amount">Amount</InputLabel>
-                <Field as={FilledInput}
+              <div className="form-price">
+              <Field as={TextField}
                   name="amount"
+                  label="Price"
+                  sx={{marginTop: 1.5}}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  }}
                   // value={values.amount}
                   // onChange={handleChange('amount')}
-                  startAdornment={<InputAdornment position="start">$</InputAdornment>}
                 />
-              </FormControl>
-
-              <Button type='submit' variant='contained' onSubmit={onSubmit} sx={{ m: 2 }}
-              style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40}}>
+                    <Button 
+                    type='submit' 
+                    variant='contained' 
+                    onSubmit={onSubmit} sx={{ m: 2 }}
+                    style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40, padding: 10}}>
                   Create New Listing
                 </Button>
-
-
+              </div>
+          
             </Container>
           </Form>
         )}
         </Formik>
+        </div>
         </listingform>
 
     )
