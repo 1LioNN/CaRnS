@@ -49,7 +49,7 @@ function isInArray(array, value) {
 transactionSchema.statics.log = async function (customerID, listingID, bookingStartDate, bookingEndDate) {
 
     // validation
-    if (!customerID || !listingID) {
+    if (!customerID || !listingID ||!transactionAmount) {
         throw Error('Missing data to complete transaction')
     }
 
@@ -78,9 +78,8 @@ transactionSchema.statics.log = async function (customerID, listingID, bookingSt
 
     if (listing.isBuy == true){
         listing.buyListingDetails.isActive = false
-        const transactionAmount = listing.buyListingDetails.salePrice
         listing.save()
-        const transaction = await this.create({ customerID, vendorID, listingID,  transactionAmount})
+        const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount })
         return transaction
     } else {
         let rentDates =  toDateArray(bookingStartDate, bookingEndDate)
@@ -105,6 +104,7 @@ transactionSchema.statics.log = async function (customerID, listingID, bookingSt
         }
             
         const transactionAmount = listing.rentListingDetails.rentPrice * dates.length  
+
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
         return transaction
 

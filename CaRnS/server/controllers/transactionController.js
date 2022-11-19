@@ -6,7 +6,9 @@ const mongoose = require('mongoose')
 
 const logTransaction = async (req, res) => {
 
+
     const { customerID, listingID, bookingStartDate, bookingEndDate } = req.body
+
    
     const listing = await Listing.findById(listingID)
     
@@ -17,6 +19,7 @@ const logTransaction = async (req, res) => {
             transaction = await Transaction.log(customerID, listingID)
         } else {     
             transaction = await Transaction.log(customerID, listingID, bookingStartDate, bookingEndDate)
+
         }
         res.status(200).json(transaction)
     } catch (error) {
@@ -24,6 +27,7 @@ const logTransaction = async (req, res) => {
     }
     
 }
+
 
 const getPastPurchases = async (req, res) => {
     const id = req.session.user._id;
@@ -44,3 +48,4 @@ const getPastPurchases = async (req, res) => {
 }
 
 module.exports = { logTransaction, getPastPurchases }
+
