@@ -39,9 +39,8 @@ function ContactInfo(props){
 			sx={{
 				fontFamily: 'redhat',
 				padding: '15px',
-				width: '500px',
-				fontSize: '14px',
-				marginTop: '10px'}}>
+				width: '300px',
+				fontSize: 12,}}>
 			<h2 style={{color: 'black'}}> Contact Information: </h2>
 			<h3 style={{color: 'black'}}> Name: {contactInfo.name}</h3>
 			<h3 style={{color: 'black'}}> Phone Number: {contactInfo.phone_number}</h3>

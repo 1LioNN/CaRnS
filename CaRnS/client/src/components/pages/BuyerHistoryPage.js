@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileSideBar from '../ProfileSideBar';
-import BuyerHistory from '../BuyerHistory';
+import BuyerHistory from '../BuyHistory';
 
 function BuyerHistoryPage(){
     return(

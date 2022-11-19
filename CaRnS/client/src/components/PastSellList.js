@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import "./ActiveSellList.css";
+import "./VendorHistory.css";
 import PastHistorySingle from "./PastHistorySingle";
 import Stack from '@mui/material/Stack';
 import { useEffect, useState} from 'react'
@@ -46,7 +46,7 @@ function PastSellList(){
         </Link>
         </div>
 
-            <div className='listings'>
+            <div className='vendor-history'>
             <Stack spacing={2}>
                 {buyListing && buyListing.map((buyListing) => (
                     <PastHistorySingle listing = {buyListing}/>
