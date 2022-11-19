@@ -41,6 +41,11 @@ function toDateArray(startDate, endDate) {
     return dateArray
 }
 
+//Check if date is in array
+function isInArray(array, value) {
+    return !!array.find(item => {return item.getTime() == value.getTime()})
+}
+
 transactionSchema.statics.log = async function (customerID, listingID, bookingStartDate, bookingEndDate) {
 
     // validation
@@ -78,8 +83,21 @@ transactionSchema.statics.log = async function (customerID, listingID, bookingSt
         const transaction = await this.create({ customerID, vendorID, listingID,  transactionAmount})
         return transaction
     } else {
+        let rentDates =  toDateArray(bookingStartDate, bookingEndDate)
+        const startDate = listing.rentListingDetails.availabilityStart
+        const endDate = listing.rentListingDetails.availabilityEnd
+
+        for(let i = 0; i < rentDates.length; i++) {
+            if(isInArray(listing.rentListingDetails.allUnavailableDates, rentDates[i])) {
+                throw Error('Date is already taken')   
+            }
+        }
+        if(!(rentDates[0] >= startDate && rentDates[rentDates.length - 1] < endDate && rentDates.length > 0)) {
+            throw Error('Invalid booking date')
+        }
+
         Listing.addRentListingDates(customerID, listingID, bookingStartDate, bookingEndDate)
-        
+
         dates = toDateArray(bookingStartDate, bookingEndDate)
     
         if(dates.length == 0) {

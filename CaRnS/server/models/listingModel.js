@@ -185,7 +185,7 @@ listingSchema.statics.addRentListingDates = async function (customerID, listingI
         //Check if date is taken
         for(let i = 0; i < rentDates.length; i++) {
             if(isInArray(listing.rentListingDetails.allUnavailableDates, rentDates[i])) {
-                throw Error('Date is already taken')
+                throw Error('Date is already taken')  
             }
         }
 
