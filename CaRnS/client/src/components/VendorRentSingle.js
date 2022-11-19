@@ -6,31 +6,43 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import { useNotification } from "../Utils/NotificationContext";
-import "./ActiveHistorySingle.css";
+import "./VendorRentSingle.css";
 import trash from "../assets/icons/trash-icon.png";
 import placeholder from "../assets/image/placeholder-image.png";
 
-export default function ActiveHistorySingle(props) {
+export default function VendorRentSingle(props) {
   const { listing } = props;
-  const newPriceRef = useRef(listing.buyListingDetails.salePrice);
-  const newLocationRef = useRef(listing.buyListingDetails.location);
+  
+  const newPriceRef = useRef(listing.rentListingDetails.rentPrice);
+  const newLocationRef = useRef(listing.rentListingDetails.location);
   const newDescriptionRef = useRef(
-    listing.buyListingDetails.listingDescription
+    listing.rentListingDetails.listingDescription
   );
+  const newStartDateRef = useRef((new Date(listing.rentListingDetails.availabilityStart)).toLocaleDateString());
+  const newEndDateRef = useRef((new Date(listing.rentListingDetails.availabilityEnd)).toLocaleDateString());
+  
   const { _, setNotification } = useNotification();
+  
   useEffect(() => {
     newDescriptionRef.current.value =
-      listing.buyListingDetails.listingDescription;
-    newPriceRef.current.value = listing.buyListingDetails.salePrice;
-    newLocationRef.current.value = listing.buyListingDetails.location;
+      listing.rentListingDetails.listingDescription;
+    newPriceRef.current.value = listing.rentListingDetails.rentPrice;
+    newLocationRef.current.value = listing.rentListingDetails.location;
+    
+    newStartDateRef.current.value = listing.rentListingDetails.availabilityStart.slice(0,10);
+    newEndDateRef.current.value = listing.rentListingDetails.availabilityEnd.slice(0,10);
   }, []);
 
   const newpost = async (e) => {
     const listingDescription = newDescriptionRef.current.value;
     const salePrice = newPriceRef.current.value;
     const nlocation = newLocationRef.current.value;
+    
+    const startDate = newStartDateRef.current.value;
+    const endDate = newEndDateRef.current.value;
+    
     const response = await fetch(
-      "http://localhost:8000/api/listing/update-buy/" + listing._id,
+      "http://localhost:8000/api/listing/update-rent/" + listing._id,
       {
         method: "PUT",
         mode: "cors",
@@ -39,9 +51,11 @@ export default function ActiveHistorySingle(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          newSalePrice: salePrice,
+          newRentPrice: salePrice,
           newListingDescription: listingDescription,
           newLocation: nlocation,
+          newStartDate: startDate,
+          newEndDate: endDate
         }),
       }
     );
@@ -63,6 +77,9 @@ export default function ActiveHistorySingle(props) {
       });
     }
   };
+  
+  
+
   const handleDelete = async (e) => {
     const response = await fetch(
       "http://localhost:8000/api/listing/" + listing._id,
@@ -103,7 +120,6 @@ export default function ActiveHistorySingle(props) {
         className="listing-card"
       >
       <div className="single-left">
-      <div className="listing-name">
       <Typography
             component="h1"
             variant="h5"
@@ -115,8 +131,6 @@ export default function ActiveHistorySingle(props) {
           >
             {listing.listingName}
           </Typography>
-      </div>
-          
         <div className="listing-image">
           <img
             className="car-img"
@@ -125,9 +139,11 @@ export default function ActiveHistorySingle(props) {
             alt="placeholder"
           ></img>
         </div>
+
       </div>
-      
+
         <div className="listing-info">
+
           <div className="delete-button">
             <img
               title="Delete"
@@ -145,7 +161,7 @@ export default function ActiveHistorySingle(props) {
             fontFamily="redhat"
             gutterBottom
           >
-            Type: {listing.buyListingDetails.vehicleType}
+            Type: {listing.rentListingDetails.vehicleType}
           </Typography>
           <Container>
             <form
@@ -154,7 +170,7 @@ export default function ActiveHistorySingle(props) {
               className="vendor-listing-card"
             >
               <Stack>
-                <>Price:</>
+                <>Rent Price (/day):</>
                 <input required id="input" name="input" ref={newPriceRef} />
                 <>Location:</>
                 <input required id="input" name="input" ref={newLocationRef} />
@@ -166,6 +182,10 @@ export default function ActiveHistorySingle(props) {
                   ref={newDescriptionRef}
                   maxLength="300"
                 />
+                <>Start Date:</>
+                <input required id="input" name="input" ref={newStartDateRef} />
+                <>End Date:</>
+                <input required id="input" name="input" ref={newEndDateRef} />
               </Stack>
               <Button
                 type="submit"

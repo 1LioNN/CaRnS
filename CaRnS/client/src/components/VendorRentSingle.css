@@ -1,13 +1,9 @@
 .listing-card{
     border-radius: 50px;
     padding-top: 20px;
-    height: 350px;
+    height: 450px;
     position: relative;
     display: flex;
-}
-.single-left{
-    display: flex;
-    flex-direction: column;
 }
 .listing-image{
     display: flex;
@@ -25,7 +21,6 @@
 .listing-info{
     width: 550px;
     margin-left: auto;
-    margin-top: 35px;
 }
 
 .vendor-listing-card{

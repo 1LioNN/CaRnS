@@ -7,6 +7,7 @@ import BuyListingPage from './components/pages/BuyListingPage';
 import SignUpPage from './components/pages/SignUpPage';
 import SignInPage from './components/pages/SignInPage';
 import BuyDetail from './components/pages/BuyDetailsPage';
+import RentDetail from './components/pages/RentDetailsPage';
 import ProfilePage from './components/pages/ProfilePage';
 import VendorListingsPage from './components/pages/VendorListingsPage';
 import VendorHistoryPage from './components/pages/VendorHistoryPage';
@@ -14,6 +15,8 @@ import EditProfilePage from './components/pages/EditProfilePage';
 import VendorListingsRent from './components/pages/VendorListingsPageRent';
 import BuyerHistoryPage from './components/pages/BuyerHistoryPage';
 import BuyCheckoutPage from './components/pages/BuyCheckoutPage';
+import RentCheckoutPage from './components/pages/RentCheckoutPage';
+import VendorBookingHistoryPage from './components/pages/VendorBookingHistoryPage';
 import { useAuth } from "./Utils/AuthContext";
 import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -61,6 +64,9 @@ function App() {
         <Route path='/history' element={<VendorHistoryPage />} />
         <Route path='/buyerhistory' element={<BuyerHistoryPage />} />
         <Route path='/buycheckout/:listId' element={<BuyCheckoutPage />} />
+        <Route path='/rentcheckout/:listId' element={<RentCheckoutPage />} />
+        <Route path='/rentdetail/:listId' element ={<RentDetail/>}/>
+        <Route path='/vendorbookinghistory' element={<VendorBookingHistoryPage />} />
       </Routes>
      
     </div>

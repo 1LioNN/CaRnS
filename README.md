@@ -8,22 +8,21 @@ Our motive behind the creation of CaRnS was to fill the gap for a flexible, all-
 2. Download a ZIP of the repository and unzip it or checkout the repository.
 3. Install dependencies in package.json by entering the `CaRnS` folder then running the following:
    ```
-   cd backend
+   cd client
    npm install
-   cd ../backend
+   cd ../server
    npm install
    ```
-3. Download .env from `#project-files` and drag it into the `CaRnS/backend` folder.
+3. Download .env from `#project-files` and drag it into the `CaRnS/server` folder.
 
-4. Run the backend (let the backend run in it's own terminal).
+4. Assuming you're still in the server folder, run the server (let the server run in it's own terminal).
    ```
-   cd backend
-   npm start
+   npm start //or nodemon server
    ```
-5. Open another terminal in the `CaRnS` folder and run the backend from its respective folder.
+5. Open another terminal in the `CaRnS` folder and run the client from its respective folder.
 
    ```
-   cd backend
+   cd client
    npm start
    ```
 
@@ -35,7 +34,7 @@ Yes. The master contains the latest stable release. The feature and bug branches
 ### What do you name your branches?
 Adhearing to Gitflow:
 - `master`
-- `develop`
+- `DEV`
 
 The feature/bug branches will have the following naming convention:
 - `author-feature-feature_name-trello_ticket_number`

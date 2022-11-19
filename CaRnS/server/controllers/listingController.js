@@ -28,27 +28,27 @@ const postRentListing = async (req, res) => {
 
 // view buy listings
 const viewBuyListings = async (req, res) => {
-    const listings = await Listing.find({isBuy: true, 'buyListingDetails.isActive': true}).sort({createdAt: -1})
+    const listings = await Listing.find({ isBuy: true, 'buyListingDetails.isActive': true }).sort({ createdAt: -1 })
     res.status(200).json(listings)
 }
 
 const viewActiveBuyListings = async (req, res) => {
     const { id } = req.params
-    const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': true}).sort({createdAt: -1})
+    const listings = await Listing.find({ isBuy: true, vendorID: id, 'buyListingDetails.isActive': true }).sort({ createdAt: -1 })
     res.status(200).json(listings)
 }
 
 const viewPastBuyListings = async (req, res) => {
     const { id } = req.params
-    const listings = await Listing.find({isBuy: true, vendorID: id, 'buyListingDetails.isActive': false}).sort({createdAt: -1})
+    const listings = await Listing.find({ isBuy: true, vendorID: id, 'buyListingDetails.isActive': false }).sort({ createdAt: -1 })
     res.status(200).json(listings)
 }
 
 // view non-expired/avaliable rent listings
 const viewRentListings = async (req, res) => {
     const today = new Date()
-    //$gt -> greater than
-    const listings = await Listing.find({ isBuy: false, "rentListingDetails.availabilityEnd": { $gt: today }} ).sort({ createdAt: -1 })
+    //$gte -> greater than or equal to
+    const listings = await Listing.find({ isBuy: false, "rentListingDetails.availabilityEnd": { $gte: today }} ).sort({ createdAt: -1 })
     res.status(200).json(listings)
 }
 
@@ -183,13 +183,45 @@ const getdetailbuy = async (req, res) => {
     res.status(200).json(listing)
 }
 
+const getDetailRent = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Not a valid listing ID' })
+    }
+
+    const listing = await Listing.findById(id)
+    if (!listing) {
+        return res.status(404).json({ error: 'No such listing' })
+    }
+    if (!listing.rentListingDetails) {
+        return res.status(404).json({ error: 'Missing details' })
+    }
+    
+    res.status(200).json(listing)
+}
+
 //Check if date is in array
 function isInArray(array, value) {
     return !!array.find(item => {return item.getTime() == value.getTime()})
 }
 
+//Convert start and end dates to an array of dates
+function toDateArray(startDate, endDate) {
+    let dateArray = []
+    let date = new Date(startDate)
+    let end = new Date(endDate)
+
+    while (date <= end) {
+        dateArray.push(new Date(date))
+        date.setDate(date.getDate() + 1)
+    }
+    return dateArray
+}
+
 const addRentListingDates = async (req, res) => {
     const { id } = req.params
+    const { bookingStartDate, bookingEndDate } = req.body
 
     if(req.session.user == null) {
         return res.status(400).json({ error: 'User not logged in' })
@@ -212,12 +244,12 @@ const addRentListingDates = async (req, res) => {
     const startDate = listing.rentListingDetails.availabilityStart
     const endDate = listing.rentListingDetails.availabilityEnd
 
-    //Sorting the dates
-    let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime()) 
-    let bookingDates = rentDates //Save original (non-concated) booking dates
+    //let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime())
+    let rentDates =  toDateArray(bookingStartDate, bookingEndDate)
+    let bookingDates = rentDates //Save original booking dates
 
     //Check if dates are between bounds
-    if(rentDates[0] >= startDate && rentDates[rentDates.length - 1] < endDate) {
+    if(rentDates[0] >= startDate && rentDates[rentDates.length - 1] < endDate && rentDates.length > 0) {
         //Check if date is taken
         for(let i = 0; i < rentDates.length; i++) {
             if(isInArray(listing.rentListingDetails.allUnavailableDates, rentDates[i])) {
@@ -264,6 +296,7 @@ function removeDates(dates, datesToRemove) {
 
 const removeRentListingDates = async (req, res) => {
     const { id } = req.params
+    const { bookingStartDate, bookingEndDate } = req.body
 
     if(req.session.user == null) {
         return res.status(400).json({ error: 'User not logged in' })
@@ -282,10 +315,13 @@ const removeRentListingDates = async (req, res) => {
         return res.status(400).json({ error: 'Not a rent listing' })
     }
 
-    //Sorting the dates
-    let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime())
+   
+    // let rentDates = req.body.dates.map(dateString => new Date(dateString)).sort((a,b)=>a.getTime()-b.getTime())
+    let rentDates = toDateArray(bookingStartDate, bookingEndDate)
 
-
+    if(rentDates.length == 0) {
+        return res.status(400).json({error: 'Invalid booking date'})
+    }
 
     try {
         //Create and update booking object
@@ -322,4 +358,6 @@ const removeRentListingDates = async (req, res) => {
     }
 } 
 
-module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }
+
+module.exports = { postBuyListing, postRentListing, viewBuyListings, viewExpiredRentListings, viewRentListings, updateBuyListing, updateRentListing, deleteListing, getdetailbuy, getDetailRent, addRentListingDates, removeRentListingDates, viewActiveBuyListings, viewPastBuyListings, viewActiveRentListings }
+

@@ -28,8 +28,25 @@ const transactionSchema = new Schema({
     }
 }, { timestamps: true })
 
+//Convert start and end dates to an array of dates
+function toDateArray(startDate, endDate) {
+    let dateArray = []
+    let date = new Date(startDate)
+    let end = new Date(endDate)
 
-transactionSchema.statics.log = async function (customerID, listingID, transactionAmount, dates) {
+    while (date <= end) {
+        dateArray.push(new Date(date))
+        date.setDate(date.getDate() + 1)
+    }
+    return dateArray
+}
+
+//Check if date is in array
+function isInArray(array, value) {
+    return !!array.find(item => {return item.getTime() == value.getTime()})
+}
+
+transactionSchema.statics.log = async function (customerID, listingID, bookingStartDate, bookingEndDate) {
 
     // validation
     if (!customerID || !listingID ||!transactionAmount) {
@@ -65,14 +82,32 @@ transactionSchema.statics.log = async function (customerID, listingID, transacti
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount })
         return transaction
     } else {
-        
-        if(dates.length == 0) {
-            throw Error('No dates for the rent listing')
+        let rentDates =  toDateArray(bookingStartDate, bookingEndDate)
+        const startDate = listing.rentListingDetails.availabilityStart
+        const endDate = listing.rentListingDetails.availabilityEnd
+
+        for(let i = 0; i < rentDates.length; i++) {
+            if(isInArray(listing.rentListingDetails.allUnavailableDates, rentDates[i])) {
+                throw Error('Date is already taken')   
+            }
+        }
+        if(!(rentDates[0] >= startDate && rentDates[rentDates.length - 1] < endDate && rentDates.length > 0)) {
+            throw Error('Invalid booking date')
         }
 
-        transactionAmount = transactionAmount * dates.length
+        Listing.addRentListingDates(customerID, listingID, bookingStartDate, bookingEndDate)
+
+        dates = toDateArray(bookingStartDate, bookingEndDate)
+    
+        if(dates.length == 0) {
+            throw Error('Invalid booking date for transaction')
+        }
+            
+        const transactionAmount = listing.rentListingDetails.rentPrice * dates.length  
+
         const transaction = await this.create({ customerID, vendorID, listingID, transactionAmount, dates })
         return transaction
+
     }
 }
 
