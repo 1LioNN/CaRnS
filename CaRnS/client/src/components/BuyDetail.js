@@ -15,7 +15,10 @@ function BuyDetail() {
   const [contactInfo, setContactInfo] = useState(null);
   let params = useParams();
   let auth = useAuth();
-  let buyer = (auth.user.userType == 'buyer')
+  let buyer = true;
+  if (auth.user){
+    buyer = (auth.user.userType == 'buyer')
+  }
   console.log(buyer);
   useEffect(() => {
     const url =
@@ -45,7 +48,7 @@ function BuyDetail() {
         <ArrowBackIcon />
       </IconButton>
       <div className="buydetail">
-        {buyListing ? (
+        {buyListing? (
           <>
 
             <div className="buydetail-container">
