@@ -159,6 +159,11 @@ const deleteListing = async (req, res) => {
     if (!listing) {
         return res.status(404).json({error: 'No such listing'})
     }
+    if(!listing.isBuy) {
+        if(listing.rentListingDetails.allUnavailableDates.length != 0) {
+            return res.status(400).json({error: 'Cannot remove the listing while it is being rented'})
+        }
+    }
 
     res.status(200).json(listing)
 }
