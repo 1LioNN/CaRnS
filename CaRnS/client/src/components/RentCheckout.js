@@ -37,12 +37,16 @@ const initialValues = {
 
 //Get number of dates between 2 date strings (+1 because renting for the same day counts as 1 day)
 function getRentPeriod(startDate, endDate) {
-  console.log (startDate);
-  console.log (endDate);
-  if (!moment(startDate, "YYYY-MM-DD", true).isValid() || !moment(endDate, "YYYY-MM-DD", true).isValid()) {
-    return 1;
-  }
-    return Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) + 1;
+    console.log (startDate);
+    console.log (endDate);
+    if (!moment(startDate, "YYYY-MM-DD", true).isValid() || !moment(endDate, "YYYY-MM-DD", true).isValid()) {
+        return 1;
+    }
+    const result = Math.round((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)) + 1
+    if(result < 0) {
+        return 0
+    }
+    return result
 }
 
 const RentCheckout = () => {
