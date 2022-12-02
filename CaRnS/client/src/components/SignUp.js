@@ -25,7 +25,6 @@ const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
         phoneNumber: '',
         password: '',
         confirmPassword: '',
-        termsAndConditions: false
     }
     const validationSchema = Yup.object().shape({
         name: Yup.string().min(3, "It's too short").required("Required"),
@@ -34,7 +33,6 @@ const paperStyle = { padding: 20, width: 300, margin: "0 auto" }
         phoneNumber: Yup.number().typeError("Enter valid Phone Number").required('Required'),
         password: Yup.string().min(8, "Password minimum length should be 8").required("Required"),
         confirmPassword: Yup.string().oneOf([Yup.ref('password')], "Password not matched").required("Required"),
-        termsAndConditions: Yup.string().oneOf(["true"], "Accept terms & conditions")
     })
 /*
 const OnSubmit = (values, props) => {
@@ -98,7 +96,7 @@ function SignUp(){
             <Grid align='center'>
                 <img style={{width: 80, height: 60}} src={logo} alt = "carns logo" ></img>
                 <h2 style={headerStyle}>Sign Up</h2>
-                <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
+                <Typography variant='caption' gutterBottom>Please fill in this form to create an account!</Typography>
             </Grid>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {(props) => (
@@ -124,10 +122,6 @@ function SignUp(){
                     <Field as={TextField} fullWidth name="confirmPassword" type="password"
                     label='Confirm Password' placeholder="Confirm your password"
                     helperText={<ErrorMessage name="confirmPassword" />} />
-                    <FormControlLabel
-                    control={<Field as={Checkbox} name="termsAndConditions" />}
-                    label="I accept the terms and conditions."
-                    />
                     <FormHelperText><ErrorMessage name="termsAndConditions" /></FormHelperText>
                     <Button type='submit' variant='contained' disabled={props.isSubmitting}
                     style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40}}>{props.isSubmitting ? "Loading" : "Sign up"}</Button>
