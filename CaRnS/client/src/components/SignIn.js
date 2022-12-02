@@ -15,7 +15,6 @@ const paperStyle = { padding: 20, height: '73vh', width: 300, margin: "0 auto" }
 const initialValues = { 
     username: '',
     password: '',
-    remember: false
 }
 const validationSchema = Yup.object().shape({
     username: Yup.string().email('please enter valid email').required("Required"),
@@ -70,26 +69,17 @@ function SignIn({ handleChange }){
                         <Field as={TextField} label='Password' name="password"
                             placeholder='Enter password' type='password' fullWidth required
                             helperText={<ErrorMessage name="password" />} />
-                        <Field as={FormControlLabel}
-                            name='remember'
-                            control={
-                                <Checkbox
-                                    color="primary"
-                                />
-                            }
-                            label="Remember me"
-                        />
                         <Button type='submit' color='primary' variant="contained" disabled={props.isSubmitting}
-                            style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40}} fullWidth>{props.isSubmitting ? "Loading" : "Sign in"}</Button>
+                            style={{ color: "#fff", backgroundColor: "#e87123", borderRadius: 40, marginTop : 10}} fullWidth>{props.isSubmitting ? "Loading" : "Sign in"}</Button>
 
                     </Form>
                 )}
             </Formik>
            
-            <Typography > Do you have an account ?
+            <Typography > Already have an account?
                  <Link href="signup" onClick={() => handleChange("event", 1)} >
                     Sign Up
-            </Link>
+                </Link>
             </Typography>
         </Paper>
     </Grid>
